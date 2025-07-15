@@ -72,6 +72,8 @@ def Poincare_section(total_numbers_of_initial_conditions):
     for m in range(len(theta_2)):
         plt.scatter((theta_2[m]+np.pi)%(2 * np.pi) - np.pi, theta_2_dot[m], c=colors[m], s=0.1)
 
+    plt.xlabel(r"$\theta_2\ [rad]$")
+    plt.ylabel(r"$\dot{\theta_2}\ [rad \cdot s^{-1}]$")
     plt.show()
 
 # solving the equations of motion
