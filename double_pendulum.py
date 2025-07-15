@@ -70,7 +70,7 @@ def Poincare_section(total_numbers_of_initial_conditions):
                 theta_2_dot.append(solutions[i].y[3][j+1])
 
     for m in range(len(theta_2)):
-        plt.scatter((theta_2[m]+np.pi)%(2 * np.pi) - np.pi, theta_2_dot[m], c=colors[m], s=1)
+        plt.scatter((theta_2[m]+np.pi)%(2 * np.pi) - np.pi, theta_2_dot[m], c=colors[m], s=0.1)
 
     plt.show()
 
