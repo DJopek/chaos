@@ -18,9 +18,12 @@ g = 9.81
 # y0 = [theta_1_0, theta_2_0, theta_1_dot_0, theta_2_dot_0]
 
 # generating initial conditions for some energy E
+
+number_of_initial_conditions = 50
+
 theta_1_0 = []
 # theta_2_0 = []
-theta_2_0 = np.linspace(-pi/2, pi/2, 50)
+theta_2_0 = np.linspace(-pi/2, pi/2, number_of_initial_conditions)
 theta_1_dot_0 = []
 theta_2_dot_0 = []
 
@@ -41,7 +44,7 @@ Energy = [6.09]
 # Energy = [6.079]
 # Energy = [6.12]
 
-number_of_initial_conditions = 1
+# number_of_initial_conditions = 1
 
 total_numbers_of_initial_conditions = number_of_initial_conditions*len(Energy)
 
