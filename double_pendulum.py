@@ -19,7 +19,8 @@ g = 9.81
 
 # generating initial conditions for some energy E
 theta_1_0 = []
-theta_2_0 = []
+# theta_2_0 = []
+theta_2_0 = np.linspace(-pi/2, pi/2, 50)
 theta_1_dot_0 = []
 theta_2_dot_0 = []
 
@@ -28,14 +29,17 @@ theta_2_dot_0 = []
 # Energy = np.linspace(6.2,6.4,8) # [0,500] 3.
 # Energy = np.linspace(6.4,6.8,8) # [0,1000] 4.
 # Energy = np.linspace(5.9,6.3,8) # [0,700] 2-3.
-
 # Energy = np.linspace(6.3,6.8,12) # [0,1200] 3-4.
-
 # Energy = np.linspace(5.4,6.8,20) # [0,2000] 0.
 # Energy = np.linspace(5.6, 6.4, 16) # [0,700] 2_3
 # Energy = np.linspace(6.2,6.8,18) # [0,1200] 3_4.
 
-Energy = [5.865]
+# Energy = [5.865]
+Energy = [6.09]
+# Energy = [6.075]
+# Energy = [6.095]
+# Energy = [6.079]
+# Energy = [6.12]
 
 number_of_initial_conditions = 1
 
@@ -45,7 +49,7 @@ def initial_conditions(E, number_of_initial_conditions):
 
     for i in range(number_of_initial_conditions):
         theta_1_0.append(0)
-        theta_2_0.append(0)
+        # theta_2_0.append(np.random.uniform(-pi/4, pi/4))
         theta_2_dot_0.append(0)
         bucket = []
         bucket.append(np.sqrt(2*(E+l_1*g*(m_1+m_2)+l_2*m_2*g*np.cos(theta_2_0[i])-(l_1+l_2)*(m_1+m_2)*g)/(l_1**2*(m_1+m_2))))
@@ -73,20 +77,33 @@ def Poincare_section(total_numbers_of_initial_conditions):
 
     colors = []
 
+    color = [
+    "#2C3E50", "#3A3F64", "#484078", "#56428D", "#6B469E",
+    "#804AAF", "#954EBF", "#A753C4", "#BA58C8", "#CE5DCD",
+    "#E062C9", "#E971B4", "#F1809F", "#F98F8A", "#FFA07A",
+    "#FF9C65", "#FF9850", "#FF943B", "#FF9026", "#FF8C11",
+    "#F97F0D", "#F3730A", "#ED6606", "#E75A03", "#E04E00",
+    "#D4431E", "#C8383C", "#BC2D5A", "#B02178", "#A41596",
+    "#9710A3", "#880EA7", "#790CAB", "#6A0AAF", "#5C08B2",
+    "#4D06B6", "#3E04BA", "#2F02BD", "#2000C1", "#1800B8",
+    "#1000AF", "#0800A6", "#00009D", "#00008F", "#000081",
+    "#0B006C", "#160057", "#210043", "#2C002E", "#37001A"
+    ]
+
     for i in range(total_numbers_of_initial_conditions):
-        color = ["#"+''.join([random.choice('0123456789ABCDEF') for r in range(6)])
-                    for s in range(1)]
+        # color = ["#"+''.join([random.choice('0123456789ABCDEF') for r in range(6)])
+        #             for s in range(1)]
 
         number_of_points = len(solutions[i].t)
 
         for j in range(number_of_points-1):
             if solutions[i].y[0][j] <= 0 and solutions[i].y[0][j+1] >= 0:
-                colors.append(color[0])
+                colors.append(color[i])
                 theta_2.append(solutions[i].y[1][j+1])
                 theta_2_dot.append(solutions[i].y[3][j+1])
 
     for m in range(len(theta_2)):
-        plt.scatter((theta_2[m]+np.pi)%(2 * np.pi) - np.pi, theta_2_dot[m], c=colors[m], s=0.5)
+        plt.scatter((theta_2[m]+np.pi)%(2 * np.pi) - np.pi, theta_2_dot[m], c=colors[m], s=0.1)
 
     plt.xlabel(r"$\theta_2\ [rad]$")
     plt.ylabel(r"$\dot{\theta_2}\ [rad \cdot s^{-1}]$")
@@ -98,7 +115,7 @@ solutions = []
 error = 0.001
 
 # defining time interval
-t_span = [0,10]
+t_span = [0,750]
 
 for i in range(total_numbers_of_initial_conditions):
     y0 = [theta_1_0[i], theta_2_0[i], theta_1_dot_0[i], theta_2_dot_0[i]]
