@@ -59,7 +59,7 @@ for i in range(len(rho)):
             if line.startswith("Time of execution"):
                 break
         ic = [[rho[i],u_rho[j]]]
-        with open(f'ic_{sample}.csv', 'a', newline='') as csvfile:
+        with open(f'../ic_{sample}.csv', 'a', newline='') as csvfile:
             writer = csv.writer(csvfile, delimiter=';')
             writer.writerows(ic)
 
