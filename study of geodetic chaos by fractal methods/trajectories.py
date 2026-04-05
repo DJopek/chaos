@@ -49,7 +49,7 @@ stderr_thread.start()
 
 for i in range(len(rho)):
     for j in range(len(u_rho)):
-        output_file = f"test_{parallelisation_division*i+j+parallelisation_division*len(rho)*(sample-1)}.csv"
+        output_file = f"../data/test_{parallelisation_division*i+j+parallelisation_division*len(rho)*(sample-1)}.csv"
         print(f"trajectory_weyl(CombinedWeyl(WeylSchwarzschild({M}), BachWeylRing({m}, {sigma})), {eps}, {l}, {rho[i]*M}, {z},{u_rho[j]}, {Tmax}, {time_stemp}, {output_file})\n")
         process_0.stdin.write(f"trajectory_weyl(CombinedWeyl(WeylSchwarzschild({M}), BachWeylRing({m}, {sigma})), {eps}, {l}, {rho[i]*M}, {z}, {u_rho[j]}, {Tmax}, {time_stemp}, {output_file})\n")
         process_0.stdin.flush()
