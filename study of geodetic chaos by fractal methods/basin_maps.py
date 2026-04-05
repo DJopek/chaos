@@ -79,7 +79,6 @@ for i in range(number_of_points**2):
         if os.path.getsize(f"./data/test_{i}.csv") == 0:
             rho_last = 0.0
             t_last = 0.0
-            z = 0.0
             Lambda = 0.0
 
         else:
@@ -96,10 +95,6 @@ for i in range(number_of_points**2):
             rho_last = float(split_row_last[2]) 
             t_last = float(split_row_last[0])
             Lambda = float(split_row_first[-1])
-            ut = float(split_row_last[4])
-            uphi = float(split_row_last[5])
-            z_last = float(split_row_last[3])
-
         
         v_schw = v_schwarzschild(rho_0[i], z)
         v_bw = v_bachweyl(rho_0[i], z)

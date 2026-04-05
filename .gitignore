@@ -207,9 +207,8 @@ marimo/_lsp/
 __marimo__/
 
 .DS_Store
-/study of geodetic chaos by fractal methods/build
-/study of geodetic chaos by fractal methods/data*
-/study of geodetic chaos by fractal methods/ic*
-/study of geodetic chaos by fractal methods/basin_map_*
-/study of geodetic chaos by fractal methods/Gravitacek-2/external
-/study of geodetic chaos by fractal methods/Gravitacek-2/build
+**/build
+**/ic*
+**/basin_map_*
+**/external
+**/data*

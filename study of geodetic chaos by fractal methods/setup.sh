@@ -1,20 +1,20 @@
 #!/bin/zsh
 
-set -e
-
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-cd "$SCRIPT_DIR"
-
 pip install -r requirements.txt
 
-mkdir -p ./data
+mkdir ./data
+mkdir ./build
 
 cd Gravitacek-2
-mkdir -p build
+
+mkdir external
+cd external
+git clone https://github.com/google/googletest.git -b v1.15.2
+cd ..
+
+mkdir build
 cd build
-cmake ..
+cmake .. -DCMAKE_BUILD_TYPE=Release
 cmake --build .
 
-cp -r ./* "$SCRIPT_DIR/build/"
-
-cd "$SCRIPT_DIR/build"
+cp -r ./* ../../build/
