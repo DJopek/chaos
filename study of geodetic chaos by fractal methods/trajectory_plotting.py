@@ -1,10 +1,6 @@
 import csv
 import matplotlib.pyplot as plt
 import numpy as np
-import datashader as ds
-import datashader.transfer_functions as tf
-import pandas as pd
-from datashader.utils import export_image
 import random
 
 def plot(filepath):
