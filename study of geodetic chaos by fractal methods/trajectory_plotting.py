@@ -5,6 +5,7 @@ import datashader as ds
 import datashader.transfer_functions as tf
 import pandas as pd
 from datashader.utils import export_image
+import random
 
 def plot(filepath):
     x = []
@@ -32,18 +33,7 @@ def plot(filepath):
     plt.scatter(T,Rho,s=1)
     plt.show()
 
-plot("./data/test_0.csv")
-
-# df = pd.DataFrame({'x': x, 'y': y})
-# canvas = ds.Canvas(plot_width=800, plot_height=600)
-# agg = canvas.points(df, 'x', 'y')
-# img = tf.shade(agg)  # returns an image you can display or save
-
-# export_image(img, "my_plot", export_path=".")  # saves as my_plot.png
-
-# df = pd.DataFrame({'t': t, 'rho': rho})
-# canvas = ds.Canvas(plot_width=800, plot_height=600)
-# agg = canvas.points(df, 't', 'rho')
-# img = tf.shade(agg)  # returns an image you can display or save
-
-# export_image(img, "my_plot_t", export_path=".")  # saves as my_plot.png
+# i = random.randint(0,999999)
+# print(i)
+# plot(f"./data/test_{i}.csv")
+# plot(f"./build/test.csv")

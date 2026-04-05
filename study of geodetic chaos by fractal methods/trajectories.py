@@ -12,11 +12,11 @@ import threading
 # u_rho_end = float(input("u_rho end in weyl coordinates: "))
 # number_of_points = int(input("number of points: "))
 # parallelisation_number = int(input("number of parallel runs: "))
-rho_start = 3.0
+rho_start = 2
 rho_end = 30
 u_rho_start = 0.0
-u_rho_end = 0.25
-number_of_points = 100
+u_rho_end = 0.30
+number_of_points = 1000
 parallelisation_number = 5 #number of points needs to be divisable by parallelisation number
 sample = int(input("sample: "))
 parallelisation_division = int(number_of_points/parallelisation_number)
@@ -33,7 +33,7 @@ m = 0.5*M
 sigma = (b*(b-2*M))**0.5
 z = 0.2*M
 Tmax = 10**4
-time_stemp = 1
+time_stemp = 100
 
 process_0 = subprocess.Popen(["./Gravitacek2"], stdin=subprocess.PIPE, stdout=PIPE, stderr=PIPE, text=True)
 
