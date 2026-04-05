@@ -79,6 +79,8 @@ for i in range(number_of_points**2):
         if os.path.getsize(f"./data/test_{i}.csv") == 0:
             rho_last = 0.0
             t_last = 0.0
+            z = 0.0
+            Lambda = 0.0
 
         else:
             csv_reader = csv.reader(file)
