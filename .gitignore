@@ -210,5 +210,8 @@ __marimo__/
 **/build
 **/ic*
 **/basin_map_*
+**/schw_bw_*
+**/rn_mp_*
 **/external
 **/data*
+**/run_history.txt

@@ -6,62 +6,99 @@ import csv
 import os
 import threading
 
-# rho_start = float(input("rho start in weyl coordinates: "))
-# rho_end = float(input("rho end in weyl coordinates: "))
-# u_rho_start = float(input("u_rho start in weyl coordinates: "))
-# u_rho_end = float(input("u_rho end in weyl coordinates: "))
-# number_of_points = int(input("number of points: "))
-# parallelisation_number = int(input("number of parallel runs: "))
-rho_start = 2
-rho_end = 30
-u_rho_start = 0.0
-u_rho_end = 0.30
-number_of_points = 1000
-parallelisation_number = 5 #number of points needs to be divisable by parallelisation number
-sample = int(input("sample: "))
-parallelisation_division = int(number_of_points/parallelisation_number)
+def calculate_trajectories(
+    rho_start,
+    rho_end,
+    u_rho_start,
+    u_rho_end,
+    perturbation,
+    M,
+    l,
+    eps,
+    b, # Schwarzschild coordinates
+    m,
+    z,
+    Tmax,
+    time_stamp,
+    schw_bw,
+    rn_mp,
+    number_of_points,
+    parallelisation_number=5, #number of points needs to be divisable by parallelisation number
+    sample=int(input("sample: ")),
+):
 
-rho = np.linspace(rho_start,rho_end, number_of_points)
-u_rho = np.linspace(u_rho_start,u_rho_end, number_of_points)
-u_rho = u_rho[(parallelisation_division*(sample-1)):(parallelisation_division*sample)]
+    parallelisation_division = int(number_of_points/parallelisation_number)
 
-M = 1.0
-l = 3.750*M
-eps = 0.955
-b = 20*M
-m = 0.5*M
-sigma = (b*(b-2*M))**0.5
-z = 0.2*M
-Tmax = 10**4
-time_stemp = 100
+    rho = np.linspace(rho_start,rho_end, number_of_points)
+    rho = rho + perturbation
+    u_rho = np.linspace(u_rho_start,u_rho_end, number_of_points)
+    u_rho = u_rho[(parallelisation_division*(sample-1)):(parallelisation_division*sample)]
 
-process_0 = subprocess.Popen(["./Gravitacek2"], stdin=subprocess.PIPE, stdout=PIPE, stderr=PIPE, text=True)
+    l = l*M
+    b = b*M
+    m = m*M
+    z = z*M
 
-response = process_0.stdout.readline()
-print(response)
+    process_0 = subprocess.Popen(["./Gravitacek2"], stdin=subprocess.PIPE, stdout=PIPE, stderr=PIPE, text=True)
 
-def drain_stderr(proc):
-    for line in proc.stderr:
-        pass
+    response = process_0.stdout.readline()
+    print(response)
 
-stderr_thread = threading.Thread(target=drain_stderr, args=(process_0,), daemon=True)
-stderr_thread.start()
+    # code for buffer handling was done with assistance of Claude
+    def drain_stderr(proc):
+        for line in proc.stderr:
+            pass
 
-for i in range(len(rho)):
-    for j in range(len(u_rho)):
-        output_file = f"../data/test_{parallelisation_division*i+j+parallelisation_division*len(rho)*(sample-1)}.csv"
-        print(f"trajectory_weyl(CombinedWeyl(WeylSchwarzschild({M}), BachWeylRing({m}, {sigma})), {eps}, {l}, {rho[i]*M}, {z},{u_rho[j]}, {Tmax}, {time_stemp}, {output_file})\n")
-        process_0.stdin.write(f"trajectory_weyl(CombinedWeyl(WeylSchwarzschild({M}), BachWeylRing({m}, {sigma})), {eps}, {l}, {rho[i]*M}, {z}, {u_rho[j]}, {Tmax}, {time_stemp}, {output_file})\n")
-        process_0.stdin.flush()
-        while True:
-            line = process_0.stdout.readline()
-            print(line)
-            if line.startswith("Time of execution"):
-                break
-        ic = [[rho[i],u_rho[j]]]
-        with open(f'../ic_{sample}.csv', 'a', newline='') as csvfile:
-            writer = csv.writer(csvfile, delimiter=';')
-            writer.writerows(ic)
+    stderr_thread = threading.Thread(target=drain_stderr, args=(process_0,), daemon=True)
+    stderr_thread.start()
 
-process_0.stdin.close()
-process_0.wait()
+    ic = []
+
+    for i in range(len(rho)):
+        for j in range(len(u_rho)):
+
+            output_file = f"../data/trajectory_{parallelisation_division*i+j+parallelisation_division*len(rho)*(sample-1)}.csv"
+
+            if schw_bw:
+                sigma = (b*(b-2*M))**0.5 # b is in Schwarzschild coordinates, sigma is converted value to Weyl coordinates
+                command = f"trajectory_weyl(CombinedWeyl(WeylSchwarzschild({M}), BachWeylRing({m}, {sigma})), {eps}, {l}, {rho[i]*M}, {z},{u_rho[j]}, {Tmax}, {time_stamp}, {output_file})\n"
+            elif rn_mp:
+                sigma = (b*(b-2*M))**0.5 # we want to have MP ring of the same size as we had with BW ring
+                command = f"trajectory_mp(CombinedMP(ReissnerNordstrom({M}), MajumdarPapapetrouRing({m}, {sigma})), {eps}, {l}, {rho[i]*M}, {z},{u_rho[j]}, {Tmax}, {time_stamp}, {output_file})\n"
+
+            print(command)
+            process_0.stdin.write(command)
+            process_0.stdin.flush()
+            while True:
+                line = process_0.stdout.readline()
+                print(line)
+                if line.startswith("Time of execution"):
+                    break
+
+            ic.append([rho[i],u_rho[j]])
+
+    with open(f'../data/ic_{sample}.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile, delimiter=';')
+        writer.writerows(ic)
+
+    process_0.stdin.close()
+    process_0.wait()
+
+calculate_trajectories(
+    rho_start = 15,
+    rho_end = 17,
+    u_rho_start = 0.15,
+    u_rho_end = 0.18,
+    perturbation = -10**(-2),
+    M = 1.0,
+    l = 3.750,
+    eps = 0.955,
+    b = 20,
+    m = 0.5,
+    z = 0.2,
+    Tmax = 10**4,
+    time_stamp = 100,
+    schw_bw = False,
+    rn_mp = True,
+    number_of_points = 500,
+)

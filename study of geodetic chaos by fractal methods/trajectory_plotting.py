@@ -29,7 +29,8 @@ def plot(filepath):
     plt.scatter(T,Rho,s=1)
     plt.show()
 
-# i = random.randint(0,999999)
+# number_of_points = 300
+# i = random.randint(0,number_of_points**2-1)
 # print(i)
 # plot(f"./data/test_{i}.csv")
 # plot(f"./build/test.csv")

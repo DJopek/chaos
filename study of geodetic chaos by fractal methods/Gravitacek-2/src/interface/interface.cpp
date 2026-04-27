@@ -2113,7 +2113,7 @@ void Interface::trajectory_mp(std::string text)
 {
     // Initialize calculation
     auto args = find_function_arguments(text);
-    int number_of_arguments = 8;
+    int number_of_arguments = 9;
     if (args.size() < number_of_arguments)
         throw std::invalid_argument("too little arguments for trajectory_mp");
     else if (args.size() > number_of_arguments)
@@ -2125,14 +2125,15 @@ void Interface::trajectory_mp(std::string text)
     gr2::real L = std::stold(args[2]);
     
     gr2::real rho_start = std::stold(args[3]);
-    gr2::real u_rho_frac = std::stold(args[4]);
+    gr2::real z_start = std::stold(args[4]);
+    gr2::real u_rho = std::stold(args[5]);
 
-    gr2::real t_max = std::stold(args[5]);
-    gr2::real dt = std::stold(args[6]);
-    std::string file_name = args[7];
+    gr2::real t_max = std::stold(args[6]);
+    gr2::real dt = std::stold(args[7]);
+    std::string file_name = args[8];
 
     std::ofstream file;
-    gr2::real y[8]={};
+    gr2::real y[9]={};
     
     // Procede in calculation
     try
@@ -2159,7 +2160,7 @@ void Interface::trajectory_mp(std::string text)
 
         // ========== initial conditions for the first particle ==========
         gr2::real rho = rho_start;
-        gr2::real z = 1e-4;
+        gr2::real z = z_start;
         y[gr2::Weyl::RHO] = rho;
         y[gr2::Weyl::Z] = z;
 
@@ -2175,10 +2176,19 @@ void Interface::trajectory_mp(std::string text)
         if (norm2 < 0)
             return;
         gr2::real norm = sqrtl(norm2/spt->get_metric()[gr2::Weyl::RHO][gr2::Weyl::RHO]);
+        gr2::real norm2_c = norm2/spt->get_metric()[gr2::Weyl::RHO][gr2::Weyl::RHO];
 
         // calculate velocity
-        y[gr2::Weyl::URHO] = norm*u_rho_frac;
-        y[gr2::Weyl::UZ] = norm*sqrtl(1-u_rho_frac*u_rho_frac);
+        // y[gr2::Weyl::URHO] = norm*u_rho_frac;
+        // y[gr2::Weyl::UZ] = norm*sqrtl(1-u_rho_frac*u_rho_frac);
+        gr2::real u_rho2 = u_rho*u_rho;
+        if (u_rho2 > norm2_c)
+        {
+            std::cerr << "u_rho = " << u_rho << "mimo povolenú hodnotu " << sqrtl(norm2_c) << std::endl;
+            return;
+        }
+        y[gr2::Weyl::URHO] = u_rho;
+        y[gr2::Weyl::UZ] = sqrtl(norm2_c - u_rho2);
 
         // calculate trajectory
         try
