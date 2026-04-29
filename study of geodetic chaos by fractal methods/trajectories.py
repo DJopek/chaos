@@ -85,11 +85,11 @@ def calculate_trajectories(
     process_0.wait()
 
 calculate_trajectories(
-    rho_start = 15,
-    rho_end = 17,
-    u_rho_start = 0.15,
-    u_rho_end = 0.18,
-    perturbation = -10**(-2),
+    rho_start = 18.90,
+    rho_end = 19.0,
+    u_rho_start = 0.0,
+    u_rho_end = 0.1,
+    perturbation = 0,
     M = 1.0,
     l = 3.750,
     eps = 0.955,
@@ -98,7 +98,7 @@ calculate_trajectories(
     z = 0.2,
     Tmax = 10**4,
     time_stamp = 100,
-    schw_bw = False,
-    rn_mp = True,
-    number_of_points = 500,
+    schw_bw = True,
+    rn_mp = False,
+    number_of_points = 100,
 )

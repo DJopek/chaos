@@ -24,17 +24,17 @@ def v_bachweyl(rho, z, sigma, m):
         K = ellipk(k2)
     return -2 * m * K / (pi * sqrt(z**2 + (rho+sigma)**2))
 
-def v_rn(rho, z, M):
-    return -np.log(1+M/sqrt(rho**2 + z**2))
+def Nmin1_RN(rho, z, M):
+    return 1+M/sqrt(rho**2 + z**2)
 
-def v_mp(rho, z, sigma, m):
+def Nmin_MP(rho, z, sigma, m):
     l2 = sqrt((rho + sigma)**2 + z**2)
     k2 = 4*sigma*rho/l2**2
     if k2 >= 0.95:
         K = ellipkm1(1-k2)
     else:
         K = ellipk(k2)
-    return -np.log(1 + 2*m*K/(pi*l2))
+    return 1 + 2*m*K/(pi*l2)
 
 def accessible_region_condition(v, rho, Lambda, u_rho_0, eps, l):
     grhorho = np.exp(2*(Lambda-v))
@@ -126,11 +126,11 @@ def processing(
             if schw_bw:
                 v_bh = v_schwarzschild(rho_0[i], z, sigma, M)
                 v_ring = v_bachweyl(rho_0[i], z, sigma, m)
+                v = v_bh + v_ring
             elif rn_mp:
-                v_bh = v_rn(rho_0[i], z, M)
-                v_ring = v_mp(rho_0[i], z, sigma, m)
-
-            v = v_bh + v_ring
+                Nmin1_bh = Nmin1_RN(rho_0[i], z, M)
+                Nmin1_ring = Nmin_MP(rho_0[i], z, sigma, m)
+                v = -np.log(Nmin1_bh+Nmin1_ring)
 
             inside_the_region = accessible_region_condition(v, rho_0[i], Lambda, u_rho_0[i], eps, l)
             
@@ -361,16 +361,12 @@ def fractal_dim(perturbations, fbars, name):
 
 # fractal_dim(perturbations, fbars, "schw_bw_1.0_3.943_0.955_20_0.5_0.2.pdf")
 
-# fractal dimension: 1.8610841597291847 ± 0.028723757498522188
-
-# rn_mp_1.0_3.750_0.955_20_0.5_0.2
-
-destiny_unperturbed = processing(
-    data_path="./data_0",
-    rho_start = 15,
-    rho_end = 17,
-    u_rho_start = 0.15,
-    u_rho_end = 0.18,
+_ = processing(
+    data_path="./data",
+    rho_start = 18.90,
+    rho_end = 19.0,
+    u_rho_start = 0.0,
+    u_rho_end = 0.1,
     perturbation = 0,
     M = 1.0,
     l = 3.750,
@@ -379,139 +375,8 @@ destiny_unperturbed = processing(
     m = 0.5,
     z = 0.2,
     Tmax = 10**4,
-    schw_bw = False,
-    rn_mp = True,
-    number_of_points = 500,
-    samples = 5,
+    schw_bw = True,
+    rn_mp = False,
+    number_of_points = 100,
+    samples=5,
 )
-
-destiny_perturbed_1 = processing(
-    data_path="./data_1",
-    rho_start = 15,
-    rho_end = 17,
-    u_rho_start = 0.15,
-    u_rho_end = 0.18,
-    perturbation = 10**(-4),
-    M = 1.0,
-    l = 3.750,
-    eps = 0.955,
-    b = 20,
-    m = 0.5,
-    z = 0.2,
-    Tmax = 10**4,
-    schw_bw = False,
-    rn_mp = True,
-    number_of_points = 500,
-    samples = 5,
-)
-
-destiny_perturbed_2 = processing(
-    data_path="./data_2",
-    rho_start = 15,
-    rho_end = 17,
-    u_rho_start = 0.15,
-    u_rho_end = 0.18,
-    perturbation = -10**(-4),
-    M = 1.0,
-    l = 3.750,
-    eps = 0.955,
-    b = 20,
-    m = 0.5,
-    z = 0.2,
-    Tmax = 10**4,
-    schw_bw = False,
-    rn_mp = True,
-    number_of_points = 500,
-    samples = 5,
-)
-
-destiny_perturbed_3 = processing(
-    data_path="./data_3",
-    rho_start = 15,
-    rho_end = 17,
-    u_rho_start = 0.15,
-    u_rho_end = 0.18,
-    perturbation = 10**(-3),
-    M = 1.0,
-    l = 3.750,
-    eps = 0.955,
-    b = 20,
-    m = 0.5,
-    z = 0.2,
-    Tmax = 10**4,
-    schw_bw = False,
-    rn_mp = True,
-    number_of_points = 500,
-    samples = 5,
-)
-
-destiny_perturbed_4 = processing(
-    data_path="./data_4",
-    rho_start = 15,
-    rho_end = 17,
-    u_rho_start = 0.15,
-    u_rho_end = 0.18,
-    perturbation = -10**(-3),
-    M = 1.0,
-    l = 3.750,
-    eps = 0.955,
-    b = 20,
-    m = 0.5,
-    z = 0.2,
-    Tmax = 10**4,
-    schw_bw = False,
-    rn_mp = True,
-    number_of_points = 500,
-    samples = 5,
-)
-
-destiny_perturbed_5 = processing(
-    data_path="./data_5",
-    rho_start = 15,
-    rho_end = 17,
-    u_rho_start = 0.15,
-    u_rho_end = 0.18,
-    perturbation = 10**(-2),
-    M = 1.0,
-    l = 3.750,
-    eps = 0.955,
-    b = 20,
-    m = 0.5,
-    z = 0.2,
-    Tmax = 10**4,
-    schw_bw = False,
-    rn_mp = True,
-    number_of_points = 500,
-    samples = 5,
-)
-
-destiny_perturbed_6 = processing(
-    data_path="./data_6",
-    rho_start = 15,
-    rho_end = 17,
-    u_rho_start = 0.15,
-    u_rho_end = 0.18,
-    perturbation = -10**(-2),
-    M = 1.0,
-    l = 3.750,
-    eps = 0.955,
-    b = 20,
-    m = 0.5,
-    z = 0.2,
-    Tmax = 10**4,
-    schw_bw = False,
-    rn_mp = True,
-    number_of_points = 500,
-    samples = 5,
-)
-
-fbar_1 = fbar(destiny_perturbed_1, destiny_perturbed_2)
-fbar_2 = fbar(destiny_perturbed_3, destiny_perturbed_4)
-fbar_3 = fbar(destiny_perturbed_5, destiny_perturbed_6)
-
-perturbations = [10**(-4), 10**(-3), 10**(-2)]
-fbars = [fbar_1, fbar_2, fbar_3]
-
-fractal_dim(perturbations, fbars, "rn_mp_1.0_3.750_0.955_20_0.5_0.2.pdf")
-
-# fractal dimension: 1.7734547747740814 ± 0.027473193370768003
