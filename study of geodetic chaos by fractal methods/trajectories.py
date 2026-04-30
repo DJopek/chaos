@@ -63,7 +63,7 @@ def calculate_trajectories(
                 sigma = (b*(b-2*M))**0.5 # b is in Schwarzschild coordinates, sigma is converted value to Weyl coordinates
                 command = f"trajectory_weyl(CombinedWeyl(WeylSchwarzschild({M}), BachWeylRing({m}, {sigma})), {eps}, {l}, {rho[i]*M}, {z},{u_rho[j]}, {Tmax}, {time_stamp}, {output_file})\n"
             elif rn_mp:
-                sigma = (b*(b-2*M))**0.5 # we want to have MP ring of the same size as we had with BW ring
+                sigma = b-M # we want to have MP ring of the same size as we had with BW ring
                 command = f"trajectory_mp(CombinedMP(ReissnerNordstrom({M}), MajumdarPapapetrouRing({m}, {sigma})), {eps}, {l}, {rho[i]*M}, {z},{u_rho[j]}, {Tmax}, {time_stamp}, {output_file})\n"
 
             print(command)
@@ -85,8 +85,8 @@ def calculate_trajectories(
     process_0.wait()
 
 calculate_trajectories(
-    rho_start = 18.90,
-    rho_end = 19.0,
+    rho_start = 18.9,
+    rho_end = 19.1,
     u_rho_start = 0.0,
     u_rho_end = 0.1,
     perturbation = 0,
@@ -95,10 +95,10 @@ calculate_trajectories(
     eps = 0.955,
     b = 20,
     m = 0.5,
-    z = 0.2,
+    z = 0.001,
     Tmax = 10**4,
-    time_stamp = 100,
-    schw_bw = True,
-    rn_mp = False,
+    time_stamp = 1,
+    schw_bw = False,
+    rn_mp = True,
     number_of_points = 100,
 )

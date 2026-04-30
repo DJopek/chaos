@@ -73,8 +73,12 @@ def processing(
     l = l*M
     b = b*M
     m = m*M
-    sigma = (b*(b-2*M))**0.5
     z = z*M
+
+    if schw_bw:
+        sigma = (b*(b-2*M))**0.5
+    elif rn_mp:
+        sigma = b - M
 
     color = []
 
@@ -142,17 +146,21 @@ def processing(
         COLOR_ORBIT    = ( 22/255, 102/255, 186/255)  # dark blue
         COLOR_OUTSIDE  = (1.0,     1.0,     1.0    )  # white
 
+        tolerance = 10
+
         if type(rho_last) == float:
-            if t_last < Tmax:
+            if t_last < Tmax - tolerance:
                 color.append(COLOR_PLUNGE)
                 destiny.append("plunge")
-            elif t_last == Tmax:
+            elif Tmax - tolerance <= t_last and t_last <= Tmax + tolerance:
                 color.append(COLOR_ORBIT)
                 destiny.append("orbit")
             else:
                 color.append(COLOR_OUTSIDE)
         else:
             color.append(COLOR_OUTSIDE)
+
+    # TODO basin map (r,ur) for validation (comparison with Poincare sections)
 
     # I had just simple point plotting to see some visual but then asked Claude to change it for pixel plot
     color_array = np.array(color, dtype=np.float32)
@@ -178,6 +186,38 @@ def processing(
 
     plt.savefig(name, dpi=300)
     plt.close()
+
+    # validation - (r,ur) basin maps in order to compare the basin maps to Poincare sections from Polcar, Sukova, Semerak Free motion around black holes with discs or rings: between integrability and chaos – V
+    if z==0.0:
+        color_array = np.array(color, dtype=np.float32)
+
+        parallelisation_division = int(number_of_points/samples)
+
+        color_blocks = color_array.reshape(samples, number_of_points, parallelisation_division, 3)
+
+        color_rho_urho = color_blocks.transpose(1, 0, 2, 3).reshape(number_of_points, number_of_points, 3)
+
+        color_grid = color_rho_urho.transpose(1, 0, 2)
+
+        u_r_start = u_rho_start
+        u_r_end = u_rho_end
+        r_start = rho_start + M
+        r_end = rho_end + M
+
+        fig, ax = plt.subplots()
+        ax.imshow(color_grid, origin='lower', aspect='auto',
+                extent=[r_start, r_end, u_r_start, u_rho_end])
+        ax.set_xlabel(r'$r$ [M]')
+        ax.set_ylabel(r'$u^r$ [1]')
+
+    if schw_bw:
+        name = f"basin_map_r_ur_sch_bw_{number_of_points}_{M}_{l}_{eps}_{b}_{m}_{z}_{perturbation}.pdf"
+    elif rn_mp:
+        name = f"basin_map_r_ur_rn_mp_{number_of_points}_{M}_{l}_{eps}_{b}_{m}_{z}_{perturbation}.pdf"
+
+    plt.savefig(name, dpi=300)
+    plt.close()
+
 
     return destiny
 
@@ -363,8 +403,8 @@ def fractal_dim(perturbations, fbars, name):
 
 _ = processing(
     data_path="./data",
-    rho_start = 18.90,
-    rho_end = 19.0,
+    rho_start = 18.9,
+    rho_end = 19.1,
     u_rho_start = 0.0,
     u_rho_end = 0.1,
     perturbation = 0,
@@ -373,10 +413,10 @@ _ = processing(
     eps = 0.955,
     b = 20,
     m = 0.5,
-    z = 0.2,
+    z = 0.001,
     Tmax = 10**4,
-    schw_bw = True,
-    rn_mp = False,
+    schw_bw = False,
+    rn_mp = True,
     number_of_points = 100,
     samples=5,
 )

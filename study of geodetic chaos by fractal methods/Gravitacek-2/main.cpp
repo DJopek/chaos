@@ -25,6 +25,7 @@ int main()
         catch(const std::exception& e)
         {
             std::cerr << e.what() << '\n';
+            std::cout << "Time of execution: 0 s" << std::endl;
         }
         
     }
