@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import csv
 import os
 import threading
+import sys
 
 def calculate_trajectories(
     rho_start,
@@ -24,7 +25,7 @@ def calculate_trajectories(
     rn_mp,
     number_of_points,
     parallelisation_number=5, #number of points needs to be divisable by parallelisation number
-    sample=int(input("sample: ")),
+    sample=int(sys.argv[1]),
 ):
 
     parallelisation_division = int(number_of_points/parallelisation_number)
@@ -97,8 +98,8 @@ calculate_trajectories(
     m = 0.5,
     z = 0.0,
     Tmax = 10**5,
-    time_stamp = 1000,
+    time_stamp = 10**4,
     schw_bw = False,
     rn_mp = True,
-    number_of_points = 1000,
+    number_of_points = 500,
 )

@@ -29,7 +29,7 @@ def plot(filepath):
     plt.scatter(T,Rho,s=1)
     plt.show()
 
-number_of_points = 100
+number_of_points = 500
 i = random.randint(0,number_of_points**2-1)
 print(i)
 plot(f"./data/trajectory_{i}.csv")

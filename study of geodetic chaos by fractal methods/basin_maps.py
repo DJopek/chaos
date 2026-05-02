@@ -1,6 +1,5 @@
 import csv
 import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
 import numpy as np
 import os
 import scipy
@@ -419,9 +418,8 @@ _ = processing(
     m = 0.5,
     z = 0.0,
     Tmax = 10**5,
-    time_stamp = 1000,
     schw_bw = False,
     rn_mp = True,
-    number_of_points = 1000,
+    number_of_points = 500,
     samples = 5,
 )
