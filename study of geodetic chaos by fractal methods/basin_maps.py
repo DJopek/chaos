@@ -27,7 +27,7 @@ def v_bachweyl(rho, z, sigma, m):
 def Nmin1_RN(rho, z, M):
     return 1+M/sqrt(rho**2 + z**2)
 
-def Nmin_MP(rho, z, sigma, m):
+def Nmin1_MP(rho, z, sigma, m):
     l2 = sqrt((rho + sigma)**2 + z**2)
     k2 = 4*sigma*rho/l2**2
     if k2 >= 0.95:
@@ -36,11 +36,10 @@ def Nmin_MP(rho, z, sigma, m):
         K = ellipk(k2)
     return 1 + 2*m*K/(pi*l2)
 
-def accessible_region_condition(v, rho, Lambda, u_rho_0, eps, l):
-    grhorho = np.exp(2*(Lambda-v))
-    if -1 + eps**2 * np.exp(-2 * v) - l**2 / rho**2 * np.exp(2*v) >= 0:
-        u_rho_max = sqrt((-1 + eps**2 * np.exp(-2 * v) - l**2 / rho**2 * np.exp(2*v))/grhorho)
-        if  u_rho_max >= u_rho_0:
+def accessible_region_condition(eps, l, gtt, gphiphi, g_rhorho, urho_0):
+    if -1 - eps**2 * gtt - l**2 * gphiphi >= 0:
+        urho_max = sqrt((-1 - eps**2 * gtt - l**2 * gphiphi)/g_rhorho)
+        if urho_max >= urho_0:
             return True
         else:
             return False
@@ -51,8 +50,8 @@ def processing(
     data_path,
     rho_start,
     rho_end,
-    u_rho_start,
-    u_rho_end,
+    urho_start,
+    urho_end,
     perturbation,
     M,
     l,
@@ -83,7 +82,7 @@ def processing(
     color = []
 
     rho_0 = []
-    u_rho_0 = []
+    urho_0 = []
 
     destiny = []
 
@@ -94,7 +93,7 @@ def processing(
             for row in csv_reader:
                 split_row = row[0].split(';')
                 rho_0.append(float(split_row[0]))
-                u_rho_0.append(float(split_row[1]))
+                urho_0.append(float(split_row[1]))
 
     for i in range(number_of_points**2):
 
@@ -131,12 +130,19 @@ def processing(
                 v_bh = v_schwarzschild(rho_0[i], z, sigma, M)
                 v_ring = v_bachweyl(rho_0[i], z, sigma, m)
                 v = v_bh + v_ring
+                gtt = -np.exp(-2*v)
+                gphiphi = 1/rho_0[i]**2 * np.exp(2*v)
+                g_rhorho = np.exp(2*(Lambda-v))
+
             elif rn_mp:
                 Nmin1_bh = Nmin1_RN(rho_0[i], z, M)
-                Nmin1_ring = Nmin_MP(rho_0[i], z, sigma, m)
-                v = -np.log(Nmin1_bh+Nmin1_ring)
-
-            inside_the_region = accessible_region_condition(v, rho_0[i], Lambda, u_rho_0[i], eps, l)
+                Nmin1_ring = Nmin1_MP(rho_0[i], z, sigma, m)
+                N = 1/(Nmin1_bh+Nmin1_ring-1)
+                gtt = -1/N**2
+                gphiphi = 1/rho_0[i]**2 * N**2
+                g_rhorho = 1/N**2 
+                
+            inside_the_region = accessible_region_condition(eps, l, gtt, gphiphi, g_rhorho, urho_0[i])
             
             if inside_the_region == False:
                 rho_last = "-"
@@ -160,8 +166,6 @@ def processing(
         else:
             color.append(COLOR_OUTSIDE)
 
-    # TODO basin map (r,ur) for validation (comparison with Poincare sections)
-
     # I had just simple point plotting to see some visual but then asked Claude to change it for pixel plot
     color_array = np.array(color, dtype=np.float32)
 
@@ -175,7 +179,7 @@ def processing(
 
     fig, ax = plt.subplots()
     ax.imshow(color_grid, origin='lower', aspect='auto',
-            extent=[rho_start, rho_end, u_rho_start, u_rho_end])
+            extent=[rho_start, rho_end, urho_start, urho_end])
     ax.set_xlabel(r'$\rho$ [M]')
     ax.set_ylabel(r'$u^\rho$ [1]')
 
@@ -188,7 +192,7 @@ def processing(
     plt.close()
 
     # validation - (r,ur) basin maps in order to compare the basin maps to Poincare sections from Polcar, Sukova, Semerak Free motion around black holes with discs or rings: between integrability and chaos – V
-    if z==0.0:
+    if z==0.0 and rn_mp:
         color_array = np.array(color, dtype=np.float32)
 
         parallelisation_division = int(number_of_points/samples)
@@ -199,14 +203,14 @@ def processing(
 
         color_grid = color_rho_urho.transpose(1, 0, 2)
 
-        u_r_start = u_rho_start
-        u_r_end = u_rho_end
+        u_r_start = urho_start
+        u_r_end = urho_end
         r_start = rho_start + M
         r_end = rho_end + M
 
         fig, ax = plt.subplots()
         ax.imshow(color_grid, origin='lower', aspect='auto',
-                extent=[r_start, r_end, u_r_start, u_rho_end])
+                extent=[r_start, r_end, u_r_start, urho_end])
         ax.set_xlabel(r'$r$ [M]')
         ax.set_ylabel(r'$u^r$ [1]')
 
@@ -256,8 +260,8 @@ def fractal_dim(perturbations, fbars, name):
 #     data_path="./data_3",
 #     rho_start = 11.65,
 #     rho_end = 12,
-#     u_rho_start = 0.077,
-#     u_rho_end = 0.082,
+#     urho_start = 0.077,
+#     urho_end = 0.082,
 #     perturbation = 0.,
 #     M = 1.0,
 #     l = 3.943,
@@ -276,8 +280,8 @@ def fractal_dim(perturbations, fbars, name):
 #     data_path="./data_5",
 #     rho_start = 11.65,
 #     rho_end = 12,
-#     u_rho_start = 0.077,
-#     u_rho_end = 0.082,
+#     urho_start = 0.077,
+#     urho_end = 0.082,
 #     perturbation = 10**(-4),
 #     M = 1.0,
 #     l = 3.943,
@@ -296,8 +300,8 @@ def fractal_dim(perturbations, fbars, name):
 #     data_path="./data_6",
 #     rho_start = 11.65,
 #     rho_end = 12,
-#     u_rho_start = 0.077,
-#     u_rho_end = 0.082,
+#     urho_start = 0.077,
+#     urho_end = 0.082,
 #     perturbation = -10**(-4),
 #     M = 1.0,
 #     l = 3.943,
@@ -316,8 +320,8 @@ def fractal_dim(perturbations, fbars, name):
 #     data_path="./data_7",
 #     rho_start = 11.65,
 #     rho_end = 12,
-#     u_rho_start = 0.077,
-#     u_rho_end = 0.082,
+#     urho_start = 0.077,
+#     urho_end = 0.082,
 #     perturbation = 10**(-3),
 #     M = 1.0,
 #     l = 3.943,
@@ -336,8 +340,8 @@ def fractal_dim(perturbations, fbars, name):
 #     data_path="./data_8",
 #     rho_start = 11.65,
 #     rho_end = 12,
-#     u_rho_start = 0.077,
-#     u_rho_end = 0.082,
+#     urho_start = 0.077,
+#     urho_end = 0.082,
 #     perturbation = -10**(-3),
 #     M = 1.0,
 #     l = 3.943,
@@ -356,8 +360,8 @@ def fractal_dim(perturbations, fbars, name):
 #     data_path="./data_9",
 #     rho_start = 11.65,
 #     rho_end = 12,
-#     u_rho_start = 0.077,
-#     u_rho_end = 0.082,
+#     urho_start = 0.077,
+#     urho_end = 0.082,
 #     perturbation = 10**(-2),
 #     M = 1.0,
 #     l = 3.943,
@@ -376,8 +380,8 @@ def fractal_dim(perturbations, fbars, name):
 #     data_path="./data_10",
 #     rho_start = 11.65,
 #     rho_end = 12,
-#     u_rho_start = 0.077,
-#     u_rho_end = 0.082,
+#     urho_start = 0.077,
+#     urho_end = 0.082,
 #     perturbation = -10**(-2),
 #     M = 1.0,
 #     l = 3.943,
@@ -402,21 +406,22 @@ def fractal_dim(perturbations, fbars, name):
 # fractal_dim(perturbations, fbars, "schw_bw_1.0_3.943_0.955_20_0.5_0.2.pdf")
 
 _ = processing(
-    data_path="./data",
-    rho_start = 18.9,
-    rho_end = 19.1,
-    u_rho_start = 0.0,
-    u_rho_end = 0.1,
+    data_path = "./data",
+    rho_start = 12,
+    rho_end = 16,
+    urho_start = 0.0,
+    urho_end = 0.15,
     perturbation = 0,
     M = 1.0,
     l = 3.750,
-    eps = 0.955,
-    b = 20,
+    eps = 0.94,
+    b = 15,
     m = 0.5,
-    z = 0.001,
-    Tmax = 10**4,
+    z = 0.0,
+    Tmax = 10**5,
+    time_stamp = 1000,
     schw_bw = False,
     rn_mp = True,
-    number_of_points = 100,
-    samples=5,
+    number_of_points = 1000,
+    samples = 5,
 )

@@ -9,8 +9,8 @@ import threading
 def calculate_trajectories(
     rho_start,
     rho_end,
-    u_rho_start,
-    u_rho_end,
+    urho_start,
+    urho_end,
     perturbation,
     M,
     l,
@@ -31,8 +31,8 @@ def calculate_trajectories(
 
     rho = np.linspace(rho_start,rho_end, number_of_points)
     rho = rho + perturbation
-    u_rho = np.linspace(u_rho_start,u_rho_end, number_of_points)
-    u_rho = u_rho[(parallelisation_division*(sample-1)):(parallelisation_division*sample)]
+    urho = np.linspace(urho_start,urho_end, number_of_points)
+    urho = urho[(parallelisation_division*(sample-1)):(parallelisation_division*sample)]
 
     l = l*M
     b = b*M
@@ -55,16 +55,16 @@ def calculate_trajectories(
     ic = []
 
     for i in range(len(rho)):
-        for j in range(len(u_rho)):
+        for j in range(len(urho)):
 
             output_file = f"../data/trajectory_{parallelisation_division*i+j+parallelisation_division*len(rho)*(sample-1)}.csv"
 
             if schw_bw:
                 sigma = (b*(b-2*M))**0.5 # b is in Schwarzschild coordinates, sigma is converted value to Weyl coordinates
-                command = f"trajectory_weyl(CombinedWeyl(WeylSchwarzschild({M}), BachWeylRing({m}, {sigma})), {eps}, {l}, {rho[i]*M}, {z},{u_rho[j]}, {Tmax}, {time_stamp}, {output_file})\n"
+                command = f"trajectory_weyl(CombinedWeyl(WeylSchwarzschild({M}), BachWeylRing({m}, {sigma})), {eps}, {l}, {rho[i]*M}, {z},{urho[j]}, {Tmax}, {time_stamp}, {output_file})\n"
             elif rn_mp:
                 sigma = b-M # we want to have MP ring of the same size as we had with BW ring
-                command = f"trajectory_mp(CombinedMP(ReissnerNordstrom({M}), MajumdarPapapetrouRing({m}, {sigma})), {eps}, {l}, {rho[i]*M}, {z},{u_rho[j]}, {Tmax}, {time_stamp}, {output_file})\n"
+                command = f"trajectory_mp(CombinedMP(ReissnerNordstrom({M}), MajumdarPapapetrouRing({m}, {sigma})), {eps}, {l}, {rho[i]*M}, {z},{urho[j]}, {Tmax}, {time_stamp}, {output_file})\n"
 
             print(command)
             process_0.stdin.write(command)
@@ -75,7 +75,7 @@ def calculate_trajectories(
                 if line.startswith("Time of execution"):
                     break
 
-            ic.append([rho[i],u_rho[j]])
+            ic.append([rho[i],urho[j]])
 
     with open(f'../data/ic_{sample}.csv', 'w', newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter=';')
@@ -85,20 +85,20 @@ def calculate_trajectories(
     process_0.wait()
 
 calculate_trajectories(
-    rho_start = 18.9,
-    rho_end = 19.1,
-    u_rho_start = 0.0,
-    u_rho_end = 0.1,
+    rho_start = 12,
+    rho_end = 16,
+    urho_start = 0.0,
+    urho_end = 0.15,
     perturbation = 0,
     M = 1.0,
     l = 3.750,
-    eps = 0.955,
-    b = 20,
+    eps = 0.94,
+    b = 15,
     m = 0.5,
-    z = 0.001,
-    Tmax = 10**4,
-    time_stamp = 1,
+    z = 0.0,
+    Tmax = 10**5,
+    time_stamp = 1000,
     schw_bw = False,
     rn_mp = True,
-    number_of_points = 100,
+    number_of_points = 1000,
 )
