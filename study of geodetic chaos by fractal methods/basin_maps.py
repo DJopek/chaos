@@ -46,7 +46,6 @@ def accessible_region_condition(eps, l, gtt, gphiphi, g_rhorho, urho_0):
         return False
 
 def processing(
-    data_path,
     rho_start,
     rho_end,
     urho_start,
@@ -62,7 +61,8 @@ def processing(
     schw_bw,
     rn_mp,
     number_of_points,
-    samples,
+    samples=5,
+    data_path = "./data",
 ):
 
     rho_start = rho_start + perturbation
@@ -85,6 +85,7 @@ def processing(
 
     destiny = []
 
+    # initial conditions
     for i in range(samples):
         with open(f"{data_path}/ic_{i+1}.csv", mode="r") as file:
             csv_reader = csv.reader(file)
@@ -94,6 +95,29 @@ def processing(
                 rho_0.append(float(split_row[0]))
                 urho_0.append(float(split_row[1]))
 
+    # lookup for Lambda for rho0
+    if schw_bw:
+        Lambda_lookup = []
+
+        for i in range(number_of_points**2//samples):
+            if i % (number_of_points//samples) == 0:
+                with open(f"{data_path}/trajectory_{i}.csv", mode='r') as file:
+                    if os.path.getsize(f"{data_path}/trajectory_{i}.csv") == 0:
+                        Lambda_lookup.append("-")
+                    else:
+                        csv_reader = csv.reader(file)
+                        rows = list(csv_reader)
+
+                        if len(rows) < 2:
+                            split_row_first = rows[0][0].split(";")
+                            split_row_last = rows[0][0].split(";")
+                        else:
+                            split_row_first = rows[0][0].split(";")
+                            split_row_last = rows[-1][0].split(";")
+
+                        Lambda_lookup.append(float(split_row_first[-1]))
+
+    # main loop
     for i in range(number_of_points**2):
 
         if (i+1)%10000 == 0:
@@ -105,7 +129,11 @@ def processing(
             if os.path.getsize(f"{data_path}/trajectory_{i}.csv") == 0:
                 rho_last = 0.0
                 t_last = 0.0
-                Lambda = 0.0
+                if schw_bw:
+                    j = (i%(number_of_points**2//samples))
+                    n = j%(number_of_points//samples)
+                    idx = (j-n)//(number_of_points//samples)
+                    Lambda = Lambda_lookup[idx]
 
             else:
                 csv_reader = csv.reader(file)
@@ -122,16 +150,18 @@ def processing(
                 t_last = float(split_row_last[0])
                 if schw_bw:
                     Lambda = float(split_row_first[-1])
-                elif rn_mp:
-                    Lambda = 0.0
             
             if schw_bw:
-                v_bh = v_schwarzschild(rho_0[i], z, sigma, M)
-                v_ring = v_bachweyl(rho_0[i], z, sigma, m)
-                v = v_bh + v_ring
-                gtt = -np.exp(-2*v)
-                gphiphi = 1/rho_0[i]**2 * np.exp(2*v)
-                g_rhorho = np.exp(2*(Lambda-v))
+                if type(Lambda) == float:
+                    v_bh = v_schwarzschild(rho_0[i], z, sigma, M)
+                    v_ring = v_bachweyl(rho_0[i], z, sigma, m)
+                    v = v_bh + v_ring
+                    gtt = -np.exp(-2*v)
+                    gphiphi = 1/rho_0[i]**2 * np.exp(2*v)
+                    g_rhorho = np.exp(2*(Lambda-v))
+                    inside_the_region = accessible_region_condition(eps, l, gtt, gphiphi, g_rhorho, urho_0[i])
+                else:
+                    inside_the_region = False
 
             elif rn_mp:
                 Nmin1_bh = Nmin1_RN(rho_0[i], z, M)
@@ -140,9 +170,8 @@ def processing(
                 gtt = -1/N**2
                 gphiphi = 1/rho_0[i]**2 * N**2
                 g_rhorho = 1/N**2 
-                
-            inside_the_region = accessible_region_condition(eps, l, gtt, gphiphi, g_rhorho, urho_0[i])
-            
+                inside_the_region = accessible_region_condition(eps, l, gtt, gphiphi, g_rhorho, urho_0[i])
+
             if inside_the_region == False:
                 rho_last = "-"
                 t_last = "-"
@@ -151,7 +180,7 @@ def processing(
         COLOR_ORBIT    = ( 22/255, 102/255, 186/255)  # dark blue
         COLOR_OUTSIDE  = (1.0,     1.0,     1.0    )  # white
 
-        tolerance = 10
+        tolerance = 10 # this is in case timestamp was set to 1
 
         if type(rho_last) == float:
             if t_last < Tmax - tolerance:
@@ -213,13 +242,13 @@ def processing(
         ax.set_xlabel(r'$r$ [M]')
         ax.set_ylabel(r'$u^r$ [1]')
 
-    if schw_bw:
-        name = f"basin_map_r_ur_sch_bw_{number_of_points}_{M}_{l}_{eps}_{b}_{m}_{z}_{perturbation}.pdf"
-    elif rn_mp:
-        name = f"basin_map_r_ur_rn_mp_{number_of_points}_{M}_{l}_{eps}_{b}_{m}_{z}_{perturbation}.pdf"
+        if schw_bw:
+            name = f"basin_map_r_ur_sch_bw_{number_of_points}_{M}_{l}_{eps}_{b}_{m}_{z}_{perturbation}.pdf"
+        elif rn_mp:
+            name = f"basin_map_r_ur_rn_mp_{number_of_points}_{M}_{l}_{eps}_{b}_{m}_{z}_{perturbation}.pdf"
 
-    plt.savefig(name, dpi=300)
-    plt.close()
+        plt.savefig(name, dpi=300)
+        plt.close()
 
 
     return destiny
@@ -405,21 +434,19 @@ def fractal_dim(perturbations, fbars, name):
 # fractal_dim(perturbations, fbars, "schw_bw_1.0_3.943_0.955_20_0.5_0.2.pdf")
 
 _ = processing(
-    data_path = "./data",
-    rho_start = 12,
-    rho_end = 16,
+    rho_start = 2,
+    rho_end = 30,
     urho_start = 0.0,
-    urho_end = 0.15,
+    urho_end = 0.3,
     perturbation = 0,
     M = 1.0,
-    l = 3.750,
-    eps = 0.94,
-    b = 15,
+    l = 3.75,
+    eps = 0.955,
+    b = 20,
     m = 0.5,
-    z = 0.0,
-    Tmax = 10**5,
-    schw_bw = False,
-    rn_mp = True,
-    number_of_points = 500,
-    samples = 5,
+    z = 0.2,
+    Tmax = 10**4,
+    schw_bw = True,
+    rn_mp = False,
+    number_of_points = 1000,
 )
