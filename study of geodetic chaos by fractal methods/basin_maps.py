@@ -61,6 +61,8 @@ def processing(
     schw_bw,
     rn_mp,
     number_of_points,
+    n,
+    zofrho = False,
     samples=5,
     data_path = "./data",
 ):
@@ -94,6 +96,9 @@ def processing(
                 split_row = row[0].split(';')
                 rho_0.append(float(split_row[0]))
                 urho_0.append(float(split_row[1]))
+
+    if zofrho:
+        zvals = np.sqrt(np.array(rho_0)*M)*n
 
     # lookup for Lambda for rho0
     if schw_bw:
@@ -164,6 +169,8 @@ def processing(
                     inside_the_region = False
 
             elif rn_mp:
+                if zofrho:
+                    z = zvals[i]
                 Nmin1_bh = Nmin1_RN(rho_0[i], z, M)
                 Nmin1_ring = Nmin1_MP(rho_0[i], z, sigma, m)
                 N = 1/(Nmin1_bh+Nmin1_ring-1)
@@ -433,14 +440,34 @@ def fractal_dim(perturbations, fbars, name):
 
 # fractal_dim(perturbations, fbars, "schw_bw_1.0_3.943_0.955_20_0.5_0.2.pdf")
 
+# _ = processing(
+#     rho_start = 0.0001,
+#     rho_end = 30,
+#     urho_start = 0.0,
+#     urho_end = 0.3,
+#     perturbation = 0,
+#     M = 1.0,
+#     l = 3.2,
+#     eps = 0.955,
+#     b = 20,
+#     m = 0.5,
+#     z = 0.2,
+#     Tmax = 10**4,
+#     schw_bw = False,
+#     rn_mp = True,
+#     number_of_points = 1000,
+#     n = 1/10,
+#     zofrho = True,
+# )
+
 _ = processing(
-    rho_start = 2,
+    rho_start = 0.0001,
     rho_end = 30,
     urho_start = 0.0,
     urho_end = 0.3,
     perturbation = 0,
     M = 1.0,
-    l = 3.75,
+    l = 3.943,
     eps = 0.955,
     b = 20,
     m = 0.5,
@@ -448,5 +475,7 @@ _ = processing(
     Tmax = 10**4,
     schw_bw = True,
     rn_mp = False,
-    number_of_points = 1000,
+    number_of_points = 500,
+    n = 1/10,
+    zofrho = False,
 )

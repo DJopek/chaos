@@ -20,13 +20,16 @@ def calculate_trajectories(
     m,
     z,
     Tmax,
-    time_stamp,
     schw_bw,
     rn_mp,
     number_of_points,
+    n,
+    zofrho = False,
     parallelisation_number=5, #number of points needs to be divisable by parallelisation number
     sample=int(sys.argv[1]),
 ):
+
+    time_stamp = Tmax/10
 
     parallelisation_division = int(number_of_points/parallelisation_number)
 
@@ -39,6 +42,9 @@ def calculate_trajectories(
     b = b*M
     m = m*M
     z = z*M
+
+    if zofrho:
+        zvals = np.sqrt(rho*M)*n
 
     process_0 = subprocess.Popen(["./Gravitacek2"], stdin=subprocess.PIPE, stdout=PIPE, stderr=PIPE, text=True)
 
@@ -59,6 +65,9 @@ def calculate_trajectories(
         for j in range(len(urho)):
 
             output_file = f"../data/trajectory_{parallelisation_division*i+j+parallelisation_division*len(rho)*(sample-1)}.csv"
+
+            if zofrho:
+                z = zvals[i]
 
             if schw_bw:
                 sigma = (b*(b-2*M))**0.5 # b is in Schwarzschild coordinates, sigma is converted value to Weyl coordinates
@@ -85,21 +94,42 @@ def calculate_trajectories(
     process_0.stdin.close()
     process_0.wait()
 
+# calculate_trajectories(
+#     rho_start = 0.0001,
+#     rho_end = 30,
+#     urho_start = 0.0,
+#     urho_end = 0.3,
+#     perturbation = 0,
+#     M = 1.0,
+#     l = 3.2,
+#     eps = 0.955,
+#     b = 20,
+#     m = 0.5,
+#     z = 0.2,
+#     Tmax = 10**4,
+#     schw_bw = False,
+#     rn_mp = True,
+#     number_of_points = 1000,
+#     n = 1/10,
+#     zofrho = True,
+# )
+
 calculate_trajectories(
-    rho_start = 2,
+    rho_start = 0.0001,
     rho_end = 30,
     urho_start = 0.0,
     urho_end = 0.3,
     perturbation = 0,
     M = 1.0,
-    l = 3.75,
+    l = 3.943,
     eps = 0.955,
     b = 20,
     m = 0.5,
     z = 0.2,
     Tmax = 10**4,
-    time_stamp = 10**3,
     schw_bw = True,
     rn_mp = False,
-    number_of_points = 1000,
+    number_of_points = 500,
+    n = 1/10,
+    zofrho = False,
 )
