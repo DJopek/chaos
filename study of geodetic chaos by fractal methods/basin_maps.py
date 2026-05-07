@@ -122,6 +122,21 @@ def processing(
 
                         Lambda_lookup.append(float(split_row_first[-1]))
 
+        Lambda_plot = []
+        rho_0_plot = []
+
+        for i in range(len(Lambda_lookup)):
+            rho_vals = np.linspace(rho_start, rho_end, number_of_points)
+            if type(Lambda_lookup[i]) == float:
+                Lambda_plot.append(Lambda_lookup[i])
+                rho_0_plot.append(rho_vals[i])
+
+        plt.scatter(rho_0_plot, Lambda_plot, s=1)
+        name = f"lambda_sch_bw_{number_of_points}_{M}_{l}_{eps}_{b}_{m}_{z}_{perturbation}.png"
+        plt.xlabel(r'$\rho$ [M]')
+        plt.ylabel(r"$\lambda$ [1]")
+        plt.savefig(name, dpi=300)
+
     # main loop
     for i in range(number_of_points**2):
 
@@ -157,12 +172,19 @@ def processing(
                     Lambda = float(split_row_first[-1])
             
             if schw_bw:
+                v_bh = v_schwarzschild(rho_0[i], z, sigma, M)
+                v_ring = v_bachweyl(rho_0[i], z, sigma, m)
+                v = v_bh + v_ring
+                gtt = -np.exp(-2*v)
+                gphiphi = 1/rho_0[i]**2 * np.exp(2*v)
                 if type(Lambda) == float:
-                    v_bh = v_schwarzschild(rho_0[i], z, sigma, M)
-                    v_ring = v_bachweyl(rho_0[i], z, sigma, m)
-                    v = v_bh + v_ring
-                    gtt = -np.exp(-2*v)
-                    gphiphi = 1/rho_0[i]**2 * np.exp(2*v)
+                    g_rhorho = np.exp(2*(Lambda-v))
+                    inside_the_region = accessible_region_condition(eps, l, gtt, gphiphi, g_rhorho, urho_0[i])
+                elif -1 - eps**2 * gtt - l**2 * gphiphi >= 0:
+                    if rho_0[i] < sigma and rho_0[i] > 5:
+                        Lambda = 100
+                    else:
+                        Lambda = -100
                     g_rhorho = np.exp(2*(Lambda-v))
                     inside_the_region = accessible_region_condition(eps, l, gtt, gphiphi, g_rhorho, urho_0[i])
                 else:
@@ -212,7 +234,7 @@ def processing(
 
     color_grid = color_rho_urho.transpose(1, 0, 2)
 
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(6.4, 4.8))
     ax.imshow(color_grid, origin='lower', aspect='auto',
             extent=[rho_start, rho_end, urho_start, urho_end])
     ax.set_xlabel(r'$\rho$ [M]')
@@ -243,7 +265,7 @@ def processing(
         r_start = rho_start + M
         r_end = rho_end + M
 
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(6.4, 4.8))
         ax.imshow(color_grid, origin='lower', aspect='auto',
                 extent=[r_start, r_end, u_r_start, urho_end])
         ax.set_xlabel(r'$r$ [M]')
@@ -440,38 +462,18 @@ def fractal_dim(perturbations, fbars, name):
 
 # fractal_dim(perturbations, fbars, "schw_bw_1.0_3.943_0.955_20_0.5_0.2.pdf")
 
-# _ = processing(
-#     rho_start = 0.0001,
-#     rho_end = 30,
-#     urho_start = 0.0,
-#     urho_end = 0.3,
-#     perturbation = 0,
-#     M = 1.0,
-#     l = 3.2,
-#     eps = 0.955,
-#     b = 20,
-#     m = 0.5,
-#     z = 0.2,
-#     Tmax = 10**4,
-#     schw_bw = False,
-#     rn_mp = True,
-#     number_of_points = 1000,
-#     n = 1/10,
-#     zofrho = True,
-# )
-
 _ = processing(
-    rho_start = 0.0001,
+    rho_start = 0.001,
     rho_end = 30,
     urho_start = 0.0,
-    urho_end = 0.3,
+    urho_end = 0.4,
     perturbation = 0,
     M = 1.0,
-    l = 3.943,
+    l = 3.75,
     eps = 0.955,
     b = 20,
     m = 0.5,
-    z = 0.2,
+    z = 0.02,
     Tmax = 10**4,
     schw_bw = True,
     rn_mp = False,
