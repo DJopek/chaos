@@ -114,26 +114,6 @@ def calculate_trajectories(
 #     zofrho = True,
 # )
 
-# calculate_trajectories(
-#     rho_start = 0.0001,
-#     rho_end = 30,
-#     urho_start = 0.0,
-#     urho_end = 0.3,
-#     perturbation = 0,
-#     M = 1.0,
-#     l = 3.75,
-#     eps = 0.955,
-#     b = 20,
-#     m = 0.5,
-#     z = 0.02,
-#     Tmax = 10**4,
-#     schw_bw = True,
-#     rn_mp = False,
-#     number_of_points = 500,
-#     n = 1/10,
-#     zofrho = False,
-# )
-
 calculate_trajectories(
     rho_start = 0.001,
     rho_end = 30,
@@ -142,10 +122,10 @@ calculate_trajectories(
     perturbation = 0,
     M = 1.0,
     l = 3.75,
-    eps = 0.955,
+    eps = 0.977,
     b = 20,
-    m = 0.5,
-    z = 0.02,
+    m = 0.2,
+    z = 0.00,
     Tmax = 10**4,
     schw_bw = True,
     rn_mp = False,
@@ -153,3 +133,7 @@ calculate_trajectories(
     n = 1/10,
     zofrho = False,
 )
+
+# TODO rn+mp with 1> eps > 0.955
+# TODO examine schw+bw near ring
+# TODO examine rn+bw near ring (probably with very low n as it get's us close to the ring)

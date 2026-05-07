@@ -248,38 +248,6 @@ def processing(
     plt.savefig(name, dpi=300)
     plt.close()
 
-    # validation - (r,ur) basin maps in order to compare the basin maps to Poincare sections from Polcar, Sukova, Semerak Free motion around black holes with discs or rings: between integrability and chaos – V
-    if z==0.0 and rn_mp:
-        color_array = np.array(color, dtype=np.float32)
-
-        parallelisation_division = int(number_of_points/samples)
-
-        color_blocks = color_array.reshape(samples, number_of_points, parallelisation_division, 3)
-
-        color_rho_urho = color_blocks.transpose(1, 0, 2, 3).reshape(number_of_points, number_of_points, 3)
-
-        color_grid = color_rho_urho.transpose(1, 0, 2)
-
-        u_r_start = urho_start
-        u_r_end = urho_end
-        r_start = rho_start + M
-        r_end = rho_end + M
-
-        fig, ax = plt.subplots(figsize=(6.4, 4.8))
-        ax.imshow(color_grid, origin='lower', aspect='auto',
-                extent=[r_start, r_end, u_r_start, urho_end])
-        ax.set_xlabel(r'$r$ [M]')
-        ax.set_ylabel(r'$u^r$ [1]')
-
-        if schw_bw:
-            name = f"basin_map_r_ur_sch_bw_{number_of_points}_{M}_{l}_{eps}_{b}_{m}_{z}_{perturbation}.pdf"
-        elif rn_mp:
-            name = f"basin_map_r_ur_rn_mp_{number_of_points}_{M}_{l}_{eps}_{b}_{m}_{z}_{perturbation}.pdf"
-
-        plt.savefig(name, dpi=300)
-        plt.close()
-
-
     return destiny
 
 # uncertainty exponent and fractal dimension calculation 
@@ -470,10 +438,10 @@ _ = processing(
     perturbation = 0,
     M = 1.0,
     l = 3.75,
-    eps = 0.955,
+    eps = 0.977,
     b = 20,
-    m = 0.5,
-    z = 0.02,
+    m = 0.2,
+    z = 0.00,
     Tmax = 10**4,
     schw_bw = True,
     rn_mp = False,
