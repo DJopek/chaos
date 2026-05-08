@@ -23,7 +23,7 @@ def calculate_trajectories(
     schw_bw,
     rn_mp,
     number_of_points,
-    n,
+    n=1,
     zofrho = False,
     parallelisation_number=5, #number of points needs to be divisable by parallelisation number
     sample=int(sys.argv[1]),
@@ -114,26 +114,44 @@ def calculate_trajectories(
 #     zofrho = True,
 # )
 
+# calculate_trajectories(
+#     rho_start = 0.001,
+#     rho_end = 30,
+#     urho_start = 0.0,
+#     urho_end = 0.4,
+#     perturbation = 0,
+#     M = 1.0,
+#     l = 3.75,
+#     eps = 0.977,
+#     b = 20,
+#     m = 1.1,
+#     z = 0.00,
+#     Tmax = 10**4,
+#     schw_bw = True,
+#     rn_mp = False,
+#     number_of_points = 500,
+# )
+
 calculate_trajectories(
-    rho_start = 0.001,
-    rho_end = 30,
+    rho_start = 5,
+    rho_end = 22,
     urho_start = 0.0,
     urho_end = 0.4,
     perturbation = 0,
     M = 1.0,
     l = 3.75,
-    eps = 0.977,
-    b = 20,
-    m = 0.2,
+    eps = 0.94,
+    b = 15,
+    m = 0.5,
     z = 0.00,
-    Tmax = 10**4,
-    schw_bw = True,
-    rn_mp = False,
+    Tmax = 10**5,
+    schw_bw = False,
+    rn_mp = True,
     number_of_points = 500,
-    n = 1/10,
-    zofrho = False,
 )
 
-# TODO rn+mp with 1> eps > 0.955
+# TODO schw+bw comparison to the paper (Semerak, Polcar, Sukova - Chaos V)
+# TODO fractal dim for schw+bw from the thesis on x86
 # TODO examine schw+bw near ring
 # TODO examine rn+bw near ring (probably with very low n as it get's us close to the ring)
+# TODO rn+mp with 1> eps > 0.955 and fractal dim
