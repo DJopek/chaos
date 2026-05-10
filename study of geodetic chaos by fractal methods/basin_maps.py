@@ -6,6 +6,7 @@ import scipy
 from scipy.special import ellipk, ellipkm1
 from math import pi, sqrt
 
+# output file structure for schw+bw (for rn+mp it's the same but without lambda)
 # t | phi | rho | z | ut | uphi | urho | uz | lambda
 
 # basin map creation
@@ -136,6 +137,7 @@ def processing(
         plt.xlabel(r'$\rho$ [M]')
         plt.ylabel(r"$\lambda$ [1]")
         plt.savefig(name, dpi=300)
+        plt.close()
 
     # main loop
     for i in range(number_of_points**2):
@@ -243,7 +245,10 @@ def processing(
     if schw_bw:
         name = f"basin_map_sch_bw_{number_of_points}_{M}_{l}_{eps}_{b}_{m}_{z}_{perturbation}.pdf"
     elif rn_mp:
-        name = f"basin_map_rn_mp_{number_of_points}_{M}_{l}_{eps}_{b}_{m}_{z}_{perturbation}.pdf"
+        if zofrho:
+            name = f"basin_map_rn_mp_{number_of_points}_{M}_{l}_{eps}_{b}_{m}_{n}_{perturbation}.pdf"
+        else:
+            name = f"basin_map_rn_mp_{number_of_points}_{M}_{l}_{eps}_{b}_{m}_{z}_{perturbation}.pdf"
 
     plt.savefig(name, dpi=300)
     plt.close()
@@ -279,10 +284,11 @@ def fractal_dim(perturbations, fbars, name):
 
     print(f"fractal dimension: {2-slope} ± {slope_error}") # 2 is the dimension of our phase space
 
+# example use
 # schw_bw_1.0_3.943_0.955_20_0.5_0.2
 
 # destiny_unperturbed = processing(
-#     data_path="./data_3",
+#     data_path="./data_0",
 #     rho_start = 11.65,
 #     rho_end = 12,
 #     urho_start = 0.077,
@@ -298,11 +304,10 @@ def fractal_dim(perturbations, fbars, name):
 #     schw_bw = True,
 #     rn_mp = False,
 #     number_of_points = 500,
-#     samples = 5,
 # )
 
 # destiny_perturbed_1 = processing(
-#     data_path="./data_5",
+#     data_path="./data_1",
 #     rho_start = 11.65,
 #     rho_end = 12,
 #     urho_start = 0.077,
@@ -318,11 +323,10 @@ def fractal_dim(perturbations, fbars, name):
 #     schw_bw = True,
 #     rn_mp = False,
 #     number_of_points = 500,
-#     samples = 5,
 # )
 
 # destiny_perturbed_2 = processing(
-#     data_path="./data_6",
+#     data_path="./data_2",
 #     rho_start = 11.65,
 #     rho_end = 12,
 #     urho_start = 0.077,
@@ -338,11 +342,10 @@ def fractal_dim(perturbations, fbars, name):
 #     schw_bw = True,
 #     rn_mp = False,
 #     number_of_points = 500,
-#     samples = 5,
 # )
 
 # destiny_perturbed_3 = processing(
-#     data_path="./data_7",
+#     data_path="./data_3",
 #     rho_start = 11.65,
 #     rho_end = 12,
 #     urho_start = 0.077,
@@ -358,11 +361,10 @@ def fractal_dim(perturbations, fbars, name):
 #     schw_bw = True,
 #     rn_mp = False,
 #     number_of_points = 500,
-#     samples = 5,
 # )
 
 # destiny_perturbed_4 = processing(
-#     data_path="./data_8",
+#     data_path="./data_4",
 #     rho_start = 11.65,
 #     rho_end = 12,
 #     urho_start = 0.077,
@@ -378,11 +380,10 @@ def fractal_dim(perturbations, fbars, name):
 #     schw_bw = True,
 #     rn_mp = False,
 #     number_of_points = 500,
-#     samples = 5,
 # )
 
 # destiny_perturbed_5 = processing(
-#     data_path="./data_9",
+#     data_path="./data_5",
 #     rho_start = 11.65,
 #     rho_end = 12,
 #     urho_start = 0.077,
@@ -398,11 +399,10 @@ def fractal_dim(perturbations, fbars, name):
 #     schw_bw = True,
 #     rn_mp = False,
 #     number_of_points = 500,
-#     samples = 5,
 # )
 
 # destiny_perturbed_6 = processing(
-#     data_path="./data_10",
+#     data_path="./data_6",
 #     rho_start = 11.65,
 #     rho_end = 12,
 #     urho_start = 0.077,
@@ -418,7 +418,6 @@ def fractal_dim(perturbations, fbars, name):
 #     schw_bw = True,
 #     rn_mp = False,
 #     number_of_points = 500,
-#     samples = 5,
 # )
 
 # fbar_1 = fbar(destiny_perturbed_1, destiny_perturbed_2)
@@ -430,20 +429,185 @@ def fractal_dim(perturbations, fbars, name):
 
 # fractal_dim(perturbations, fbars, "schw_bw_1.0_3.943_0.955_20_0.5_0.2.pdf")
 
-_ = processing(
-    rho_start = 5,
-    rho_end = 22,
-    urho_start = 0.0,
-    urho_end = 0.4,
+# _ = processing(
+#     rho_start = 0.0001,
+#     rho_end = 40,
+#     urho_start = 0.0,
+#     urho_end = 0.3,
+#     perturbation = 0,
+#     M = 1.0,
+#     l = 3.2,
+#     eps = 0.965, # 0.965 0.97 0.975 0.98 0.985
+#     b = 20,
+#     m = 0.5,
+#     z = 0.2,
+#     Tmax = 10**4,
+#     schw_bw = False,
+#     rn_mp = True,
+#     number_of_points = 1000,
+#     n = 1/10,
+#     zofrho = True,
+# )
+
+destiny_unperturbed = processing(
+    data_path = "./data_0",
+    rho_start = 9,
+    rho_end = 13,
+    urho_start = 0.08,
+    urho_end = 0.12,
     perturbation = 0,
     M = 1.0,
-    l = 3.75,
-    eps = 0.94,
-    b = 15,
+    l = 3.2,
+    eps = 0.96,
+    b = 20,
     m = 0.5,
-    z = 0.00,
-    Tmax = 10**5,
+    z = 0.2,
+    Tmax = 10**4,
     schw_bw = False,
     rn_mp = True,
     number_of_points = 500,
+    n = 1/10,
+    zofrho = True,
+    samples = 100,
 )
+
+destiny_perturbed_1 = processing(
+    data_path = "./data_1",
+    rho_start = 9,
+    rho_end = 13,
+    urho_start = 0.08,
+    urho_end = 0.12,
+    perturbation = 10**(-4),
+    M = 1.0,
+    l = 3.2,
+    eps = 0.96,
+    b = 20,
+    m = 0.5,
+    z = 0.2,
+    Tmax = 10**4,
+    schw_bw = False,
+    rn_mp = True,
+    number_of_points = 500,
+    n = 1/10,
+    zofrho = True,
+    samples = 100,
+)
+
+destiny_perturbed_2 = processing(
+    data_path = "./data_2", 
+    rho_start = 9,
+    rho_end = 13,
+    urho_start = 0.08,
+    urho_end = 0.12,
+    perturbation = -10**(-4),
+    M = 1.0,
+    l = 3.2,
+    eps = 0.96,
+    b = 20,
+    m = 0.5,
+    z = 0.2,
+    Tmax = 10**4,
+    schw_bw = False,
+    rn_mp = True,
+    number_of_points = 500,
+    n = 1/10,
+    zofrho = True,
+    samples = 100,
+)
+
+destiny_perturbed_3 = processing(
+    data_path = "./data_3", 
+    rho_start = 9,
+    rho_end = 13,
+    urho_start = 0.08,
+    urho_end = 0.12,
+    perturbation = 10**(-3),
+    M = 1.0,
+    l = 3.2,
+    eps = 0.96,
+    b = 20,
+    m = 0.5,
+    z = 0.2,
+    Tmax = 10**4,
+    schw_bw = False,
+    rn_mp = True,
+    number_of_points = 500,
+    n = 1/10,
+    zofrho = True,
+    samples = 100,
+)
+
+destiny_perturbed_4 = processing(
+    data_path = "./data_4", 
+    rho_start = 9,
+    rho_end = 13,
+    urho_start = 0.08,
+    urho_end = 0.12,
+    perturbation = -10**(-3),
+    M = 1.0,
+    l = 3.2,
+    eps = 0.96,
+    b = 20,
+    m = 0.5,
+    z = 0.2,
+    Tmax = 10**4,
+    schw_bw = False,
+    rn_mp = True,
+    number_of_points = 500,
+    n = 1/10,
+    zofrho = True,
+    samples = 100,
+)
+
+destiny_perturbed_5 = processing(
+    data_path = "./data_5", 
+    rho_start = 9,
+    rho_end = 13,
+    urho_start = 0.08,
+    urho_end = 0.12,
+    perturbation = 10**(-2),
+    M = 1.0,
+    l = 3.2,
+    eps = 0.96,
+    b = 20,
+    m = 0.5,
+    z = 0.2,
+    Tmax = 10**4,
+    schw_bw = False,
+    rn_mp = True,
+    number_of_points = 500,
+    n = 1/10,
+    zofrho = True,
+    samples = 100,
+)
+
+destiny_perturbed_6 = processing(
+    data_path = "./data_6", 
+    rho_start = 9,
+    rho_end = 13,
+    urho_start = 0.08,
+    urho_end = 0.12,
+    perturbation = -10**(-2),
+    M = 1.0,
+    l = 3.2,
+    eps = 0.96,
+    b = 20,
+    m = 0.5,
+    z = 0.2,
+    Tmax = 10**4,
+    schw_bw = False,
+    rn_mp = True,
+    number_of_points = 500,
+    n = 1/10,
+    zofrho = True,
+    samples = 100,
+)
+
+fbar_1 = fbar(destiny_perturbed_1, destiny_perturbed_2)
+fbar_2 = fbar(destiny_perturbed_3, destiny_perturbed_4)
+fbar_3 = fbar(destiny_perturbed_5, destiny_perturbed_6)
+
+perturbations = [10**(-4), 10**(-3), 10**(-2)]
+fbars = [fbar_1, fbar_2, fbar_3]
+
+fractal_dim(perturbations, fbars, "rn_mp_1.0_3.2_0.96_20_0.5_0.1.pdf")
