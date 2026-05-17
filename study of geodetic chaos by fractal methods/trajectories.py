@@ -94,35 +94,15 @@ def calculate_trajectories(
     process_0.stdin.close()
     process_0.wait()
 
-# calculate_trajectories(
-#     rho_start = 0.0001,
-#     rho_end = 40,
-#     urho_start = 0.0,
-#     urho_end = 0.3,
-#     perturbation = 0,
-#     M = 1.0,
-#     l = 3.2,
-#     eps = 0.965, # 0.965 0.97 0.975 0.98 0.985
-#     b = 20,
-#     m = 0.5,
-#     z = 0.2,
-#     Tmax = 10**4,
-#     schw_bw = False,
-#     rn_mp = True,
-#     number_of_points = 1000,
-#     n = 1/10,
-#     zofrho = True,
-# )
-
 calculate_trajectories(
-    rho_start = 9,
-    rho_end = 13,
-    urho_start = 0.08,
-    urho_end = 0.12,
+    rho_start = 1,
+    rho_end = 2,
+    urho_start = 0.18,
+    urho_end = 0.20,
     perturbation = 0,
     M = 1.0,
     l = 3.2,
-    eps = 0.96,
+    eps = 0.995,
     b = 20,
     m = 0.5,
     z = 0.2,
@@ -135,14 +115,14 @@ calculate_trajectories(
 )
 
 #calculate_trajectories(
-#    rho_start = 9,
-#    rho_end = 13,
-#    urho_start = 0.08,
-#    urho_end = 0.12,
+#    rho_start = 1,
+#    rho_end = 2,
+#    urho_start = 0.18,
+#    urho_end = 0.20,
 #    perturbation = 10**(-4),
 #    M = 1.0,
 #    l = 3.2,
-#    eps = 0.96,
+#    eps = 0.995,
 #    b = 20,
 #    m = 0.5,
 #    z = 0.2,
@@ -155,14 +135,14 @@ calculate_trajectories(
 #)
 #
 #calculate_trajectories(
-#    rho_start = 9,
-#    rho_end = 13,
-#    urho_start = 0.08,
-#    urho_end = 0.12,
+#    rho_start = 1,
+#    rho_end = 2,
+#    urho_start = 0.18,
+#    urho_end = 0.20,
 #    perturbation = -10**(-4),
 #    M = 1.0,
 #    l = 3.2,
-#    eps = 0.96,
+#    eps = 0.995,
 #    b = 20,
 #    m = 0.5,
 #    z = 0.2,
@@ -175,14 +155,14 @@ calculate_trajectories(
 #)
 #
 #calculate_trajectories(
-#    rho_start = 9,
-#    rho_end = 13,
-#    urho_start = 0.08,
-#    urho_end = 0.12,
+#    rho_start = 1,
+#    rho_end = 2,
+#    urho_start = 0.18,
+#    urho_end = 0.20,
 #    perturbation = 10**(-3),
 #    M = 1.0,
 #    l = 3.2,
-#    eps = 0.96,
+#    eps = 0.995,
 #    b = 20,
 #    m = 0.5,
 #    z = 0.2,
@@ -195,14 +175,14 @@ calculate_trajectories(
 #)
 #
 #calculate_trajectories(
-#    rho_start = 9,
-#    rho_end = 13,
-#    urho_start = 0.08,
-#    urho_end = 0.12,
+#    rho_start = 1,
+#    rho_end = 2,
+#    urho_start = 0.18,
+#    urho_end = 0.20,
 #    perturbation = -10**(-3),
 #    M = 1.0,
 #    l = 3.2,
-#    eps = 0.96,
+#    eps = 0.995,
 #    b = 20,
 #    m = 0.5,
 #    z = 0.2,
@@ -215,14 +195,14 @@ calculate_trajectories(
 #)
 #
 #calculate_trajectories(
-#    rho_start = 9,
-#    rho_end = 13,
-#    urho_start = 0.08,
-#    urho_end = 0.12,
+#    rho_start = 1,
+#    rho_end = 2,
+#    urho_start = 0.18,
+#    urho_end = 0.20,
 #    perturbation = 10**(-2),
 #    M = 1.0,
 #    l = 3.2,
-#    eps = 0.96,
+#    eps = 0.995,
 #    b = 20,
 #    m = 0.5,
 #    z = 0.2,
@@ -235,14 +215,14 @@ calculate_trajectories(
 #)
 #
 #calculate_trajectories(
-#    rho_start = 9,
-#    rho_end = 13,
-#    urho_start = 0.08,
-#    urho_end = 0.12,
+#    rho_start = 1,
+#    rho_end = 2,
+#    urho_start = 0.18,
+#    urho_end = 0.20,
 #    perturbation = -10**(-2),
 #    M = 1.0,
 #    l = 3.2,
-#    eps = 0.96,
+#    eps = 0.995,
 #    b = 20,
 #    m = 0.5,
 #    z = 0.2,
@@ -256,8 +236,9 @@ calculate_trajectories(
 
 # DONE schw+bw comparison with the paper (Semerak, Polcar, Sukova - Chaos V) - mac + cluster
 # DONE fractal dim for schw+bw from the thesis on x86 - polis pc
+# DONE examine schw+bw near ring - mac
+# DONE rn+mp with 1> eps > 0.955 and fractal dim - cluster (analysis on mac)
 
+# TODO examine rn+bw near ring z=0, z=0.01, z=0.02 - mac
 # TODO different fractal dim for schw+bw from the thesis - mac
-# TODO examine schw+bw near ring - mac
-# TODO examine rn+bw near ring (probably with very low n as it get's us close to the ring) - mac
-# TODO rn+mp with 1> eps > 0.955 and fractal dim - mac
+# TODO rn+mp with decreasing m + fractal dim - mac
