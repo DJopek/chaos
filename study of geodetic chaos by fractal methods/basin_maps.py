@@ -608,3 +608,152 @@ def fractal_dims_plot(fractal_dims, parameters, errors, name, xlabel):
 #    name = "d_eps_rn_mp",
 #    xlabel = r"$\varepsilon$"
 #)
+
+destiny_unperturbed = processing(
+    data_path = "./data_0",
+    rho_start = 13,
+    rho_end = 17,
+    urho_start = 0.15,
+    urho_end = 0.19,
+    perturbation = 0,
+    M = 1.0,
+    l = 3.75,
+    eps = 0.977,
+    b = 20,
+    m = 0.2, # m = [0.001, 0.003, 0.006, 0.01, 0.02, 0.04, 0.07, 0.1, 0.2, 0.3, 0.6, 1.1]
+    z = 0.2,
+    Tmax = 10**4,
+    schw_bw = True,
+    rn_mp = False,
+    number_of_points = 500,
+    samples = 20,
+)
+
+destiny_perturbed_1 = processing(
+    data_path = "./data_1",
+    rho_start = 13,
+    rho_end = 17,
+    urho_start = 0.15,
+    urho_end = 0.19,
+    perturbation = 10**(-4),
+    M = 1.0,
+    l = 3.75,
+    eps = 0.977,
+    b = 20,
+    m = 0.2, # m = [0.001, 0.003, 0.006, 0.01, 0.02, 0.04, 0.07, 0.1, 0.2, 0.3, 0.6, 1.1]
+    z = 0.2,
+    Tmax = 10**4,
+    schw_bw = True,
+    rn_mp = False,
+    number_of_points = 500,
+    samples = 20,
+)
+
+destiny_perturbed_2 = processing(
+    data_path = "./data_2",
+    rho_start = 13,
+    rho_end = 17,
+    urho_start = 0.15,
+    urho_end = 0.19,
+    perturbation = -10**(-4),
+    M = 1.0,
+    l = 3.75,
+    eps = 0.977,
+    b = 20,
+    m = 0.2, # m = [0.001, 0.003, 0.006, 0.01, 0.02, 0.04, 0.07, 0.1, 0.2, 0.3, 0.6, 1.1]
+    z = 0.2,
+    Tmax = 10**4,
+    schw_bw = True,
+    rn_mp = False,
+    number_of_points = 500,
+    samples = 20,
+)
+
+destiny_perturbed_3 = processing(
+    data_path = "./data_3",
+    rho_start = 13,
+    rho_end = 17,
+    urho_start = 0.15,
+    urho_end = 0.19,
+    perturbation = 10**(-3),
+    M = 1.0,
+    l = 3.75,
+    eps = 0.977,
+    b = 20,
+    m = 0.2, # m = [0.001, 0.003, 0.006, 0.01, 0.02, 0.04, 0.07, 0.1, 0.2, 0.3, 0.6, 1.1]
+    z = 0.2,
+    Tmax = 10**4,
+    schw_bw = True,
+    rn_mp = False,
+    number_of_points = 500,
+    samples = 20,
+)
+
+destiny_perturbed_4 = processing(
+    data_path = "./data_4",
+    rho_start = 13,
+    rho_end = 17,
+    urho_start = 0.15,
+    urho_end = 0.19,
+    perturbation = -10**(-3),
+    M = 1.0,
+    l = 3.75,
+    eps = 0.977,
+    b = 20,
+    m = 0.2, # m = [0.001, 0.003, 0.006, 0.01, 0.02, 0.04, 0.07, 0.1, 0.2, 0.3, 0.6, 1.1]
+    z = 0.2,
+    Tmax = 10**4,
+    schw_bw = True,
+    rn_mp = False,
+    number_of_points = 500,
+    samples = 20,
+)
+
+destiny_perturbed_5 = processing(
+    data_path = "./data_5",
+    rho_start = 13,
+    rho_end = 17,
+    urho_start = 0.15,
+    urho_end = 0.19,
+    perturbation = 10**(-2),
+    M = 1.0,
+    l = 3.75,
+    eps = 0.977,
+    b = 20,
+    m = 0.2, # m = [0.001, 0.003, 0.006, 0.01, 0.02, 0.04, 0.07, 0.1, 0.2, 0.3, 0.6, 1.1]
+    z = 0.2,
+    Tmax = 10**4,
+    schw_bw = True,
+    rn_mp = False,
+    number_of_points = 500,
+    samples = 20,
+)
+
+destiny_perturbed_6 = processing(
+    data_path = "./data_6",
+    rho_start = 13,
+    rho_end = 17,
+    urho_start = 0.15,
+    urho_end = 0.19,
+    perturbation = -10**(-2),
+    M = 1.0,
+    l = 3.75,
+    eps = 0.977,
+    b = 20,
+    m = 0.2, # m = [0.001, 0.003, 0.006, 0.01, 0.02, 0.04, 0.07, 0.1, 0.2, 0.3, 0.6, 1.1]
+    z = 0.2,
+    Tmax = 10**4,
+    schw_bw = True,
+    rn_mp = False,
+    number_of_points = 500,
+    samples = 20,
+)
+
+fbar_1 = fbar(destiny_perturbed_1, destiny_perturbed_2)
+fbar_2 = fbar(destiny_perturbed_3, destiny_perturbed_4)
+fbar_3 = fbar(destiny_perturbed_5, destiny_perturbed_6)
+
+perturbations = [10**(-4), 10**(-3), 10**(-2)]
+fbars = [fbar_1, fbar_2, fbar_3]
+
+fractal_dim(perturbations, fbars, "schw_bw_1.0_3.75_0.977_20_0.2_0.2.pdf")

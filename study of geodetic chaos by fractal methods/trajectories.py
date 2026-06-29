@@ -94,26 +94,6 @@ def calculate_trajectories(
     process_0.stdin.close()
     process_0.wait()
 
-calculate_trajectories(
-    rho_start = 1,
-    rho_end = 2,
-    urho_start = 0.18,
-    urho_end = 0.20,
-    perturbation = 0,
-    M = 1.0,
-    l = 3.2,
-    eps = 0.995,
-    b = 20,
-    m = 0.5,
-    z = 0.2,
-    Tmax = 10**4,
-    schw_bw = False,
-    rn_mp = True,
-    number_of_points = 500,
-    n = 1/10,
-    zofrho = True,
-)
-
 #calculate_trajectories(
 #    rho_start = 1,
 #    rho_end = 2,
@@ -239,6 +219,23 @@ calculate_trajectories(
 # DONE examine schw+bw near ring - mac
 # DONE rn+mp with 1> eps > 0.955 and fractal dim - cluster (analysis on mac)
 
-# TODO examine rn+bw near ring z=0, z=0.01, z=0.02 - mac
-# TODO different fractal dim for schw+bw from the thesis - mac
-# TODO rn+mp with decreasing m + fractal dim - mac
+# TODO examine rn+mp near ring z=0, z=0.01, z=0.02 - mac + cluster, same for schw+bw (check also the trajectory)
+# TODO replicate fig 5.18 from the thesis (Sychrovsky)
+
+calculate_trajectories(
+    rho_start = 0.001,
+    rho_end = 40,
+    urho_start = 0.0,
+    urho_end = 0.3,
+    perturbation = 0,
+    M = 1.0,
+    l = 3.75,
+    eps = 0.977,
+    b = 20,
+    m = 1.1, # m = [0.001, 0.003, 0.006, 0.01, 0.02, 0.04, 0.07, 0.1, 0.2, 0.3, 0.6, 1.1]
+    z = 0.0,
+    Tmax = 10**4,
+    schw_bw = True,
+    rn_mp = False,
+    number_of_points = 500,
+)
