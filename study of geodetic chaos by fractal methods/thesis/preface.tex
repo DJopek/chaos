@@ -1,0 +1,30 @@
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+
+The history of gravitation modeling shares the roots with modeling of motion of physical systems with equations itself, both of which are related to Sir Isaac Newton. Along the way he invented calculus, which is the essential "tool" and "language" necessary to describe the motion of physical systems. With this "tool" differential equations came into existence. These equations and methods are now used not just for modeling of motion, but more generally for modeling change and evolution of systems in all areas of science, not just physics.
+
+However, shortcomings of the gravitational law and the method of modeling with differential equations started to show up. Newton himself was skeptical about his laws of gravitation. In correspondence with Bentley, he wrote:
+\begin{quote}
+    That gravity should be innate, inherent, and essential to matter, so that one body may act upon another at a distance through a vacuum, without the mediation of anything else, by and through which their action and force may be conveyed from one to another, is to me so great an absurdity that I believe no man who has in philosophical matters a competent faculty of thinking can ever fall into it.
+\end{quote}
+The quotation is from Newton's correspondence edited by Turnbull~\cite{Newton1961}.
+
+Note that in this correspondence the relation of gravity and chaos was also mentioned, although in a different sense than the one used in modern dynamical-systems theory.
+
+The solutions obtained by solving the governing differential equations, when such solutions could be found, usually described regular motion. However, this is only a part of the possible dynamics. The three-body problem, studied by Poincar\'e and later authors, became one of the classical motivations for modern chaos theory. Even when formal analytic constructions exist, their practical predictive value may be limited; in this thesis we therefore follow the numerical and geometrical viewpoint standard in dynamical-systems theory~\cite{Ott2002}.
+
+With the improvement of the technology of computers, systems have started to be examined numerically. 
+In 1961, Lorenz was running a numerical computer model for weather prediction where he found sensitive dependence on initial conditions, now commonly known as the butterfly effect~\cite{Ott2002}.
+
+The chaos theory started to play an important role in astronomy. But Newtonian theory could not explain some phenomena like the Mercury trajectory. In 1915 Albert Einstein presented his field equations. In contrast to Newtonian gravity, the theory of general relativity is non-linear.
+No long after the publication of the theory of general relativity, the astrophysicist Karl Schwarzschild found the first non-trivial exact solution to the Einstein field equations. Later, the Reissner–Nordström solution, which is associated with electrically charged black holes was discovered. These solutions were based on assumptions of symmetry, hence the solution has enough integrals of motion so the dynamics of a test particle is regular. As the theory is non-linear, it is quite natural to expect presence of chaotic dynamics. 
+
+More realistic descriptions of astronomical systems need to consider a field perturbed by other parts of the system, such as accretion disks in the case of black holes. Due to the non-linear character of the theory, these perturbations can result in broken integrability and therefore chaotic dynamics. Ring-like and disk-like sources, as well as geodesic dynamics in the corresponding perturbed black-hole space-times, have been studied in previous work~\cite{Semerak2016,Polcar2019,PolcarSemerak2019}.
+
+This thesis is a follow-up to the thesis of David Sychrovsky~\cite{Sychrovsky2020}, where systems of the Schwarzschild solution superposed with the Bach--Weyl ring solution and inverted Morgan--Morgan disk solution were examined by creating escape basin maps and then calculating the fractal dimensions of the basin boundaries. The fractal dimension was calculated using the box-counting method, while in this thesis the fractal dimension will be examined by the uncertainty-exponent method. It is also worth mentioning that we use a different codebase for creating basin maps and calculating trajectories; the thesis repository is available at \url{https://github.com/DJopek/chaos}. The work in this thesis consists of replicating some results of Sychrovsky for the Schwarzschild with Bach--Weyl ring system and then applying our methods to the system of the Reissner--Nordstrom solution superposed with the Majumdar--Papapetrou ring solution. 
+The thesis is organized in the following way: 
+Unless stated otherwise, we will use geometrized units in which \(c=G=1\),
+where c is the speed of light and G is the gravitational constant. Greek indices
+indicate space-time coordinate components and we follow Einstein’s summation
+rule over the same-index pairs (unless they denote a specific coordinate). The
+metric signature is \((-,+,+,+)\). A lower index after a comma denotes a partial derivative.

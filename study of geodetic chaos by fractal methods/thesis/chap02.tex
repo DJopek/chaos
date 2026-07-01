@@ -1,0 +1,648 @@
+\chapter{General relativity}
+\label{chap:general-relativity}
+In this chapter, we will introduce the necessary parts and concepts from the theory of general relativity that we will work with and that are relevant for this thesis.
+
+\section{Static axisymmetric space-times}
+\label{sec:static-axisymmetric-spacetimes}
+
+\subsection{Weyl metric}
+\label{subsec:weyl-metric}
+
+A static and axially symmetric space-time admits two commuting Killing
+vector fields associated with time translations and rotations about the
+symmetry axis $\xi^\mu_{(t)}$ and $\xi^\mu_{(\phi)}$.
+For a geodesic with four-velocity \(u^\mu\), the Killing symmetries imply
+the conserved specific energy and azimuthal angular momentum
+\begin{equation}
+    \epsilon
+    :=
+    -g_{\mu\nu}u^\mu\xi^\nu_{(t)},
+    \qquad
+    \ell
+    :=
+    g_{\mu\nu}u^\mu\xi^\nu_{(\phi)}.
+    \label{eq:killings}
+\end{equation}
+\cite{Sychrovsky2020}
+In Weyl coordinates \((t,\rho,\phi,z)\), where \(\rho=0\) represents the
+symmetry axis, the metric can be written as
+\begin{equation}
+    \mathrm{d}s^2
+    =
+    -N^2\,\mathrm{d}t^2
+    +
+    N^{-2}
+    \left[
+        \rho^2\,\mathrm{d}\phi^2
+        +
+        e^{2\lambda}
+        \left(
+            \mathrm{d}\rho^2+\mathrm{d}z^2
+        \right)
+    \right],
+    \label{eq:weyl-metric}
+\end{equation}
+where \(N=N(\rho,z)\) is the lapse function and
+\(\lambda=\lambda(\rho,z)\) is the second Weyl metric function
+\cite{Semerak2016}.
+
+The lapse is conventionally expressed in terms of the gravitational
+potential \(\nu\) as
+\begin{equation}
+    N\equiv e^\nu.
+    \label{eq:lapse-potential}
+\end{equation}
+In the weak-field limit,
+\begin{equation}
+    g_{tt}=-e^{2\nu}\approx -(1+2\nu),
+\end{equation}
+and therefore \(\nu\) corresponds to the Newtonian gravitational
+potential.
+
+Equivalently, the metric~\eqref{eq:weyl-metric} takes the form
+\begin{equation}
+    \mathrm{d}s^2
+    =
+    -e^{2\nu}\,\mathrm{d}t^2
+    +
+    \rho^2 e^{-2\nu}\,\mathrm{d}\phi^2
+    +
+    e^{2(\lambda-\nu)}
+    \left(
+        \mathrm{d}\rho^2+\mathrm{d}z^2
+    \right).
+    \label{eq:weyl-metric-nu}
+\end{equation}
+
+In a vacuum region, the corresponding Einstein equations reduce to
+\begin{align}
+    \nu_{,\rho\rho}
+    +\frac{1}{\rho}\nu_{,\rho}
+    +\nu_{,zz}
+    &=0,
+    \label{eq:weyl-laplace}
+    \\
+    \lambda_{,\rho}
+    &=
+    \rho
+    \left[
+        \left(\nu_{,\rho}\right)^2
+        -
+        \left(\nu_{,z}\right)^2
+    \right],
+    \label{eq:weyl-lambda-rho}
+    \\
+    \lambda_{,z}
+    &=
+    2\rho\nu_{,\rho}\nu_{,z}.
+    \label{eq:weyl-lambda-z}
+\end{align}
+
+In a vacuum region, the function \(\nu\) satisfies the axisymmetric
+Laplace equation in cylindrical coordinates~\eqref{eq:weyl-laplace}
+\cite{Sychrovsky2020}.
+
+
+\subsection{Schwarzschild black hole}
+\label{subsec:schwarzschild}
+
+In Schwarzschild coordinates \((t,r,\theta,\phi)\), the Schwarzschild
+metric is
+\begin{equation}
+    \mathrm{d}s^2
+    =
+    -\left(1-\frac{2M}{r}\right)\mathrm{d}t^2
+    +
+    \left(1-\frac{2M}{r}\right)^{-1}\mathrm{d}r^2
+    +
+    r^2
+    \left(
+        \mathrm{d}\theta^2
+        +
+        \sin^2\theta\,\mathrm{d}\phi^2
+    \right).
+    \label{eq:schwarzschild-metric}
+\end{equation}
+
+The transformation from Schwarzschild coordinates to Weyl coordinates
+is
+\begin{equation}
+    \rho
+    =
+    \sqrt{r(r-2M)}\sin\theta,
+    \qquad
+    z
+    =
+    (r-M)\cos\theta.
+    \label{eq:schwarzschild-to-weyl}
+\end{equation}
+Introducing
+\begin{equation}
+    d_{\pm}
+    :=
+    \sqrt{\rho^2+(z\pm M)^2},
+    \label{eq:schwarzschild-distances}
+\end{equation}
+the inverse transformation reads
+\begin{equation}
+    r
+    =
+    M+\frac{d_{+}+d_{-}}{2},
+    \qquad
+    \cos\theta
+    =
+    \frac{d_{+}-d_{-}}{2M}.
+    \label{eq:weyl-to-schwarzschild}
+\end{equation}
+The Schwarzschild horizon is represented in Weyl coordinates by the
+segment
+\begin{equation}
+    \rho=0,
+    \qquad
+    -M\leq z\leq M.
+\end{equation}
+
+The Schwarzschild potential in Weyl coordinates is
+\begin{equation}
+    \nu_{\mathrm{Schw}}
+    =
+    \frac{1}{2}
+    \ln
+    \left(
+        \frac{d_{+}+d_{-}-2M}
+             {d_{+}+d_{-}+2M}
+    \right).
+    \label{eq:schwarzschild-potential}
+\end{equation}
+Consequently,
+\begin{equation}
+    N_{\mathrm{Schw}}
+    =
+    e^{\nu_{\mathrm{Schw}}}
+    =
+    \sqrt{
+        \frac{d_{+}+d_{-}-2M}
+             {d_{+}+d_{-}+2M}
+    }.
+\end{equation}
+The second Weyl metric function is
+\begin{equation}
+    \lambda_{\mathrm{Schw}}
+    =
+    \frac{1}{2}
+    \ln
+    \left[
+        \frac{(d_{+}+d_{-})^2-4M^2}
+             {4d_{+}d_{-}}
+    \right].
+    \label{eq:schwarzschild-lambda}
+\end{equation}
+These expressions follow directly from the Schwarzschild--Weyl
+coordinate transformation \cite{Sychrovsky2020}.
+
+
+\subsection{Bach--Weyl ring}
+\label{subsec:bach-weyl-ring}
+
+The Bach--Weyl solution represents the gravitational field of a static,
+axially symmetric, homogeneous infinitesimally thin circular ring. It is
+the direct relativistic counterpart of the Newtonian homogeneous-ring
+potential, although the second Weyl metric function \(\lambda\) produces
+a strongly non-Newtonian geometry close to the ring
+\cite{Semerak2016,Sychrovsky2020}.
+
+Let \(a\) be the Weyl radius of the ring and \(\mathcal{M}\) its mass.
+Define
+\begin{equation}
+    l_{1,2}
+    :=
+    \sqrt{(\rho\mp a)^2+z^2},
+    \qquad
+    k^2
+    :=
+    1-\frac{l_1^2}{l_2^2}
+    =
+    \frac{4a\rho}{l_2^2},
+    \label{eq:ring-quantities}
+\end{equation}
+and the complete elliptic integral of the first kind,
+\begin{equation}
+    K(k)
+    :=
+    \int_0^{\pi/2}
+    \frac{\mathrm{d}\alpha}
+         {\sqrt{1-k^2\sin^2\alpha}}.
+    \label{eq:complete-elliptic-k}
+\end{equation}
+The Bach--Weyl potential is
+\begin{equation}
+    \nu_{\mathrm{BW}}
+    =
+    -\frac{2\mathcal{M}K(k)}{\pi l_2},
+    \label{eq:bw-potential}
+\end{equation}
+and hence
+\begin{equation}
+    \frac{1}{N_{\mathrm{BW}}}
+    =
+    \exp
+    \left(
+        \frac{2\mathcal{M}K(k)}{\pi l_2}
+    \right).
+    \label{eq:bw-lapse}
+\end{equation}
+
+Unlike the Majumdar--Papapetrou solution considered below, the
+Bach--Weyl solution has a non-vanishing second metric function
+\(\lambda_{\mathrm{BW}}\). Its behaviour near the ring makes the geometry
+strongly anisotropic and the ring is not locally cylindrical
+\cite{Semerak2016}.
+
+Since the vacuum equation~\eqref{eq:weyl-laplace} is linear, the
+Schwarzschild and Bach--Weyl potentials can be superposed,
+\begin{equation}
+    \nu
+    =
+    \nu_{\mathrm{Schw}}
+    +
+    \nu_{\mathrm{BW}}.
+    \label{eq:schwarzschild-bw-potential}
+\end{equation}
+The corresponding lapse is therefore
+\begin{equation}
+    N
+    =
+    N_{\mathrm{Schw}}N_{\mathrm{BW}}.
+    \label{eq:schwarzschild-bw-lapse}
+\end{equation}
+The function \(\lambda\), however, is not obtained by a simple linear
+sum because equations~\eqref{eq:weyl-lambda-rho} and
+\eqref{eq:weyl-lambda-z} are quadratic in derivatives of \(\nu\).
+It consists of the Schwarzschild term, the Bach--Weyl term and their
+interaction term,
+\begin{equation}
+    \lambda
+    =
+    \lambda_{\mathrm{Schw}}
+    +
+    \lambda_{\mathrm{BW}}
+    +
+    \lambda_{\mathrm{int}}.
+    \label{eq:schwarzschild-bw-lambda}
+\end{equation}
+
+The second Weyl metric function does not vanish for the Bach--Weyl
+solution. Introducing
+\begin{equation}
+    k'^2
+    :=
+    \frac{l_1^2}{l_2^2},
+    \qquad
+    k^2=1-k'^2,
+\end{equation}
+and abbreviating
+\begin{equation}
+    K:=K(k^2),
+    \qquad
+    E:=E(k^2),
+\end{equation}
+where
+\begin{equation}
+    E(k^2)
+    :=
+    \int_0^{\pi/2}
+    \sqrt{1-k^2\sin^2\alpha}\,
+    \mathrm{d}\alpha
+\end{equation}
+is the complete elliptic integral of the second kind, one obtains
+\begin{equation}
+    \lambda_{\mathrm{BW}}
+    =
+    -\frac{\mathcal{M}^2}{4\pi^2 b^2\rho}
+    \left[
+        (\rho+b)(E-K)^2
+        +
+        \frac{\rho-b}{k'^2}
+        \left(E-k'^2K\right)^2
+    \right].
+\end{equation}
+The function \(\lambda_{\mathrm{BW}}\) diverges to either \(+\infty\)
+or \(-\infty\), depending on the direction from which the ring is
+approached. The Bach--Weyl ring is therefore a directional singularity
+\cite{Kraus2025,Semerak2016}.
+
+In a vacuum region, the second metric function \(\lambda\) is determined
+by
+\begin{align}
+    \lambda_{,\rho}
+    &=
+    \rho
+    \left[
+        \left(\nu_{,\rho}\right)^2
+        -
+        \left(\nu_{,z}\right)^2
+    \right],
+    \\
+    \lambda_{,z}
+    &=
+    2\rho\nu_{,\rho}\nu_{,z}.
+\end{align}
+Consequently, it may be obtained by the line integral
+\begin{equation}
+    \lambda(\rho,z)
+    =
+    \int_{(\rho_0,z_0)}^{(\rho,z)}
+    \left(
+        \lambda_{,\rho}\,\mathrm{d}\rho
+        +
+        \lambda_{,z}\,\mathrm{d}z
+    \right)
+    +
+    \lambda_0.
+    \label{eq:lambda-line-integral}
+\end{equation}
+The integration constant is fixed by the required boundary conditions.
+In particular, elementary flatness of a regular part of the symmetry axis
+requires \(\lambda=0\) there, while asymptotic flatness requires
+\(\lambda\rightarrow0\) at spatial infinity.
+
+Substituting the Bach--Weyl potential
+\(\nu_{\mathrm{BW}}\) into
+Eqs.~\eqref{eq:weyl-lambda-rho} and
+\eqref{eq:weyl-lambda-z}, or equivalently evaluating
+the line integral~\eqref{eq:lambda-line-integral}, yields
+\begin{equation}
+    \lambda_{\mathrm{BW}}
+    =
+    -\frac{\mathcal{M}^2}{4\pi^2 b^2\rho}
+    \left[
+        (\rho+b)(E-K)^2
+        +
+        \frac{\rho-b}{k'^2}
+        \left(E-k'^2K\right)^2
+    \right].
+    \label{eq:bw-lambda}
+\end{equation}
+
+For a superposition
+\begin{equation}
+    \nu=\nu_1+\nu_2,
+\end{equation}
+the corresponding second metric function has the form
+\begin{equation}
+    \lambda
+    =
+    \lambda_1+\lambda_2+\lambda_{\mathrm{int}},
+\end{equation}
+where the interaction term is determined by
+\begin{align}
+    \lambda_{\mathrm{int},\rho}
+    &=
+    2\rho
+    \left(
+        \nu_{1,\rho}\nu_{2,\rho}
+        -
+        \nu_{1,z}\nu_{2,z}
+    \right),
+    \\
+    \lambda_{\mathrm{int},z}
+    &=
+    2\rho
+    \left(
+        \nu_{1,\rho}\nu_{2,z}
+        +
+        \nu_{1,z}\nu_{2,\rho}
+    \right).
+\end{align}
+
+
+\subsection{Reissner--Nordstr\"om black hole}
+\label{subsec:reissner-nordstrom}
+
+In standard spherical coordinates, the Reissner--Nordstr\"om metric is
+\begin{equation}
+    \mathrm{d}s^2
+    =
+    -f(r)\,\mathrm{d}t^2
+    +
+    f(r)^{-1}\,\mathrm{d}r^2
+    +
+    r^2
+    \left(
+        \mathrm{d}\theta^2
+        +
+        \sin^2\theta\,\mathrm{d}\phi^2
+    \right),
+    \label{eq:rn-metric}
+\end{equation}
+where
+\begin{equation}
+    f(r)
+    =
+    1-\frac{2M}{r}+\frac{Q^2}{r^2}.
+    \label{eq:rn-function}
+\end{equation}
+The outer and inner horizons are located at
+\begin{equation}
+    r_{\pm}
+    =
+    M\pm\sqrt{M^2-Q^2}.
+\end{equation}
+
+For \(M^2\geq Q^2\), introduce
+\begin{equation}
+    \sigma
+    :=
+    \sqrt{M^2-Q^2}.
+\end{equation}
+The corresponding Weyl coordinates are
+\begin{equation}
+    \rho
+    =
+    \sqrt{r^2-2Mr+Q^2}\sin\theta,
+    \qquad
+    z
+    =
+    (r-M)\cos\theta.
+    \label{eq:rn-weyl-transformation}
+\end{equation}
+Defining
+\begin{equation}
+    R_{\pm}
+    :=
+    \sqrt{\rho^2+(z\pm\sigma)^2},
+\end{equation}
+one obtains
+\begin{equation}
+    r
+    =
+    M+\frac{R_{+}+R_{-}}{2},
+    \qquad
+    \cos\theta
+    =
+    \frac{R_{+}-R_{-}}{2\sigma}.
+    \label{eq:rn-inverse-transformation}
+\end{equation}
+The lapse is
+\begin{equation}
+    N_{\mathrm{RN}}
+    =
+    \sqrt{
+        1-\frac{2M}{r}+\frac{Q^2}{r^2}
+    }.
+    \label{eq:rn-lapse}
+\end{equation}
+
+In the extreme case,
+\begin{equation}
+    |Q|=M,
+\end{equation}
+the metric becomes
+\begin{equation}
+    \mathrm{d}s^2
+    =
+    -\left(1-\frac{M}{r}\right)^2\mathrm{d}t^2
+    +
+    \left(1-\frac{M}{r}\right)^{-2}\mathrm{d}r^2
+    +
+    r^2\mathrm{d}\Omega^2.
+    \label{eq:extreme-rn-metric}
+\end{equation}
+The transformation~\eqref{eq:rn-weyl-transformation} reduces to
+\begin{equation}
+    \rho=(r-M)\sin\theta,
+    \qquad
+    z=(r-M)\cos\theta,
+\end{equation}
+so that
+\begin{equation}
+    R:=\sqrt{\rho^2+z^2}=r-M.
+\end{equation}
+The extreme Reissner--Nordstr\"om lapse can consequently be written as
+\begin{equation}
+    \frac{1}{N_{\mathrm{eRN}}}
+    =
+    1+\frac{M}{\sqrt{\rho^2+z^2}},
+    \label{eq:ern-lapse}
+\end{equation}
+and the second Weyl function vanishes,
+\begin{equation}
+    \lambda_{\mathrm{eRN}}=0.
+\end{equation}
+Thus, the extreme Reissner--Nordstr\"om solution belongs to the
+Majumdar--Papapetrou class \cite{Polcar2019}.
+
+
+\subsection{Majumdar--Papapetrou ring}
+\label{subsec:mp-ring}
+
+The Majumdar--Papapetrou solutions describe static electrovacuum
+configurations in which the gravitational attraction is balanced by the
+electrostatic repulsion of extremally charged sources. In Cartesian-type
+coordinates, their metric has the form
+\begin{equation}
+    \mathrm{d}s^2
+    =
+    -N^2\,\mathrm{d}t^2
+    +
+    N^{-2}
+    \left(
+        \mathrm{d}x^2+\mathrm{d}y^2+\mathrm{d}z^2
+    \right),
+    \label{eq:mp-metric-cartesian}
+\end{equation}
+with
+\begin{equation}
+    \lambda=0.
+\end{equation}
+For a discrete collection of extreme sources,
+\begin{equation}
+    \frac{1}{N}
+    =
+    1+
+    \sum_j
+    \frac{M_j}{|\boldsymbol{r}-\boldsymbol{r}_j|}.
+\end{equation}
+
+The Majumdar--Papapetrou ring is obtained as a continuous circular
+distribution of such extremally charged sources. For a ring of Weyl
+radius \(b\) and total mass \(\mathcal{M}\), its lapse is
+\begin{align}
+    \frac{1}{N_{\mathrm{MP}}}
+    &=
+    1+
+    \frac{\mathcal{M}}{2\pi}
+    \int_0^{2\pi}
+    \frac{\mathrm{d}\phi'}
+    {
+        \sqrt{
+            \rho^2+b^2
+            -2b\rho\cos(\phi-\phi')
+            +z^2
+        }
+    }
+    \nonumber\\
+    &=
+    1+
+    \frac{2\mathcal{M}K(k)}{\pi l_2},
+    \label{eq:mp-ring-lapse}
+\end{align}
+where
+\begin{equation}
+    l_{1,2}
+    =
+    \sqrt{(\rho\mp b)^2+z^2},
+    \qquad
+    k^2
+    =
+    1-\frac{l_1^2}{l_2^2}
+    =
+    \frac{4b\rho}{l_2^2}.
+\end{equation}
+The elliptic-integral term is the negative of the Newtonian potential
+of a homogeneous infinitesimally thin ring
+\cite{Semerak2016,Polcar2019}.
+
+In contrast to the Bach--Weyl ring, the Majumdar--Papapetrou ring has
+\(\lambda=0\) and is locally cylindrical. Its geometry near the ring is
+therefore less directional than that of the Bach--Weyl solution
+\cite{Semerak2016,Polcar2019}.
+
+Both the extreme Reissner--Nordstr\"om black hole and the
+Majumdar--Papapetrou ring belong to the same class of solutions.
+Their superposition is consequently obtained by adding the
+corresponding harmonic terms in \(N^{-1}\):
+\begin{equation}
+    \frac{1}{N}
+    =
+    1
+    +
+    \frac{M}{\sqrt{\rho^2+z^2}}
+    +
+    \frac{2\mathcal{M}K(k)}{\pi l_2}.
+    \label{eq:ern-mp-superposition}
+\end{equation}
+The metric of the combined extreme Reissner--Nordstr\"om black hole and
+Majumdar--Papapetrou ring is therefore
+\begin{equation}
+    \mathrm{d}s^2
+    =
+    -N^2\,\mathrm{d}t^2
+    +
+    N^{-2}
+    \left(
+        \rho^2\,\mathrm{d}\phi^2
+        +
+        \mathrm{d}\rho^2
+        +
+        \mathrm{d}z^2
+    \right),
+    \label{eq:ern-mp-metric}
+\end{equation}
+with \(N\) given by~\eqref{eq:ern-mp-superposition} and
+\begin{equation}
+    \lambda=0.
+\end{equation}
+This simple superposition is one of the principal practical advantages
+of the Majumdar--Papapetrou configuration
+\cite{Polcar2019}.

@@ -1,0 +1,107 @@
+\chapter{Implementation}
+\label{chap:implementation}
+In this chapter, we present and discuss our methods for analyzing basins and basin boundaries.
+
+\section{Accessible region}
+In order to construct and analyze the basin map and basin boundary, we need to reduce the dimension of the phase space, which is 8-dimensional. As our space time is stationary and has axial symmetry, the coordinates $t$ and $\phi$ can be dropped. In Weyl-cylindrical coordinates for stationary and axial symmetric space-times, we can write $\xi^\mu_{(t)} = \delta^\mu_t$ and $\xi^\mu_{(\phi)} = \delta^\mu_\phi$. From \eqref{eq:killings} we obtain $u^t = -\frac{\epsilon}{g_{tt}}$, where $g_{tt} = g_{tt}(\rho,z)$. The same can be done for $u^{\phi}$. Hence, we end up with $u^t = u^t(\rho, z), u^\phi = u^\phi(\rho,z)$. Now we reduce our phase space to $(\rho,u^\rho,z, u^z)$.
+
+From normalization of the four-velocity, we have the following
+
+\begin{equation}
+    -1 = g_{\mu\nu}u^{\mu}u^{\nu} = \epsilon^2g^{tt}+l^2g^{\phi\phi} + g_{\rho\rho}[(u^\rho)^2+(u^z)^2].
+    \label{eq:normalization}
+\end{equation}
+
+Thus, we can have $u^z = u^z(\rho,z,u^\rho)$. Further reduction can be done by fixing the $z$ coordinate or by expressing $z$ as a function of the $\rho$ coordinate, $z=z(\rho).$ Unless otherwise indicated, we will fix the $z$ coordinate. 
+
+In the resulting 2-dimensional phase space $(\rho,u^\rho)$, the accessible region is constrained by the maximal value of $u^\rho$. The maximum value of $u^\rho$ denoted as $u^\rho_{MAX}$ is when $u^z=0$. From normalization~\eqref{eq:normalization} we obtain the following result.
+
+\begin{equation}
+    u^\rho_{MAX} = \pm \sqrt{\frac{-1-\epsilon^2g^{tt}-l^2g^{\phi\phi}}{g_{\rho\rho}}},
+    \label{eq:urhomax}
+\end{equation}
+
+or equivalently
+
+\begin{equation}
+    u^\rho_{MAX} = \pm \sqrt{
+    -g^{\rho\rho}- \epsilon^2g^{tt}g^{\rho\rho}-l^2g^{\phi\phi}g^{\rho\rho}},
+    \label{eq:urhomax2}
+\end{equation}
+
+where we used $g^{\mu\nu} = \frac{1}{g_{\mu\nu}}$. As in $g^{\rho\rho} >0$, this gives us a condition
+
+\begin{equation}
+    -g^{tt}( \epsilon^2+g_{tt}+l^2g^{\phi\phi}g_{tt})\geq0.
+    \label{eq:accessibleregioncondition}
+\end{equation}
+
+Since $\epsilon$ represents the conserved energy, we can define $V_{ef} \coloneqq -(g_{tt}+l^2g^{\phi\phi}g_{tt})$.
+
+The accessible region is therefore constrained by $u^\rho_{MAX}$ and only the initial conditions for $u^\rho$ are possible that satisfy $|u^\rho|\leq|u^\rho_{MAX}|$. In the numerical implementation, we will reduce the computation to the $u^\rho \geq 0$ part of the phase space.
+
+\subsection{Schwarzschild black hole with Bach-Weyl ring}
+In case of a Schwarzschild black hole with Bach--Weyl ring, we want to analyze when the test particle will escape to infinity. We will simply take the limit of \eqref{eq:accessibleregioncondition} as $\rho \rightarrow\infty$. Before that, we will evaluate the limits of $\nu_{SCHW}$ and $\nu_{BW}$ as $\rho \rightarrow \infty$. As $\rho \rightarrow \infty$, $k^2 \rightarrow0$, the elliptic integral $K(k)$ therefore approaches some constant value and both $\nu_{SCHW}$ and $\nu_{BW} \rightarrow 0$. Therefore, the limit of \eqref{eq:accessibleregioncondition} is $\epsilon^2 \geq 1$. Since geodesics are time-like, we have $\epsilon>0$ and get the energy constraints for the outcomes. Escape to infinity is possible if and only if $\epsilon \geq1$. In this thesis, we will analyze only scenarios with $\epsilon<1$, therefore only scenarios with two outcomes, either eternal orbit or collision with the black hole or the ring. 
+
+\subsection{Reissner--Nordstr\"om black hole with Majumdar--Papapetrou ring}
+As noted by Polcar, Sukova and Semerak~\cite{Polcar2019}, in the case of the RN+MP ring the accessible regions tend to be closed, whereas in the case of the
+Schw + BW ring it often opens towards the horizon. Therefore, we need to analyze if it is possible for a test particle in RN+MP space-time to fall into the black hole. The effective potential for RN+MP reads
+
+\begin{equation}
+    V_{ef} = \frac{l^2}{\rho^2}N^4+N^2,
+\end{equation}
+
+where $N = \frac{1}{1+\frac{M}{\rho^2+z^2}+\frac{2\mathcal{M}K(k)}{\pi l_2}}$. We will analyze the possibility of falling into the black hole by calculating the limit $\lim_{\rho \rightarrow0^+} V_{ef}$. The limit of the term $N^2$ approaches a constant value as $\rho \rightarrow 0^+$. However, the problematic is $\frac{l^2}{\rho^2}N^4$ as this term diverges as $\rho \rightarrow 0^+$. Let us inspect this limit carefully. 
+
+\begin{equation}
+    \lim_{\rho \rightarrow 0^+} \frac{l^2}{\rho^2}N^4 = \lim_{\rho \rightarrow 0^+} \left(\frac{\sqrt{l}}{\sqrt{\rho} + \frac{M\sqrt{\rho}}{\sqrt{\rho^2+z^2}}+\frac{2\mathcal{M}K(k)\sqrt{\rho}}{\pi \sqrt{(\rho+\sigma)^2 + z^2}}}\right)^4.
+\end{equation}
+
+The only term in the denominator that does not go to zero is $\frac{M\sqrt{\rho}}{\sqrt{\rho^2+z^2}} = \frac{M}{\sqrt{\rho + \frac{z^2}{\rho}}}$. If we consider $\frac{z^2}{\rho}$ to be a non-zero real number, the $\frac{l^2}{\rho^2}N^4$ term will no longer be divergent. Hence, we can write $z = z(\rho) = \sqrt{m\rho} \equiv n\sqrt{\rho}$, where $n, m \in \mathbb{R} \setminus \{0\}$. From the condition for effective potential $\epsilon^2 \geq V_{ef}^2$ we get
+
+\begin{equation}
+    \epsilon^2 \geq \frac{l^2n^4}{M^4}.
+    \label{eq:rnmpcondition}
+\end{equation}
+
+By calculating the limit of the effective potential with $z=z(\rho)$ as $\rho \rightarrow \infty$, we end up with the same condition to escape to infinity as for Schwarzschild black hole with Bach-Weyl ring.
+
+If we plot the effective potential for some values of the parameters and the fixed value of $z$, we can see that it diverges as $\rho \rightarrow0^+$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth]{img/rn_mp_Veff_fix_z.png}
+    \caption{Effective potential \(V_{\mathrm{ef}}\) of the RN+MP system for fixed \(z=0.2M\), \(M=1\), \(\mathcal{M}=0.5M\), \(b=20M\), and several values of the angular momentum \(l\). The horizontal dashed line marks \(\epsilon^2\) for \(\epsilon=0.955\).}
+    \label{fig:rn-mp-veff-fixed-z}
+\end{figure}
+
+This results in an accessible region not opening towards the horizon. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth]{img/rn_mp_accessible_region_fix_z.png}
+    \caption{Accessible region of the RN+MP system for fixed \(z=0.2M\), \(M=1\), \(\mathcal{M}=0.5M\), \(b=20M\), \(\epsilon=0.955\), and several values of \(l\). The plotted curves give the positive branch of \(u^\rho_{\mathrm{MAX}}\).}
+    \label{fig:rn-mp-accessible-fixed-z}
+\end{figure}
+
+Now consider \(z=z(\rho)\) and the condition~\eqref{eq:rnmpcondition}. The corresponding effective potential and accessible region are shown in the next two figures. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth]{img/rn_mp_Veff.png}
+    \caption{Effective potential \(V_{\mathrm{ef}}\) of the RN+MP system for \(z(\rho)=n\sqrt{\rho}\), with \(n=0.1\), \(M=1\), \(\mathcal{M}=0.5M\), \(b=20M\), and several values of \(l\). The horizontal dashed line marks \(\epsilon^2\) for \(\epsilon=0.955\).}
+    \label{fig:rn-mp-veff-z-of-rho}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth]{img/rn_mp_accessible_region.png}
+    \caption{Accessible region of the RN+MP system for \(z(\rho)=n\sqrt{\rho}\), with \(n=0.1\), \(M=1\), \(\mathcal{M}=0.5M\), \(b=20M\), \(\epsilon=0.955\), and several values of \(l\). The plotted curves give the positive branch of \(u^\rho_{\mathrm{MAX}}\).}
+    \label{fig:rn-mp-accessible-z-of-rho}
+\end{figure}
+
+In the plots, we can see that the accessible region is opening towards the horizon, but also we can see that the accessible region can be separated into regions. So, when a particle starts in one region, it can only stay within the region. In order to get richer basin maps, we will choose energies that will be above the local maximum, so that the accessible region will not be separated into subregions. To keep producing a rich basin we will choose energies so the energy level will be slightly above the critical energy of the unstable circular orbit. The corresponding trajectories will not be exactly homoclinic trajectories; however, they will lie near the perturbed homoclinic separatrix. The Melnikov analysis of the RN+MP system by Polcar and Semerak~\cite{PolcarSemerak2019} shows that the stable and unstable manifolds split and intersect transversely, producing a homoclinic tangle. There we should expect rich basins due to the presence of chaos of homoclinic origin.
+
+\subsection{Heuristic}
+Now we shall discuss how to construct the basin map and how to calculate the fractal dimension of the basin boundary. In order to construct a basin map, we need to solve a large number of trajectories for different values of initial conditions. For this we use the Gravitacek 2 solver written in C++ by Karel Kraus~\cite{Kraus2025}, with minor modifications made for this thesis. The solver is available at \url{https://github.com/ImmanuelKant314/Gravitacek-2}, and the thesis code is available at \url{https://github.com/DJopek/chaos}. For a given set of parameters (M - mass of the black hole, $\mathcal{M}$ - mass of the ring, $\sigma$ - radius of the ring, $\epsilon$ - conserved energy, $l$ - conserved angular momentum, $T_{MAX}$ - integration time), we construct a basin map in the $(\rho_0, u^\rho_0)$ plane. The computational grid contains $N\times N$ initial conditions; each coloured cell corresponds to the outcome of one integrated trajectory. We assign the outcomes using the following heuristics:
+The solver checks if the values of $\epsilon$ and $l$ are conserved up to a relative tolerance of $10^{-10}$ for the SCHW+BW trajectories and $10^{-9}$ for the RN+MP trajectories with a stop criterion for integration if the relative tolerance is exceeded. The code is written for long double (the real precision depends on the compiler/architecture, which we will discuss later) and for integration is using Dormand--Prince 853, which is an 8th order Runge--Kutta integration scheme with methods of 5th and 3rd order to estimate the error of each step. We consider the orbital trajectories to be numerically more stable than those that are chaotic. If trajectory is not orbital, in our setup, it has to be of outcome of collision with the black hole or the ring. Hence, we suppose that under given precision the orbital trajectories are more likely to survive the whole integration than those that result in collision with the black hole or the ring. Therefore, we will check if the trajectory ended earlier than $T_{MAX}$. If so, we classify it as an initial condition corresponding to the basin $C$ indicated by light blue. If it survived integration, we classify it as an initial condition corresponding to the basin $O$. If an initial condition is outside of the accessible region, it will be colored white. We will repeat this process for various values of perturbation $\varepsilon = 10^{-4},10^{-3},10^{-2}$ of the initial conditions as discussed in Section~\ref{sec:uncertainty-exponent}. Afterward, by linear fit we obtain the uncertainty exponent $\alpha$, from which we will calculate the fractal dimension $d$.

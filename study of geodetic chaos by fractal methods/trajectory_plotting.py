@@ -33,3 +33,4 @@ def plot(filepath):
 #i = random.randint(0,number_of_points**2-1)
 #print(i)
 #plot(f"./data/trajectory_{i}.csv")
+#plot("test.csv")
