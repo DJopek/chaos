@@ -3,75 +3,97 @@
 
 \section{Validation}
 \label{sec:validation}
-Before we try to bring about new results, we should verify our method. For validation, we decided to replicate some results of Sychrovsky~\cite{Sychrovsky2020} for the Schwarzschild--Bach--Weyl (SCHW+BW) system and compare some of our SCHW+BW basin maps with the Poincar\'e section from Polcar, Sukova and Semerak~\cite{Polcar2019}.
+Before we try to bring about new results, we should verify our method. For validation, we decided to replicate some results of Sychrovsky~\cite{Sychrovsky2020} for the SCHW+BW system and compare some of our SCHW+BW basin maps with the Poincar\'e section from Polcar, Sukova and Semerak~\cite{Polcar2019}.
 
 Our first validation case was Figure 4.3 in Sychrovsky~\cite{Sychrovsky2020}. 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.955_20.0_0.5_0.2_0_x86.pdf}
-    \caption{Basin map for the SCHW+BW system computed on a $500\times 500$ grid of initial conditions, $l=3.75M$, $\epsilon=0.955$, $b=20M$, $\mathcal{M}=0.5M$, $z=0.2$ (x86). \basinLegend}
+    \begin{minipage}{0.495\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.955_20.0_0.5_0.2_0_x86.pdf}
+
+        \scriptsize x86, $\tau_{\mathrm{MAX}}=10^4M$
+    \end{minipage}\hfill
+    \begin{minipage}{0.495\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.955_20.0_0.5_0.2_0_10pow5_x86.pdf}
+
+        \scriptsize x86, \(\tau_{\mathrm{MAX}}=10^5M\)
+    \end{minipage}
+    \caption{Basin maps for the SCHW+BW system computed on a $500\times 500$ grid of initial conditions, $l=3.75M$, $\epsilon=0.955$, $b=20M$, $\mathcal{M}=0.5M$, $z=0.2$ (x86). The right panel uses a longer integration time. \basinLegend}
     \label{fig:basin-map-500-l3p75-e0p955-b20-M0p5-z0p2-x86}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\linewidth]{img/basin_map_sch_bw_1000_1.0_3.75_0.955_20.0_0.5_0.2_0.pdf}
-    \caption{Basin map for the SCHW+BW system computed on a $1000\times 1000$ grid of initial conditions, $l=3.75M$, $\epsilon=0.955$, $b=20M$, $\mathcal{M}=0.5M$, $z=0.2$. \basinLegend}
+    \includegraphics[width=0.98\linewidth]{img/basin_map_sch_bw_1000_1.0_3.75_0.955_20.0_0.5_0.2_0.pdf}
+    \caption{Basin map for the SCHW+BW system computed on a $1000\times 1000$ grid of initial conditions, $l=3.75M$, $\epsilon=0.955$, $b=20M$, $\mathcal{M}=0.5M$, $z=0.2$ (ARM). \basinLegend}
     \label{fig:basin-map-1000-l3p75-e0p955-b20-M0p5-z0p2}
 \end{figure}
 
-Our basin map visually corresponds to Figure 4.3 in Sychrovsky~\cite{Sychrovsky2020} with $\lambda_{\text{stop}} = 0.02$. This correspondence can be explained by the fact that in our implementation, the stopping criterion is based on the exceeded relative tolerance for the conserved quantities. Therefore, the particle can get as close to the singularity as allowed by the tolerance.
+Our basin map visually corresponds to Figure 4.3 in Sychrovsky~\cite{Sychrovsky2020} with $\lambda_{\text{stop}} = 0.02$. This correspondence can be explained by the fact that in our implementation, the stopping criterion is based on the exceeded relative tolerance for the conserved quantities. Therefore, the particle can get as close to the singularity as allowed by the tolerance. The longer x86 integration in Figure~\ref{fig:basin-map-500-l3p75-e0p955-b20-M0p5-z0p2-x86} shows that part of the apparent basin structure is also affected by finite-time classification. When the same initial conditions are followed until \(\tau_{\mathrm{MAX}}=10^5M\), some trajectories that were previously classified as orbital are reclassified as colliding/plunged. 
 
 The next validation case was Figure 5.5 in Sychrovsky~\cite{Sychrovsky2020} and the corresponding calculated fractal dimension.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.82\linewidth]{img/basin_map_sch_bw_1000_1.0_3.943_0.955_20.0_0.5_0.2_0_whole_accessible_region.pdf}
-    \caption{Basin map for the SCHW+BW system over the whole accessible region; computed on a $1000\times 1000$ grid of initial conditions, $l=3.943M$, $\epsilon=0.955$, $b=20M$, $\mathcal{M}=0.5M$, $z=0.2$. \basinLegend}
+    \includegraphics[width=0.98\linewidth]{img/basin_map_sch_bw_1000_1.0_3.943_0.955_20.0_0.5_0.2_0_whole_accessible_region.pdf}
+    \caption{Basin map for the SCHW+BW system over the whole accessible region; computed on a $1000\times 1000$ grid of initial conditions, $l=3.943M$, $\epsilon=0.955$, $b=20M$, $\mathcal{M}=0.5M$, $z=0.2$ (ARM). \basinLegend}
     \label{fig:basin-schw-bw-1000-l3p943-e0p955-b20-M0p5-z0p2-whole}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.82\linewidth]{img/basin_map_sch_bw_1000_1.0_3.943_0.955_20.0_0.5_0.2_0.pdf}
-    \caption{Basin map for the SCHW+BW system computed on a $1000\times 1000$ grid of initial conditions, $l=3.943M$, $\epsilon=0.955$, $b=20M$, $\mathcal{M}=0.5M$, $z=0.2$. \basinLegend}
+    \includegraphics[width=0.98\linewidth]{img/basin_map_sch_bw_1000_1.0_3.943_0.955_20.0_0.5_0.2_0.pdf}
+    \caption{Basin map for the SCHW+BW system computed on a $1000\times 1000$ grid of initial conditions, $l=3.943M$, $\epsilon=0.955$, $b=20M$, $\mathcal{M}=0.5M$, $z=0.2$ (ARM). \basinLegend}
     \label{fig:basin-schw-bw-1000-l3p943-e0p955-b20-M0p5-z0p2}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.82\linewidth]{img/basin_map_sch_bw_700_1.0_3.943_0.955_20.0_0.5_0.2_0.pdf}
-    \caption{Basin map for the SCHW+BW system computed on a $700\times 700$ grid of initial conditions, $l=3.943M$, $\epsilon=0.955$, $b=20M$, $\mathcal{M}=0.5M$, $z=0.2$. \basinLegend}
+    \includegraphics[width=0.98\linewidth]{img/basin_map_sch_bw_700_1.0_3.943_0.955_20.0_0.5_0.2_0.pdf}
+    \caption{Basin map for the SCHW+BW system computed on a $700\times 700$ grid of initial conditions, $l=3.943M$, $\epsilon=0.955$, $b=20M$, $\mathcal{M}=0.5M$, $z=0.2$ (ARM). \basinLegend}
     \label{fig:basin-schw-bw-700-l3p943-e0p955-b20-M0p5-z0p2}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.82\linewidth]{img/basin_map_sch_bw_500_1.0_3.943_0.955_20.0_0.5_0.2_0.pdf}
-    \caption{Basin map for the SCHW+BW system computed on a $500\times 500$ grid of initial conditions, $l=3.943M$, $\epsilon=0.955$, $b=20M$, $\mathcal{M}=0.5M$, $z=0.2$. \basinLegend}
+    \includegraphics[width=0.98\linewidth]{img/basin_map_sch_bw_500_1.0_3.943_0.955_20.0_0.5_0.2_0.pdf}
+    \caption{Basin map for the SCHW+BW system computed on a $500\times 500$ grid of initial conditions, $l=3.943M$, $\epsilon=0.955$, $b=20M$, $\mathcal{M}=0.5M$, $z=0.2$ (ARM). \basinLegend}
     \label{fig:basin-schw-bw-500-l3p943-e0p955-b20-M0p5-z0p2}
 \end{figure}
 
-There are various reasons why our result may not fully correspond to the result of Sychrovsky~\cite{Sychrovsky2020}. In this case, the accessible region is divided into two parts. Hence, what we see in our zoomed basins are either eternal-orbit outcomes or trajectories terminating near the ring, but no falls into the black hole. As mentioned by Sychrovsky, as $\lambda_{\text{stop}}$ increases, the basin of eternal orbits grows because the particles are allowed to move closer to the ring~\cite{Sychrovsky2020}. Our stopping criterion is not identical to Sychrovsky's \(\lambda_{\text{stop}}\): it combines proximity events with conservation-error events. The visual similarity to results with larger \(\lambda_{\text{stop}}\) is therefore an interpretation, not a direct parameter equivalence. Other factors can also play a role, including the different codebases and floating-point precision. As mentioned earlier, our solver uses \texttt{long double}. On Apple silicon ARM64 with Apple Clang 17, \texttt{long double} has the same numerical precision as \texttt{double}. On the x86\_64 Linux cluster with GCC 11.5, \texttt{long double} uses extended precision. We therefore continued our calculations on x86\_64, which provides better parallelization and higher arithmetic precision for this code.
+There are various reasons why our result may not fully correspond to the result of Sychrovsky~\cite{Sychrovsky2020}. In this case, the accessible region is divided into two parts. Hence, what we see in our zoomed basins are either eternal-orbit outcomes or trajectories terminating near the ring, but no plunges into the black hole. As mentioned by Sychrovsky \cite{Sychrovsky2020}, as $\lambda_{\text{stop}}$ increases, the basin of eternal orbits grows because the particles are allowed to move closer to the ring~\cite{Sychrovsky2020}. Other factors can also play a role, including different codebases and precision. As mentioned earlier, our solver uses \texttt{long double}. On Apple silicon ARM64 with Apple Clang 17, \texttt{long double} has the same numerical precision as \texttt{double}. On the x86\_64 Linux cluster with GCC 11.5, \texttt{long double} uses extended precision. We therefore continued our calculations on x86\_64 Linux cluster, which provides better parallelization and higher precision for this code.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.82\linewidth]{img/basin_map_sch_bw_1000_1.0_3.943_0.955_20.0_0.5_0.2_0_x86.pdf}
-    \caption{Basin map for the SCHW+BW system computed on a $1000\times 1000$ grid of initial conditions, $l=3.943M$, $\epsilon=0.955$, $b=20M$, $\mathcal{M}=0.5M$, $z=0.2$ (x86). \basinLegend}
+    \begin{minipage}{0.495\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/basin_map_sch_bw_1000_1.0_3.943_0.955_20.0_0.5_0.2_0_x86.pdf}
+
+        \scriptsize x86, $\tau_{\mathrm{MAX}}=10^4M$
+    \end{minipage}\hfill
+    \begin{minipage}{0.495\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/basin_map_sch_bw_1000_1.0_3.943_0.955_20.0_0.5_0.2_0_10pow5_x86.pdf}
+
+        \scriptsize x86, \(\tau_{\mathrm{MAX}}=10^5M\)
+    \end{minipage}
+    \caption{Basin maps for the SCHW+BW system computed on a $1000\times 1000$ grid of initial conditions, $l=3.943M$, $\epsilon=0.955$, $b=20M$, $\mathcal{M}=0.5M$, $z=0.2$ (x86). The right panel uses a longer integration time. \basinLegend}
     \label{fig:basin-schw-bw-1000-l3p943-e0p955-b20-M0p5-z0p2-x86}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.82\linewidth]{img/basin_map_sch_bw_700_1.0_3.943_0.955_20.0_0.5_0.2_0_x86.pdf}
+    \includegraphics[width=0.98\linewidth]{img/basin_map_sch_bw_700_1.0_3.943_0.955_20.0_0.5_0.2_0_x86.pdf}
     \caption{Basin map for the SCHW+BW system computed on a $700\times 700$ grid of initial conditions, $l=3.943M$, $\epsilon=0.955$, $b=20M$, $\mathcal{M}=0.5M$, $z=0.2$ (x86). \basinLegend}
     \label{fig:basin-schw-bw-700-l3p943-e0p955-b20-M0p5-z0p2-x86}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.82\linewidth]{img/basin_map_sch_bw_500_1.0_3.943_0.955_20.0_0.5_0.2_0_x86.pdf}
+    \includegraphics[width=0.98\linewidth]{img/basin_map_sch_bw_500_1.0_3.943_0.955_20.0_0.5_0.2_0_x86.pdf}
     \caption{Basin map for the SCHW+BW system computed on a $500\times 500$ grid of initial conditions, $l=3.943M$, $\epsilon=0.955$, $b=20M$, $\mathcal{M}=0.5M$, $z=0.2$ (x86). \basinLegend}
     \label{fig:basin-schw-bw-500-l3p943-e0p955-b20-M0p5-z0p2-x86}
 \end{figure}
@@ -80,11 +102,11 @@ To compare our results not just visually, but also quantitatively, we shall proc
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.49\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
         \includegraphics[width=\linewidth]{img/schw_bw_1.0_3.943_0.955_20_0.5_0.2.pdf}
     \end{minipage}\hfill
-    \begin{minipage}{0.49\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
         \includegraphics[width=\linewidth]{img/schw_bw_1.0_3.943_0.955_20_0.5_0.2_x86.pdf}
     \end{minipage}
@@ -99,17 +121,17 @@ For the basin boundary under the given parameters, we obtained
     d_{\mathrm{x86}} = 1.912 \pm 0.024.
     \label{eq:fractal-dimension-arm-x86}
 \end{equation}
-These values are consistent within their uncertainties, as the corresponding confidence intervals overlap. The high fractal dimension of the basin boundary in both cases, corresponding to the low uncertainty exponent, indicates a high degree of final-state sensitivity to perturbations of the initial conditions. However, these values are not consistent with the values from Sychrovsky~\cite{Sychrovsky2020}. The discussion above for the visual inconsistency applies here as well.
+The high fractal dimension of the basin boundary in both cases, corresponding to the low uncertainty exponent, indicates a high degree of final-state sensitivity to perturbations of the initial conditions. However, these values are not consistent with the values from Sychrovsky~\cite{Sychrovsky2020}. The discussion above for visual inconsistency applies here as well.
 
-Another interesting effect that is caused by precision is the web-like numerical artifact. 
+Another interesting effect that is probably caused by precision is the web-like structure, possibly a numerical artifact. 
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.3_0.0_0_x86.pdf}
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.3_0.0_0.pdf}
     \end{minipage}
@@ -119,11 +141,11 @@ Another interesting effect that is caused by precision is the web-like numerical
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.2_0.0_0_x86.pdf}
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.2_0.0_0.pdf}
     \end{minipage}
@@ -133,11 +155,11 @@ Another interesting effect that is caused by precision is the web-like numerical
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.1_0.0_0_x86.pdf}
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.1_0.0_0.pdf}
     \end{minipage}
@@ -145,57 +167,53 @@ Another interesting effect that is caused by precision is the web-like numerical
     \label{fig:basin-x86-arm-01}
 \end{figure}
 
-The same precision-dependent pattern is visible also in the parameter
-range corresponding to the comparison with Figure 5.18 in
-Sychrovsky~\cite{Sychrovsky2020}. Figure~\ref{fig:basin-x86-arm-z0p2-web}
-shows three ring masses at \(z=0.2\). In these cases the x86 result is
-visually smoother, whereas the ARM result contains the web-like
-structure more prominently. This supports the interpretation that this
-structure is numerical rather than a robust feature of the basin boundary. The
-comparison does not isolate a single cause: floating-point precision, compiler
-details, elliptic-integral evaluation and event timing can all contribute.
+The same web-like structure can be visible in Figure ~\ref{fig:basin-x86-arm-z0p2-web}, which corresponds to a comparison with Figure 5.18 in \cite{Sychrovsky2020} and in basin maps in \cite{Sychrovsky2020} that correspond to Figure 5.18. In these cases, the x86 result is
+visually smoother, while the ARM result contains the web-like
+structure, similar to the results from \cite{Sychrovsky2020}. In comparison with \cite{Sychrovsky2020} we used different codebase and different approach for basin map creation, however, the lower precision is a shared feature and changing just the precision resulted in disappearance of the web-like structure.
+This supports the interpretation that this
+structure is numerical rather than a robust feature of the basin boundary.
 
 \begin{figure}[H]
     \centering
-    \small \(\mathcal{M}=0.2M\)
-
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize x86
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.2_0.2_0_x86.pdf}
+
+        \scriptsize x86, \(\mathcal{M}=0.2M\)
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize ARM
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.2_0.2_0.pdf}
+
+        \scriptsize ARM, \(\mathcal{M}=0.2M\)
     \end{minipage}
 
     \vspace{0.6em}
-    \small \(\mathcal{M}=0.07M\)
-
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize x86
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.07_0.2_0_x86.pdf}
+
+        \scriptsize x86, \(\mathcal{M}=0.07M\)
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize ARM
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.07_0.2_0.pdf}
+
+        \scriptsize ARM, \(\mathcal{M}=0.07M\)
     \end{minipage}
 
     \vspace{0.6em}
-    \small \(\mathcal{M}=0.01M\)
-
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize x86
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.01_0.2_0_x86.pdf}
+
+        \scriptsize x86, \(\mathcal{M}=0.01M\)
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize ARM
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.01_0.2_0.pdf}
+
+        \scriptsize ARM, \(\mathcal{M}=0.01M\)
     \end{minipage}
     \caption{Additional basin map comparison for the web-like numerical
     artifact (left: x86; right: ARM); computed on a \(500\times500\)
@@ -205,58 +223,53 @@ details, elliptic-integral evaluation and event timing can all contribute.
     \label{fig:basin-x86-arm-z0p2-web}
 \end{figure}
 
-\subsection{Mass dependence compared with Sychrovsky Figure 5.18}
+\subsection{Mass dependence}
 \label{sec:schw-bw-sychrovsky-mass-dependence}
 
-Sychrovsky's Figure 5.18 shows the dependence of SCHW+BW basin maps on
-the Bach--Weyl ring mass for \(b=20M\), \(l=3.75M\), \(z=0.2M\), and
-\(\epsilon=0.955\)~\cite{Sychrovsky2020}. The associated discussion and
-Figure 5.10 in that thesis use these maps to argue that the basin-boundary
-Minkowski dimension tends to one as the ring mass tends to zero. This is
-the behavior expected from the integrable Schwarzschild limit: when the
-external ring is removed, the additional non-integrable perturbation
-vanishes and the outcome boundary should become smooth.
-
-The result set shown here was computed with the same black-hole mass,
-angular momentum, ring radius and initial plane, but with
-\(\epsilon=0.977\). It should therefore be understood as a test of the same
-mass-dependence mechanism, not as an exact reproduction of Sychrovsky's
-Figure 5.18. Only x86 calculations are used. The two low-mass maps with
-\(\mathcal{M}=0.003M\) and \(\mathcal{M}=0.006M\) are omitted from the
-published comparison.
+Figure 5.18 in Sychrovsky \cite{Sychrovsky2020} shows the dependence of SCHW+BW basin maps on
+the Bach-Weyl ring mass for \(b=20M\), \(l=3.75M\), and \(z=0.2M\).
+Although the caption in Sychrovsky's thesis states \(\epsilon=0.955\),
+the shape of the accessible region is consistent with
+\(\epsilon=0.977\). We therefore treat \(0.977\) as the energy used for
+that figure~\cite{Sychrovsky2020}. As $\mathcal{M} \rightarrow0$ we expect $d \rightarrow1$ as the system goes to the Schwarzschild limit, which is integrable. However, even a light ring can significantly affect the dynamics, which can be described as "cracks" in the basin $O$. This effect can be observed in our basin maps. We can also observe the formation of smaller islands and their merging, which results in a decrease in the dimenion.
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \small \(\mathcal{M}=0.001M\)
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.001_0.2_0_x86.pdf}
+
+        \small \(\mathcal{M}=0.001M\)
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \small \(\mathcal{M}=0.01M\)
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.01_0.2_0_x86.pdf}
+
+        \small \(\mathcal{M}=0.01M\)
     \end{minipage}
 
     \vspace{0.6em}
 
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \small \(\mathcal{M}=0.02M\)
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.02_0.2_0_x86.pdf}
+
+        \small \(\mathcal{M}=0.02M\)
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \small \(\mathcal{M}=0.04M\)
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.04_0.2_0_x86.pdf}
+
+        \small \(\mathcal{M}=0.04M\)
     \end{minipage}
 
     \vspace{0.6em}
 
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \small \(\mathcal{M}=0.07M\)
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.07_0.2_0_x86.pdf}
+
+        \small \(\mathcal{M}=0.07M\)
     \end{minipage}
     \caption{Low-mass part of the SCHW+BW mass-dependence comparison with
     Sychrovsky's Figure 5.18. The maps were computed on a \(500\times500\)
@@ -267,36 +280,41 @@ published comparison.
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \small \(\mathcal{M}=0.1M\)
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.1_0.2_0_x86.pdf}
+
+        \small \(\mathcal{M}=0.1M\)
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \small \(\mathcal{M}=0.2M\)
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.2_0.2_0_x86.pdf}
+
+        \small \(\mathcal{M}=0.2M\)
     \end{minipage}
 
     \vspace{0.6em}
 
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \small \(\mathcal{M}=0.3M\)
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.3_0.2_0_x86.pdf}
+
+        \small \(\mathcal{M}=0.3M\)
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \small \(\mathcal{M}=0.6M\)
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.6_0.2_0_x86.pdf}
+
+        \small \(\mathcal{M}=0.6M\)
     \end{minipage}
 
     \vspace{0.6em}
 
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \small \(\mathcal{M}=1.1M\)
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_1.1_0.2_0_x86.pdf}
+
+        \small \(\mathcal{M}=1.1M\)
     \end{minipage}
     \caption{High-mass part of the SCHW+BW mass-dependence comparison with
     Sychrovsky's Figure 5.18. The maps were computed on a \(500\times500\)
@@ -309,7 +327,7 @@ published comparison.
     \centering
     \begin{tabular}{cc}
         \toprule
-        \(\mathcal{M}/M\) & \(d\) \\
+        \(\mathcal{M}\) & \(d\) \\
         \midrule
         0 & \(1.128 \pm 0.069\) \\
         0.0001 & \(1.727 \pm 0.049\) \\
@@ -333,103 +351,112 @@ published comparison.
     \label{tab:schw-bw-sychrovsky-mass-fractal-dimensions}
 \end{table}
 
-The visual comparison is only partially successful. The maps show that the
-structure of the basin boundary changes strongly with \(\mathcal{M}\), and the
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.98\linewidth]{img/d_m_schw_bw.png}
+    \caption{Dependence of the SCHW+BW basin-boundary fractal dimension
+    \(d\) on the Bach--Weyl ring mass \(\mathcal{M}\), for \(M=1\),
+    \(l=3.75M\), \(\epsilon=0.977\), \(b=20M\), and \(z=0.2M\) (x86).
+    The values are listed in
+    Table~\ref{tab:schw-bw-sychrovsky-mass-fractal-dimensions}.}
+    \label{fig:schw-bw-sychrovsky-mass-fractal-dimension}
+\end{figure}
+
+The visual comparison is only partially successful. However, the trend is consistent as we can observe a peak of the dimension with the appearance of "cracks", a decrease of the dimension with heavier rings, and the
 unperturbed case \(\mathcal{M}=0\) gives a dimension close to that of a
-smooth curve, as expected for the Schwarzschild limit. However, the
+smooth curve, as expected for the Schwarzschild limit. However, 
 non-zero low-mass cases do not show a clean monotone approach
 \(d\to1\) as \(\mathcal{M}\to0^+\). Instead, several small but non-zero
-ring masses give dimensions in the range \(d\simeq1.6\)--\(1.7\).
+ring masses give dimensions in the range \(d\approx 1.6\)-\(1.7\). Nevertheless, we can see that the error increases as the ring becomes lighter. It is possible that to better resolve the dimension of the structure we would need a much finer resolution and the decline would be observed at even smaller values for $\mathcal{M}$.
 
-This means that the result validates the integrable limit only in the strict
-\(\mathcal{M}=0\) calculation, while the limiting trend inferred by
-Sychrovsky is not reproduced quantitatively in this run. The most likely
-reasons are methodological rather than physical: the energy is not identical
-to Sychrovsky's Figure 5.18, our stopping criterion is not the same as
-Sychrovsky's \(\lambda_{\text{stop}}\), and the uncertainty-exponent
-calculation samples a finite grid and a coordinate-direction perturbation.
-For very weak perturbations, a thin chaotic layer or a numerical
-classification layer can therefore dominate the measured uncertain fraction
-before the asymptotic smooth-boundary limit is resolved. The result is still
+The result is still
 useful for the thesis because it shows that the method detects a regular
-boundary in the exactly integrable Schwarzschild case, but it also warns that
-small-perturbation limits require more careful convergence tests than a single
-\(500\times500\) basin-map sequence can provide.
+boundary in the exactly integrable Schwarzschild case and follows the trend, but it also shows limitations where more careful analysis is needed.
 
 \subsection{Comparison with Poincar\'e sections}
 
-As a second validation of the Schwarzschild black-hole plus Bach--Weyl
-ring implementation, we compare our basin maps with the equatorial
-Poincar\'e sections shown by Polcar, Sukova and Semerak~\cite{Polcar2019}.
-Their sections were computed for geodesics with
+As a second validation, we compare our basin maps with the equatorial
+Poincar\'e sections shown by Polcar, Sukova, and Semerak~\cite{Polcar2019}.
+Their sections were computed for SCHW+BW geodesics with
 \(\ell=3.75M\), \(\epsilon=0.977\), and ring radius \(b=20M\), while
-the relative ring mass \(\mathcal{M}/M\) was varied. The reference
-Poincar\'e sections are reproduced in Figure~\ref{fig:poincare-schw-bw-chaos-v}.
+the ring mass \(\mathcal{M}\) was varied.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\linewidth]{img/poincare_sections_schw_bw_chaos_V.png}
+    \includegraphics[width=0.98\linewidth]{img/poincare_sections_schw_bw_chaos_V.png}
     \caption{Reference equatorial Poincar\'e sections for the
     Schwarzschild black hole with a Bach--Weyl ring, with
     \(b=20M\), \(\ell=3.75M\), and \(\epsilon=0.977\). The values of
-    \(\mathcal{M}/M\) are indicated in the individual panels. Figure
-    taken from Polcar, Sukova and Semerak~\cite{Polcar2019}.}
+    \(\mathcal{M}\) are indicated in the individual panels. (Polcar, Sukova and Semerak~\cite{Polcar2019}).}
     \label{fig:poincare-schw-bw-chaos-v}
 \end{figure}
 
-For the comparison we use only the x86 calculations, since these were
-computed with extended precision \texttt{long double}. The basin maps in
-Figure~\ref{fig:basin-schw-bw-chaos-v-x86} use the same values of
-\(\ell\), \(\epsilon\), \(b\), and the equatorial plane \(z=0\). The
-ring-mass values are those available in our x86 result set, so this is a
-comparison of the trend with increasing perturbation, not a
-panel-by-panel reproduction of the exact masses in
-Figure~\ref{fig:poincare-schw-bw-chaos-v}. They are also not Poincar\'e
-sections: each pixel represents an initial condition in the
-\((\rho_0,u^\rho_0)\) plane and is classified according to the final
-outcome of the numerical integration. In addition, the reference sections
-use Schwarzschild \(r\), while our basin maps are plotted in Weyl
-\(\rho\). Nevertheless, the comparison is useful because both diagnostics
-probe the equatorial reduced phase space and both react visibly to the
-increasing Bach--Weyl perturbation.
+Kraus independently reproduced one of the corresponding Poincar\'e sections
+with \textit{Gravitacek 2} in \cite{Kraus2025}. Reproduction can be seen in
+Figure~\ref{fig:poincare-schw-bw-kraus-gravitacek2}. This is relevant for the
+present validation because the trajectories classified in our basin maps were
+constructed with the \textit{Gravitacek 2} codebase  as described in
+Chapter~\ref{chap:implementation}. The figure does not validate the
+basin-boundary classification by itself, but it shows that the trajectory
+integrator used here reproduces the phase space structures known from the
+Poincar\'e-section studies of the Schwarzschild-Bach-Weyl system.
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.48\linewidth}
+    \includegraphics[width=0.82\linewidth]{img/poincare_schw_bw_kraus_gravitacek2.png}
+    \caption{Equatorial Poincar\'e section for the Schwarzschild black hole with
+    a Bach--Weyl ring, computed with \textit{Gravitacek 2} for
+    \(\mathcal{M}=0.1M\), \(b=20M\), \(\epsilon=0.977\), and
+    \(\ell=3.75M\) (Kraus~\cite[Fig.~B.1]{Kraus2025}).}
+    \label{fig:poincare-schw-bw-kraus-gravitacek2}
+\end{figure}
+
+The Poincaré sections are in Schwarzschild coordinates, while in our basin maps we were working in Weyl coordinates. Also, the nature of Poincaré sections is different, so this is a qualitative comparison and a different view of the same dynamics of the system. In the comparison, we want to analyze the trend with increasing perturbation and compare if it agrees with the Poincaré sections. For comparison, we will also make use of the color scale employed. Roughly speaking, blue and possibly green indicate regular orbits, while red
+marks the most chaotic trajectories. The blue islands indicate regular, rather than plunging, trajectories. So we will compare evolution of our basin $O$ as perturbation increase as this is the most direct thing to observe and compare with the Poincaré sections.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \small \(\mathcal{M}=0.07M\)
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.07_0.0_0_x86.pdf}
+
+        \small \(\mathcal{M}=0.07M\)
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \small \(\mathcal{M}=0.3M\)
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.3_0.0_0_x86.pdf}
+
+        \small \(\mathcal{M}=0.3M\)
     \end{minipage}
 
     \vspace{0.6em}
 
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \small \(\mathcal{M}=0.1M\)
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.1_0.0_0_x86.pdf}
+
+        \small \(\mathcal{M}=0.1M\)
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \small \(\mathcal{M}=0.6M\)
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.6_0.0_0_x86.pdf}
+
+        \small \(\mathcal{M}=0.6M\)
     \end{minipage}
 
     \vspace{0.6em}
 
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \small \(\mathcal{M}=0.2M\)
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_0.2_0.0_0_x86.pdf}
+
+        \small \(\mathcal{M}=0.2M\)
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \small \(\mathcal{M}=1.1M\)
         \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.977_20.0_1.1_0.0_0_x86.pdf}
+
+        \small \(\mathcal{M}=1.1M\)
     \end{minipage}
     \caption{Basin maps for the SCHW+BW system computed on a \(500\times500\) grid
     of initial conditions for \(l=3.75M\), \(\epsilon=0.977\),
@@ -438,305 +465,252 @@ increasing Bach--Weyl perturbation.
     \label{fig:basin-schw-bw-chaos-v-x86}
 \end{figure}
 
-The comparison is necessarily qualitative. A Poincar\'e section separates
-regular invariant curves, resonant islands and stochastic layers inside
-the bounded part of phase space, whereas the basin map records whether a
-chosen initial condition survives until \(T_{\mathrm{MAX}}\) or reaches
-the singular part of the space-time earlier. Therefore one should not
-expect a one-to-one correspondence between individual islands in
-Figure~\ref{fig:poincare-schw-bw-chaos-v} and coloured domains in
-Figure~\ref{fig:basin-schw-bw-chaos-v-x86}. The relevant point is the
-common trend. In the reference sections, increasing \(\mathcal{M}\)
-destroys the simple near-integrable structure: invariant curves are
-gradually replaced by resonant island chains and broader chaotic layers.
-In our x86 basin maps the same increase of the perturbing ring mass
-produces a progressively more complicated basin boundary, especially
-near the edge of the accessible region and near the ring. This supports
-the interpretation that the final-state sensitivity visible in the basin
-maps is associated with the same loss of regularity that is seen directly
-in the Poincar\'e sections.
+In the Poincaré sections we can see with lighter rings the dominance of the regular islands. As the mass of the ring increases, the numerous small regular islands are replaced by fewer, larger, and more clearly separated regular regions. A qualitatively similar reorganization is visible in the basin maps, where the basin $O$ 
+is divided into components separated by plunge/collision regions. The correspondence is not one-to-one, because the basin $O$ also contains chaotic non-plunging trajectories and because chaotic regions may lead to either outcome, but the large regular islands are plausibly reflected in the large components of the basin $O$.
 
-\section{Schwarzschild--Bach--Weyl Radius Dependence}
-\label{sec:schw-bw-radius-dependence}
-
-The previous comparison varied the mass of the Bach--Weyl ring at fixed
-radius. Polcar, Sukova and Semerak also show the complementary dependence
-on the ring radius \(b\) for fixed \(\mathcal{M}=0.5M\),
-\(\ell=3.75M\), and \(\epsilon=0.94\)~\cite{Polcar2019}. Their
-Poincar\'e sections are reproduced in
-Figure~\ref{fig:poincare-schw-bw-chaos-v-radius}. The sections show that
-changing \(b\) does not merely rescale the accessible region. It changes
-the resonance structure in the bounded phase space, with different
-island chains and chaotic layers appearing for different ring radii.
+The previous comparison varied the mass of the Bach-Weyl ring at a fixed
+radius. Polcar, Suková, and Semerak also show the complementary dependence
+on the radius of the ring \(b\) for fixed \(\mathcal{M}=0.5M\),
+\(\ell=3.75M\), and \(\epsilon=0.94\)~\cite{Polcar2019}. The sections show that
+changing \(b\) makes itself visible in changing the overall structure of the Poincaré secions and the appearance of the chaotic dynamics.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\linewidth]{img/poincare_sections_2_schw_bw_chaos_V.png}
+    \includegraphics[width=0.98\linewidth]{img/poincare_sections_2_schw_bw_chaos_V.png}
     \caption{Reference equatorial Poincar\'e sections for the
     Schwarzschild black hole with a Bach--Weyl ring, with
     \(\mathcal{M}=0.5M\), \(\ell=3.75M\), and \(\epsilon=0.94\).
-    The ring radius \(b\) is indicated in the individual panels. Figure
-    taken from Polcar, Sukova and Semerak~\cite{Polcar2019}.}
+    The ring radius \(b\) is indicated in the individual panels (Polcar, Suková and Semerak~\cite{Polcar2019}).}
     \label{fig:poincare-schw-bw-chaos-v-radius}
 \end{figure}
 
-Our corresponding x86 basin maps are shown in
-Figure~\ref{fig:basin-schw-bw-chaos-v-radius-x86}. They use the same
-\(\mathcal{M}\), \(\ell\), and \(\epsilon\), and the same equatorial
-plane \(z=0\). Only the radii for which we have x86 calculations are
-included. Thus the comparison is again qualitative: the Poincar\'e
-sections display the internal phase-space structure of bounded motion,
-whereas the basin maps display final-state sensitivity in the
-\((\rho_0,u^\rho_0)\) initial-condition plane.
+We have done basin maps for $b=15M,21M,23M$.
+The comparison is qualitative again. We again, as previously, can see that the large regular islands are plausibly reflected in the large components of the basin $O$. Interestingly, we can see similar shapes of white regions in the Poincaré sections and islands in the basin $C$. Plunging trajectories may not contribute much to the Poincaré sections. So, it is possible that the white regions in the Poincaré sections are reflected in the islands in the basin $C$ on the basin maps. With an increase of chaotic trajectories in the Poincaré section, the basin $C$ is getting richer.
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.32\linewidth}
-        \centering
-        \small \(b=15M\)
-        \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.94_15.0_0.5_0.0_0_x86.pdf}
-    \end{minipage}\hfill
-    \begin{minipage}{0.32\linewidth}
-        \centering
-        \small \(b=21M\)
-        \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.94_21.0_0.5_0.0_0_x86.pdf}
-    \end{minipage}\hfill
-    \begin{minipage}{0.32\linewidth}
-        \centering
-        \small \(b=23M\)
-        \includegraphics[width=\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.94_23.0_0.5_0.0_0_x86.pdf}
-    \end{minipage}
-    \caption{Basin maps for the SCHW+BW system computed on a \(500\times500\) grid
+    \includegraphics[width=0.72\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.94_15.0_0.5_0.0_0_x86.pdf}
+    \caption{Basin map for the SCHW+BW system computed on a \(500\times500\) grid
     of initial conditions for \(\mathcal{M}=0.5M\), \(\ell=3.75M\),
-    \(\epsilon=0.94\), \(z=0\), and different Bach--Weyl ring radii
-    \(b\) (x86). \basinLegend}
-    \label{fig:basin-schw-bw-chaos-v-radius-x86}
+    \(\epsilon=0.94\), \(z=0\), and ring radius \(b=15M\) (x86). \basinLegend}
+    \label{fig:basin-schw-bw-b15-x86}
 \end{figure}
 
-The three basin maps follow the same message as the reference
-Poincar\'e sections: for fixed ring mass and energy, the radius of the
-external ring strongly affects the structure of the reduced dynamics.
-The maps for \(b=15M\), \(21M\), and \(23M\) do not form a simple
-monotone sequence in visual complexity. Instead, the basin boundary and
-the shape of the surviving-orbit region rearrange as the ring is moved.
-This is consistent with the radius dependence seen in
-Figure~\ref{fig:poincare-schw-bw-chaos-v-radius}, where the location of
-regular islands and chaotic layers changes with \(b\). The basin
-diagnostic therefore captures the same sensitivity to the external
-source geometry, but through final outcomes rather than through
-individual invariant curves.
-
-\section{Reissner--Nordstr\"om--Majumdar--Papapetrou Results}
-\label{sec:rn-mp-results}
-
-We now consider the extreme Reissner--Nordstr\"om black hole surrounded
-by a Majumdar--Papapetrou ring. We abbreviate this configuration as the
-RN+MP system. It was studied by Polcar,
-Sukova and Semerak as an electrovacuum analogue of the
-Schwarzschild--Bach--Weyl system~\cite{Polcar2019}. It was also
-analysed by Polcar and Semerak using the Melnikov method, where the
-splitting of the stable and unstable manifolds of a perturbed homoclinic
-orbit gives an analytic mechanism for the onset of chaos in the
-RN+MP system~\cite{PolcarSemerak2019}. Our purpose here is not to reproduce
-their Poincar\'e sections, but to use basin maps and fractal dimensions
-as a complementary final-state diagnostic.
-
-The basin maps in
-Figures~\ref{fig:basin-rn-mp-energy-low-x86}--\ref{fig:basin-rn-mp-energy-high-x86}
-were computed for \(M=1\), \(\ell=3.2M\), \(b=20M\), and
-\(\mathcal{M}=0.5M\), while the energy \(\epsilon\) was varied. The
-ring radius \(b\) is the Reissner--Nordstr\"om radial coordinate; the
-corresponding Majumdar--Papapetrou cylindrical ring radius is
-\(\sigma=b-M\). The maps use \(z(\rho)=n\sqrt{M\rho}\), as described in
-Chapter~\ref{chap:implementation}. For each energy, the left panel shows the
-wider basin map and the right panel shows the close-up used for the
-fractal-dimension calculation. The wider and close-up panels do not always use
-the same value of \(n\), because they sample different parts of the accessible
-region. The maps excluded from publication during the exploratory stage, namely the
-\(b=15M\), \(\ell=3.75M\), \(\epsilon=0.94\), \(z=0\) trial runs, are
-not used in these figures or in the following fractal-dimension
-analysis.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.72\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.94_21.0_0.5_0.0_0_x86.pdf}
+    \caption{Basin map for the SCHW+BW system computed on a \(500\times500\) grid
+    of initial conditions for \(\mathcal{M}=0.5M\), \(\ell=3.75M\),
+    \(\epsilon=0.94\), \(z=0\), and ring radius \(b=21M\) (x86). \basinLegend}
+    \label{fig:basin-schw-bw-b21-x86}
+\end{figure}
 
 \begin{figure}[H]
     \centering
-    \scriptsize \(\epsilon=0.955\)
+    \includegraphics[width=0.72\linewidth]{img/basin_map_sch_bw_500_1.0_3.75_0.94_23.0_0.5_0.0_0_x86.pdf}
+    \caption{Basin map for the SCHW+BW system computed on a \(500\times500\) grid
+    of initial conditions for \(\mathcal{M}=0.5M\), \(\ell=3.75M\),
+    \(\epsilon=0.94\), \(z=0\), and ring radius \(b=23M\) (x86). \basinLegend}
+    \label{fig:basin-schw-bw-b23-x86}
+\end{figure}
 
-    \begin{minipage}{0.48\linewidth}
+\section{Reissner-Nordstr\"om--Majumdar-Papapetrou}
+\label{sec:rn-mp-results}
+
+We now consider the extreme Reissner-Nordstr\"om black hole surrounded
+by a Majumdar-Papapetrou ring. The analysis by Polcar and Semerak \cite{PolcarSemerak2019} using the Melnikov method shows that for weak
+perturbations, the transversal intersection of stable and unstable manifolds along the homoclinic orbit is present. As a result of this, the chaotic dynamics appears. Our purpose here is not to reproduce any results but rather to bring about a new view into the dynamics. 
+
+As discussed in \ref{subchap:RNMPanalysis} a specific condition needs to be taken into account in order to have basin maps where a particle may plunge into the black hole and energy levels with given parameters may affect the results. Before we dive into a closer analysis of how this manifests in basin maps, we will take a look at some nuances. 
+
+As before, precision and integration time may affect the overall result. We will now work with fixed $z$, so only a collision with the ring is possible, no plunging into the black hole. First, a reference run is done on the ARM architecture, therefore, with lower precision with a standard integration time $\tau_{\mathrm{MAX}} = 10^4M$. Then runs with integration times $\tau_{\mathrm{MAX}}=10^5M$ both on ARM and x86 are done.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.325\linewidth}
         \centering
-        \scriptsize full basin map
+        \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.75_0.94_15.0_0.5_0.0_0.pdf}
+
+        \scriptsize reference ARM run
+    \end{minipage}\hfill
+    \begin{minipage}{0.325\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.75_0.94_15.0_0.5_0.0_0_10pow5.pdf}
+
+        \scriptsize ARM, \(\tau_{\mathrm{MAX}}=10^5M\)
+    \end{minipage}\hfill
+    \begin{minipage}{0.325\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.75_0.94_15.0_0.5_0.0_0_10pow5_x86.pdf}
+
+        \scriptsize x86, \(\tau_{\mathrm{MAX}}=10^5M\)
+    \end{minipage}
+    \caption{RN+MP basin maps testing the effect of a long integration time and
+    precision. The maps were computed on a \(500\times500\) grid of
+    initial conditions for \(M=1\), \(\ell=3.75M\), \(\epsilon=0.94\),
+    \(b=15M\), \(\mathcal{M}=0.5M\), and \(z=0\). \basinLegend}
+    \label{fig:basin-rn-mp-long-time-comparison}
+\end{figure}
+
+With lower precision, an increase in integration time results in more trajectories being classified as plunged. However, with increasing precision, we can see that the basin $C$ was only a numerical artifact. The same discussion and implication for the method, finite-time, and precision as previously can be applied.
+
+We will now analyze the basin maps with the possibility of a test particle plunging into the black hole. We will choose such parameters that the accessible region will not be separated into subregions. In addition, we will start with energies close to the energy level tangental to the local maximum of $V_{ef}$, so near the separatrix, and we will decrease it, analyzing the dependence of the fractal dimension $d$ on the energy $\epsilon$. As \cite{PolcarSemerak2019} suggests, we may expect a chaotic nature near the separatrix, and as the energy increases, we may expect $d \rightarrow1$.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.495\linewidth}
+        \centering
         \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.2_0.955_20.0_0.5_0.5477225575051662_0_x86.pdf}
+
+        \scriptsize full basin map, \(\epsilon=0.955\)
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize close-up
         \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.2_0.955_20.0_0.5_0.1_0.pdf}
+
+        \scriptsize close-up, \(\epsilon=0.955\)
     \end{minipage}
 
     \vspace{0.6em}
-    \scriptsize \(\epsilon=0.960\)
-
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize full basin map
         \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.2_0.96_20.0_0.5_0.5477225575051662_0_x86.pdf}
+
+        \scriptsize full basin map, \(\epsilon=0.960\)
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize close-up
         \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.2_0.96_20.0_0.5_0.1_0.pdf}
+
+        \scriptsize close-up, \(\epsilon=0.960\)
     \end{minipage}
 
     \vspace{0.6em}
-    \scriptsize \(\epsilon=0.965\)
-
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize full basin map
         \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.2_0.965_20.0_0.5_0.5477225575051662_0_x86.pdf}
+
+        \scriptsize full basin map, \(\epsilon=0.965\)
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize close-up
         \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.2_0.965_20.0_0.5_0.1_0.pdf}
+
+        \scriptsize close-up, \(\epsilon=0.965\)
     \end{minipage}
     \caption{Basin maps for the Reissner--Nordstr\"om--Majumdar--Papapetrou
     (RN+MP) system computed on a \(500\times500\) grid of
     initial conditions for \(M=1\), \(\ell=3.2M\), \(b=20M\),
     \(\mathcal{M}=0.5M\), and \(\epsilon=0.955,0.960,0.965\) (x86).
     Each row compares the wider basin map, computed with
-    \(z(\rho)=\sqrt{0.3}\sqrt{M\rho}\), with the corresponding close-up,
-    computed with \(z(\rho)=0.1\sqrt{M\rho}\), used for the
+    \(z(\rho)=0.1\sqrt{\rho}\), with the corresponding close-up, used for the
     uncertainty-exponent calculation. \basinLegend}
     \label{fig:basin-rn-mp-energy-low-x86}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \scriptsize \(\epsilon=0.970\)
-
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize full basin map
         \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.2_0.97_20.0_0.5_0.5477225575051662_0_x86.pdf}
+
+        \scriptsize full basin map, \(\epsilon=0.970\)
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize close-up
         \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.2_0.97_20.0_0.5_0.1_0.pdf}
+
+        \scriptsize close-up, \(\epsilon=0.970\)
     \end{minipage}
 
     \vspace{0.6em}
-    \scriptsize \(\epsilon=0.975\)
-
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize full basin map
         \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.2_0.975_20.0_0.5_0.5477225575051662_0_x86.pdf}
+
+        \scriptsize full basin map, \(\epsilon=0.975\)
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize close-up
         \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.2_0.975_20.0_0.5_0.1_0.pdf}
+
+        \scriptsize close-up, \(\epsilon=0.975\)
     \end{minipage}
 
     \vspace{0.6em}
-    \scriptsize \(\epsilon=0.980\)
-
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize full basin map
         \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.2_0.98_20.0_0.5_0.5477225575051662_0_x86.pdf}
+
+        \scriptsize full basin map, \(\epsilon=0.980\)
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize close-up
         \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.2_0.98_20.0_0.5_0.1_0.pdf}
+
+        \scriptsize close-up, \(\epsilon=0.980\)
     \end{minipage}
     \caption{Basin maps for the RN+MP system computed on a \(500\times500\) grid of
     initial conditions for \(M=1\), \(\ell=3.2M\), \(b=20M\),
     \(\mathcal{M}=0.5M\), and \(\epsilon=0.970,0.975,0.980\) (x86).
     Each row compares the wider basin map, computed with
-    \(z(\rho)=\sqrt{0.3}\sqrt{M\rho}\), with the corresponding close-up,
-    computed with \(z(\rho)=0.1\sqrt{M\rho}\), used for the
-    uncertainty-exponent calculation. \basinLegend}
+    \(z(\rho)=0.1\sqrt{\rho}\), with the corresponding close-up, used for the
+    uncertainty-exponent calculation.\basinLegend}
     \label{fig:basin-rn-mp-energy-mid-x86}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \scriptsize \(\epsilon=0.985\)
-
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize full basin map
         \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.2_0.985_20.0_0.5_0.7071067811865476_0_x86.pdf}
+
+        \scriptsize full basin map, \(\epsilon=0.985\)
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize close-up
         \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.2_0.985_20.0_0.5_0.1_0.pdf}
+
+        \scriptsize close-up, \(\epsilon=0.985\)
     \end{minipage}
 
     \vspace{0.6em}
-    \scriptsize \(\epsilon=0.990\)
-
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize full basin map
         \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.2_0.99_20.0_0.5_0.7071067811865476_0_x86.pdf}
+
+        \scriptsize full basin map, \(\epsilon=0.990\)
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize close-up
         \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.2_0.99_20.0_0.5_0.1_0.pdf}
+
+        \scriptsize close-up, \(\epsilon=0.990\)
     \end{minipage}
 
     \vspace{0.6em}
-    \scriptsize \(\epsilon=0.995\)
-
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize full basin map
         \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.2_0.995_20.0_0.5_0.7071067811865476_0_x86.pdf}
+
+        \scriptsize full basin map, \(\epsilon=0.995\)
     \end{minipage}\hfill
-    \begin{minipage}{0.48\linewidth}
+    \begin{minipage}{0.495\linewidth}
         \centering
-        \scriptsize close-up
         \includegraphics[width=\linewidth]{img/basin_map_rn_mp_500_1.0_3.2_0.995_20.0_0.5_0.1_0.pdf}
+
+        \scriptsize close-up, \(\epsilon=0.995\)
     \end{minipage}
     \caption{Basin maps for the RN+MP system computed on a \(500\times500\) grid of
     initial conditions for \(M=1\), \(\ell=3.2M\), \(b=20M\),
     \(\mathcal{M}=0.5M\), and \(\epsilon=0.985,0.990,0.995\) (x86).
     Each row compares the wider basin map, computed with
-    \(z(\rho)=\sqrt{0.5}\sqrt{M\rho}\), with the corresponding close-up,
-    computed with \(z(\rho)=0.1\sqrt{M\rho}\), used for the
+    \(z(\rho)=0.1\sqrt{\rho}\), with the corresponding close-up, used for the
     uncertainty-exponent calculation. \basinLegend}
     \label{fig:basin-rn-mp-energy-high-x86}
 \end{figure}
 
-The RN+MP sequence shows a clear energy dependence. For
-\(\epsilon=0.955\)--\(0.965\), the accessible part of the sampled
-initial-condition plane contains strongly interwoven basins both in the
-wider view and in the close-up, indicating large final-state sensitivity.
-These lower energies are close to the regime selected in
-Figure~\ref{fig:rn-mp-veff-z-of-rho}, where the energy level lies just above
-the local maximum of the effective potential. In the unperturbed problem this
-maximum corresponds to an unstable circular orbit and its separatrix. After the
-Majumdar--Papapetrou ring perturbation, the Melnikov analysis predicts that the
-stable and unstable manifolds associated with this separatrix split and form a
-homoclinic tangle~\cite{PolcarSemerak2019}. The strongly interwoven basins are
-therefore naturally interpreted as final-state traces of this homoclinic chaotic
-layer. At higher energies the boundary remains nontrivial, but the close-up
-panels show reduced interweaving and the visually dominant regions become more
-coherent. This is consistent with the fact that homoclinic chaos is localized
-near the separatrix: moving the sampled energy surface away from the most
-relevant separatrix neighbourhood can reduce the observed final-state
-sensitivity~\cite{PolcarThesis2018,Witzany2015,PolcarSemerak2019}.
-
-To quantify this trend, we computed the fractal dimension \(d\) of the
-basin boundary for the same energy sequence. The resulting values are
-listed in Table~\ref{tab:rn-mp-fractal-dimensions} and plotted in
-Figure~\ref{fig:rn-mp-fractal-dimension-energy}.
+The RN+MP sequence shows a clear energy dependence. With energ levels near the separatrix, the basin map is rich and, as noticed earlier with a comparison of the basin maps and Poincaré sections, the island in the basin $C$ may suggest a chaotic nature. With an increasing energy level, we observe the formation of regions in the basin $O$ separated by regions of basin $C$, which are more "coherent". However, with the energy level going even higher we can see dominance of the basin $O$ on the map and shrinking of the basin $C$, both with a smoother structure. This qualitative analysis suggests that our earlier hypothesis may be possible, and we shall proceed with a qualitative analysis.
 
 \begin{table}[H]
     \centering
@@ -756,36 +730,21 @@ Figure~\ref{fig:rn-mp-fractal-dimension-energy}.
         \bottomrule
     \end{tabular}
     \caption{Fractal dimension of the basin boundary for the RN+MP
-    close-up energy sequence in
+    energy sequence in
     Figures~\ref{fig:basin-rn-mp-energy-low-x86}--\ref{fig:basin-rn-mp-energy-high-x86}.}
     \label{tab:rn-mp-fractal-dimensions}
 \end{table}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.78\linewidth]{img/d_eps_rn_mp.png}
-    \caption{Dependence of the RN+MP basin-boundary fractal dimension
+    \includegraphics[width=0.98\linewidth]{img/d_eps_rn_mp.png}
+    \caption{Dependence of the RN+MP basin boundary fractal dimension
     \(d\) on the energy \(\epsilon\), for \(M=1\), \(\ell=3.2M\),
     \(b=20M\), \(\mathcal{M}=0.5M\), and
-    \(z(\rho)=0.1\sqrt{M\rho}\) (x86).}
+    \(z(\rho)=0.1\sqrt{\rho}\) (x86).}
     \label{fig:rn-mp-fractal-dimension-energy}
 \end{figure}
 
-The fractal dimension stays close to \(d\simeq1.81\) for
-\(\epsilon=0.955\)--\(0.965\), which corresponds to a highly fractal
-basin boundary. It then decreases as the energy is increased, reaching
-\(d=1.079\pm0.036\) at \(\epsilon=0.995\). The small increase from
-\(\epsilon=0.970\) to \(0.975\) should not be interpreted as a separate
-monotonic law; it is more naturally read as local structure in the
-sampled energy interval. The main result is the overall loss of
-fractal complexity across the sequence. In this sense, the basin maps
-add a quantitative final-state perspective to the RN+MP dynamics
-studied in Refs.~\cite{Polcar2019,PolcarSemerak2019}: the presence of a
-chaotic mechanism does not fix the observed basin-boundary dimension,
-which depends on the selected energy surface and the sampled
-initial-condition region. In particular, our results are compatible with the
-picture emphasized in the Melnikov analysis and in the thesis treatments of
-homoclinic chaos: the perturbation creates a chaotic layer near the broken
-separatrix, but the size of the layer sampled by a basin map depends on the
-chosen constants of motion and on the section of phase space used for the
-initial conditions~\cite{PolcarThesis2018,Witzany2015,PolcarSemerak2019}.
+The dependence of the fractal dimension $d$ on the energy $\epsilon$ quantitatively supports our qualitative observation. We see a monotonic decline in the fractal dimension $d$ as the energy level increases, further away from the separatrix. Near the separatrix, we see a high outcome sensitivity, possibly even initial condition sensitivity as the structure of the basin map suggests. As we move further away from the separatrix, we see that the system is becoming integrable. 
+
+Given the analysis done in \cite{PolcarSemerak2019} and the above results, we may form a hypothesis. Near the separatrix, for large perturbation, given the parameters with the condition of plunge into the black hole being possible, a chaos of homoclinic origin is present. However, the above analysis suggests this, it does not confirm it. Further research and analysis, for example, with Poincaré sections, is needed.  

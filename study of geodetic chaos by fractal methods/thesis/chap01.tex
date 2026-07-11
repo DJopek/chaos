@@ -3,116 +3,37 @@
 
 In this chapter, we will introduce the necessary mathematical theory and concepts from chaos theory that we will work with and that are relevant for this thesis.
 
-\section{Dynamical systems}
-\label{sec:dynamical-systems}
-
-Following the terminology used by Wiggins~\cite[pp.~1--4]{Wiggins2003},
-a dynamical system is a mathematical rule that determines how a state
-evolves with respect to an independent variable, usually interpreted as
-time. In continuous time this rule is written as an ordinary differential
-equation
-\begin{equation}
-    \dot{x}=f(x,t;\mu),
-    \label{eq:continuous-dynamical-system}
-\end{equation}
-where \(x\in U\subset\mathbb{R}^{n}\) is the state, \(t\in\mathbb{R}\) is
-time, and \(\mu\) denotes parameters. If \(f\) does not depend explicitly on
-time, the system is called autonomous. In discrete time the evolution is
-given by a map
-\begin{equation}
-    x_{n+1}=g(x_n;\mu).
-    \label{eq:discrete-dynamical-system}
-\end{equation}
-Both vector fields of the form \eqref{eq:continuous-dynamical-system} and
-maps of the form \eqref{eq:discrete-dynamical-system} are dynamical
-systems.
-
-\begin{defn}[Dynamical system]
-A dynamical system is a continuous-time vector field or a discrete-time map
-that specifies the evolution of states in a phase space.
-\end{defn}
-
-The phase space is the space of dependent variables of the system. A
-solution of \eqref{eq:continuous-dynamical-system} is a curve
-\(x(t)\) in phase space satisfying the differential equation. Such a curve
-is also called a trajectory. The orbit through an initial condition \(x_0\)
-is the set of phase-space points visited by the corresponding trajectory,
-\[
-    O(x_0)=\{x(t,t_0,x_0)\mid t \in I\},
-\]
-where \(I\) is the interval on which the solution exists. For a map, the
-orbit of \(x_0\) is the sequence
-\[
-    x_0,\quad g(x_0),\quad g^2(x_0),\quad \ldots .
-\]
-In this thesis the geodesic equations define a continuous-time dynamical
-system, while Poincar\'e sections and basin maps give reduced
-representations of its behavior in selected parts of phase space.
-
 \section{Outcome basin}
 In dynamical systems, the concept of attractor can be described as a subset of a phase space toward which a system tends to evolve. An attractor's basin of attraction is the subset of the phase space such that any point (any initial condition) in that region will asymptotically evolve into the attractor. In the dynamical system of a black hole with a ring,
 the test particle can evolve towards collision with the black hole or with the ring, escape to infinity or eternal orbit. An evolution towards eternal orbit or escape to infinity does not really satisfy the concept of an attractor. In order to capture and examine this behavior, we need to define what we will refer to as an outcome basin. 
 
 \begin{defn}[Outcome basin]
-An outcome basin is the set of initial conditions, i.e. a subset of the phase space, that evolve towards a given outcome.
+An outcome basin is the set of initial conditions, being a subset of the phase space, that evolve towards a given outcome.
 \end{defn}
 
-In our case, by outcome we understand eternal orbit, collision with a black hole or a ring, and escape to infinity.
+In our case, by outcome we understand eternal orbit, collision with a ring or plunge into a black hole, and escape to infinity.
 
 \section{Basin boundary}
-Let us now consider a specific system that has only two outcomes, hence two outcome basins. Denote the basin of the collision outcome by $C$ and $O$ as the basin of the eternal orbit outcome. By the boundary of these basins we understand the following:
+Let us now consider a specific system that has only two outcomes, hence two outcome basins. Denote the basin of the collision/plunge outcome by $C$ and $O$ as the basin of the eternal orbit outcome. By the boundary of these basins we understand the following.
 
 \begin{defn}[Basin boundary]
 Let \(O\) and \(C\) be two outcome basins. The subset \(\Sigma\) of the phase space that separates these two basins is called a basin boundary.
 \end{defn}
 
 For the systems considered in this thesis, a smooth basin boundary is associated
-with predictable final-state assignment, while a fractal basin boundary indicates
-final-state sensitivity. This should not be read as a general equivalence between
-``chaos'' and ``fractal boundary'' in all dynamical systems; rather, fractal basin
-boundaries are one of the standard signatures of chaotic scattering and
-unpredictability of outcomes~\cite{Grebogi1983,Ott2002}.
+with predictable outcome assignment, whereas a fractal basin boundary indicates
+outcome sensitivity, or rather degradation, in one's ability to determine which outcome is approached. This is discussed more in \cite{Grebogi1983} and in \cite{Ott2002}.
 
 \section{Homoclinic tangles}
 \label{sec:homoclinic-tangles}
 
-One common mechanism by which chaotic scattering appears is the splitting of a
-separatrix attached to an unstable periodic orbit. In a Poincar\'e map, such an
-orbit appears as a hyperbolic fixed point \(p\). Its stable manifold \(W^s(p)\)
-consists of points approaching \(p\) under forward iteration, while its unstable
-manifold \(W^u(p)\) consists of points approaching \(p\) under backward
-iteration. A homoclinic point is a point, different from \(p\), that lies in
-\(W^s(p)\cap W^u(p)\). Equivalently, the corresponding orbit leaves the
-neighbourhood of the hyperbolic orbit and returns to it asymptotically in both
-time directions~\cite{Wiggins2003,PolcarThesis2018}.
-
-If the stable and unstable manifolds coincide, the homoclinic orbit forms a
-separatrix between qualitatively different motions. If a perturbation makes
-these manifolds intersect transversely, the intersections are repeated under the
-map and form a homoclinic tangle. By the Smale--Birkhoff homoclinic theorem,
-the dynamics in a neighbourhood of such transverse homoclinic points contains a
-horseshoe-type invariant set and is chaotic~\cite{Wiggins2003,PolcarThesis2018}.
-For nearly integrable systems, however, this statement is local: the chaotic
-layer may occupy only a small region close to the original separatrix, while
-regular islands or invariant curves may survive elsewhere in phase space
-\cite{PolcarThesis2018,Witzany2015}.
-
-This mechanism is directly relevant to black-hole geodesic dynamics. In the
-unperturbed black-hole problem, unstable circular geodesics play the role of
-hyperbolic orbits, and the associated homoclinic orbits separate plunging motion
-from bound motion. The Melnikov method tests whether a weak external source
-splits the stable and unstable manifolds of this separatrix. In the black-hole
-plus ring systems studied by Polcar and Semer\'ak, simple zeros of the Melnikov
-function indicate transverse intersections and therefore a chaotic layer of
-homoclinic origin~\cite{PolcarSemerak2019}.
+By hyperbolic (fixed) point $\bar{x}$ we understand such a fixed point that when we do a linearization around this point, the corresponding Jacobian matrix has no eigenvalue with zero real part. With hyperbolic fixed points, the concepts of stable and unstable manifolds and homoclinic points are associated. A hypersurface in phase space, which tends to equilibrium as $t \rightarrow \infty$ is called a stable manifold. The unstable manifold is defined as a hypersurface in the phase space, which tends to equilibrium as $t \rightarrow -\infty$.
+The manifolds can intersect transversally under a perturbation and form the so-called homoclinic points. A full orbit of a homoclinic point is called a homoclinic orbit. Along this orbit, when the system is perturbed, a transverse intersection of the manifolds is present. This is a signature of chaotic dynamics, as described by the Smale-Birkhoff homoclinic theorem. More on this topic can be found in \cite{Wiggins2003}.
+Chaos of homoclinic origin in geodesic dynamics in systems with perturbed black holes was discussed and studied in \cite{Polcar2019}, \cite{PolcarThesis2018} and \cite{Witzany2015}. In particular, The Melnikov method was applied in \cite{Polcar2019} and resulted in the finding of simple zeros, confirming the transversal intersection along the homoclinic orbit, which implies the occurrence of chaotic behavior.
 
 \section{Fractals}
-A fractal is a set whose structure remains nontrivial when it is examined at
-smaller and smaller scales. In dynamical systems, fractal geometry is useful
-because basin boundaries generated by chaotic scattering may be highly folded:
-zooming in near the boundary reveals new alternations between outcomes rather
-than a smooth separating curve. Fractal dimension is a way of quantifying this
-scale dependence. Several inequivalent definitions exist. The standard
+A fractal is a set whose structure remains nontrivial even when examined at
+increasingly smaller scales. A fractal exhibits similar patterns at increasingly smaller scales. This is known as self-similarity. In order to quantify this self-similarity and roughness on smaller scales, we define the fractal dimensions. Several inequivalent definitions exist. The standard
 mathematical definition is the Hausdorff dimension. For a set \(X\), it is given
 by
 \[
@@ -122,12 +43,10 @@ by
 d \geq 0 \,\middle|\, \mathcal{H}^{d}(X)=0
 \right\},
 \]
-where \(\mathcal{H}^{d}\) is the \(d\)-dimensional Hausdorff measure. This
-definition is useful conceptually because it generalizes the usual integer
-dimension to irregular sets. In numerical applications, however, it is often
-more practical to use box-counting dimension, which is directly connected to the
-uncertainty-exponent method used for the basin maps in this thesis
-\cite{Ott2002,Wiggins2003}.
+where \(\mathcal{H}^{d}\) is the Hausdorff measure of dimension \(d\). This
+definition is useful conceptually because it generalizes the concept of
+dimension as fractals have a non-intiger (fractal) dimension usually exceeding the topological dimension. However, in numerical applications, it is often
+more practical to use the box-counting dimension, as we will see later.
 
 The box-counting dimension, also known as the Minkowski dimension, is defined as
 follows.
@@ -135,8 +54,8 @@ follows.
 \begin{defn}[Box-counting dimension]
 Let \(S \subset \mathbb{R}^n\) be a bounded set and let
 \(N(\varepsilon)\) denote the minimum number of n-dimensional boxes of side length
-\(\varepsilon\) required to cover \(S\). The Minkowski
-dimension, also called the box-counting dimension, is defined by
+\(\varepsilon\) required to cover \(S\). The box-counting
+dimension, also known as the Minkowski dimension, is defined by
 \[
 d \equiv \dim_{\mathrm{B}}(S)
 \coloneqq
@@ -155,59 +74,52 @@ scales like
 \]
 as \(\varepsilon\) becomes small.
 
-In our application, the important point is not the classification of fractals in
-full mathematical generality, but whether the basin boundary has dimension
-larger than that of a smooth curve in the two-dimensional basin map. A value
-\(d>1\) indicates a boundary with non-smooth structure and final-state
-sensitivity at small scales.
+With an n-dimensional phase space and a basin boundary that separates two basins, $d\rightarrow n-1$ is related to the assignment of predictable outcomes, while a boundary of the fractal basin with $d \rightarrow n$ is related to the outcome sensitivity.
 
 \section{Uncertainty exponent}
 \label{sec:uncertainty-exponent}
 Suppose that we perturb a random initial condition by a small amount, 
-$\varepsilon$, in a random direction. If the new trajectory ends up in a different basin from the unperturbed one, then the initial condition is called $\varepsilon$-uncertain.
+$\varepsilon>0$, in a random direction. If the new trajectory ends up in a different basin from the unperturbed one, then the initial condition is called $\varepsilon$-uncertain.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.72\linewidth]{img/region.png}
-    \caption{Schematic region of phase space divided by a basin boundary into two basins of attraction. Initial conditions 1 and 2 illustrate the effect of uncertainty \(\varepsilon\) near the basin boundary. Adapted from Grebogi et al.~\cite{Grebogi1983}.}
+    \includegraphics[width=0.98\linewidth]{img/region.png}
+    \caption{Schematic region of phase space divided by a basin boundary into two basins. Points 1 and 2 illustrate initial conditions with uncertainty \(\varepsilon\) (Grebogi et al.~\cite{Grebogi1983}).}
     \label{fig:uncertain-initial-conditions}
 \end{figure}
 
 If we denote $\Omega$ a subset of a phase space in which we are interested and $U_{\varepsilon} \subset \Omega$ the set of uncertain initial conditions, we can define a ratio $f(\varepsilon) := \frac{Vol(U_{\varepsilon})}{Vol(\Omega)}$.
-Then let us define a value $\alpha \coloneqq n-d$, where $n$ is the dimension of the phase space and $d$ is the box counting dimension of the basin boundary.
+Then we define a value $\alpha \coloneqq n-d$, where $n$ is the dimension of the phase space and $d$ is the box-counting dimension of the basin boundary.
+
 Following the uncertainty-exponent argument described by Grebogi et al.~\cite{Grebogi1983} and Ott~\cite[p.~206]{Ott2002},
 
 \begin{equation}
-  \bar{f} \sim \varepsilon^{\alpha}.
+  f \sim \varepsilon^{\alpha}.
   \label{eq:uncertainty-scaling}
 \end{equation}
 
-Thus, we will refer to the value $\alpha$ as the uncertainty exponent. We can also rewrite \eqref{eq:uncertainty-scaling} as
+Therefore, we will refer to $\alpha$ as the uncertainty exponent. We can also rewrite \eqref{eq:uncertainty-scaling} as follows
 
 \begin{equation}
-    \ln{\bar{f}} = \ln{k} + \alpha\ln{\varepsilon}.
+    \ln{f} = \ln{k} + \alpha\ln{\varepsilon}.
     \label{eq:uncertainty-log-fit}
 \end{equation}
 
 This form will be very useful in practice. Once we construct a basin map, we
 can select a smaller region of it. Consider an initial condition
-\((x_0,v_0)\). In the numerical implementation used in this thesis we perturb
-only the coordinate direction of the basin map, so the perturbed initial
+\((x_0,v_0)\). We perturb the coordinate direction of the basin map, so the perturbed initial
 conditions are \((x_0+\varepsilon,v_0)\) and
-\((x_0-\varepsilon,v_0)\). This is a coordinate-direction version of the
-uncertainty-exponent estimate, not an average over all perturbation directions.
-We check to which basin these new initial conditions correspond. If either of
+\((x_0-\varepsilon,v_0)\). We check to which basin these new initial conditions correspond. If either of
 them does not correspond to the same basin as the original initial condition, we
 classify the original initial condition as uncertain. In this way, we perturb
-every initial condition in the selected region and calculate how many of them are
+every initial condition in the selected region (every sampled initial condition) and calculate how many of them are
 uncertain, denoting this number by \(N_U\). We define a ratio of the number of
 uncertain initial conditions to the total number of sampled initial conditions
-\(N\) as \(\bar{f}(\varepsilon):=N_U/N\). This fraction can be interpreted as
+\(N\) as \(\bar{f}(\varepsilon):=\frac{N_U}{N}\). This fraction can be interpreted as
 the probability that a point chosen from the sampled region is uncertain with
-respect to the chosen perturbation direction. As the number of sampled points
+respect to the chosen perturbation. As the number of sampled points
 increases and the discretization becomes finer, \(\bar{f}(\varepsilon)\)
-approaches the corresponding directional estimate of \(f(\varepsilon)\). When
+approaches the value \(f(\varepsilon)\). When
 we repeat this process for more values of \(\varepsilon\), we can perform a
 linear fit based on \eqref{eq:uncertainty-log-fit} to obtain the uncertainty
-exponent \(\alpha\). Since our basin maps are two-dimensional, the corresponding
-box-counting dimension estimate is \(d=2-\alpha\).
+exponent \(\alpha\). Then, from the definition of $\alpha$ we calculate the fractal dimension $d$.
