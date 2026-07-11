@@ -2,51 +2,35 @@
 \addcontentsline{toc}{chapter}{Introduction}
 
 Black holes are usually introduced through highly symmetric exact solutions of
-Einstein's equations. The Schwarzschild and Reissner--Nordstr\"om geometries are
+Einstein's equations. The Schwarzschild and Reissner-Nordstr\"om geometries are
 central examples. Their symmetry makes the geodesic motion of test particles
-regular: enough conserved quantities exist to reduce the dynamics to an
-integrable problem. This is not only mathematically convenient, but also
-physically useful, because such solutions give the reference space-times around
-which more complicated astrophysical models can be built.
-
-Astrophysical black holes, however, are not isolated ideal bodies. They are
+regular. Enough conserved quantities, integrals of motion, exist to reduce the dynamics to an
+integrable problem. There is no doubt of mathematical convenience, however, the question is what can analysis of this motion give us for more realistic problems. Real astrophysical black holes are not isolated ideal bodies. They are
 surrounded by accreting matter, electromagnetic fields, stars, or other compact
-objects. Even a simplified model of additional matter in the form of an
-axisymmetric disc or ring changes the geometry experienced by a test particle.
-Such perturbations can break the integrability of the isolated black-hole
-problem and produce chaotic geodesic dynamics. This possibility has been studied
-in a sequence of works on black holes with external discs or rings, using
-Poincar\'e sections, analytic criteria and the Melnikov method
-\cite{Semerak2016,Witzany2015,PolcarThesis2018,Polcar2019,PolcarSemerak2019}.
+objects. We therefore are motivated by astrophysical application, to find systems that can give us some view into these systems. Realistic black holes are Kerr type. However, more simplified systems can give us a good enough view. In series of papers and theses \cite{Semerak2016,Witzany2015,PolcarThesis2018,Polcar2019,PolcarSemerak2019} stationary axially symmetric systems consisting of black holes supperposed with external disks or rings were studied. These systems exhibit broken integrability. Hence, irregular and chaotic dynamics is present. The dynamics was analyzed using many methods, such as Poincaré sections, the Melnikov method, or analysis of basin maps.
 
 The astrophysical motivation is therefore not that the thin rings used in this
 thesis are literal models of accretion flows. They are controlled idealizations
 of external gravitating matter. Their advantage is that they keep the problem
 stationary and axially symmetric while still perturbing the black-hole field
 strongly enough to test how regular motion is destroyed. In this setting, chaos
-is relevant because it limits final-state predictability: two nearby initial
-conditions can lead to different outcomes, such as long-lived bounded motion or
+is relevant because it limits the predictability of the outcomes. Two nearby initial
+conditions can lead to different outcomes, such as a long-lived bounded motion or
 termination near the black hole or the ring. Basin maps and fractal dimensions
 provide a way to quantify this sensitivity.
 
 This thesis follows the work of David Sychrovsky~\cite{Sychrovsky2020}, who
-studied basin maps and basin-boundary dimensions for a Schwarzschild black hole
-perturbed by external Weyl sources. We first reproduce selected results for the
-Schwarzschild--Bach--Weyl system, using a different codebase for trajectory
-integration and basin-map construction. The thesis repository is available at
-\url{https://github.com/DJopek/chaos}. We then apply the same final-state and
-uncertainty-exponent methods to the
-Reissner--Nordstr\"om--Majumdar--Papapetrou system, where previous work connects
-the onset of chaos to homoclinic tangles detected by the Melnikov method
-\cite{PolcarSemerak2019}.
+studied basin maps and basin boundary dimensions for a Schwarzschild black hole
+perturbed by external Weyl sources. We want to analyze basin boundary dimensions and basin maps using different method and extend the analysis to systems not studied before using the method of basin maps analysis.
+
+The thesis is structured as follows:
+In chapter \ref{chap:chaos} and \ref{chap:general-relativity} we will introduce the necessary theory that is relevant for this thesis. We will discuss and present our method in chapter \ref{chap:implementation}. The results will be analyzed in chapter \ref{chap:results}.
 
 \section*{Acknowledgments and AI tool disclosure}
 
-I thank my supervisor and the authors of the Gravitacek 2 solver for the
-scientific and computational foundations on which this thesis builds. During
-the preparation of the thesis, AI tools were used for routine programming
-assistance, code inspection, LaTeX typesetting, bibliography formatting, figure
-layout adjustments, and language-level revision suggestions. The mathematical
-and physical interpretation, selection of results, verification of claims, and
+I want to thank my supervisor for guidance and help. I also want to thank Karel Kraus, who is the author of the \textit{Gravitáček 2} solver, for allowing me to use the code for my thesis.
+During the synthesis of the thesis, AI tools were used for routine programming
+assistance, discussions, and challenging of the approach both in terms of code and mathematics/physics, code and math inspections, LaTeX typesetting, bibliography formatting, figure
+layout adjustments, and language-level revision suggestions. The interpretation, selection of results, claims, and
 final text remain the responsibility of the author.
 

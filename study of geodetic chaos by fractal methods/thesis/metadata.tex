@@ -15,62 +15,57 @@
 
 % Thesis title in English (exactly as in the official assignment)
 % (Note: \xxx is a "ToDo label" which makes the unfilled visible. Remove it.)
-\def\ThesisTitle{\xxx{Thesis title}}
+\def\ThesisTitle{Fractal features of geodesic motion around perturbed black holes}
 
 % Author of the thesis (you)
-\def\ThesisAuthor{\xxx{Name Surname}}
+\def\ThesisAuthor{Dávid Jopek}
 
 % Year when the thesis is submitted
-\def\YearSubmitted{\xxx{YEAR}}
+\def\YearSubmitted{2026}
 
 % Name of the department or institute, where the work was officially assigned
 % (according to the Organizational Structure of MFF UK in English,
 % see https://www.mff.cuni.cz/en/faculty/organizational-structure,
 % or a full name of a department outside MFF)
-\def\Department{\xxx{Name of the department}}
+\def\Department{Institute of Theoretical Physics}
 
 % Is it a department (katedra), or an institute (ústav)?
-\def\DeptType{\xxx{Department}}
+\def\DeptType{Institute}
 
 % Thesis supervisor: name, surname and titles
-\def\Supervisor{\xxx{Supername Supersurname}}
+\def\Supervisor{doc. RNDr. Old\v{r}ich Semer\'ak, DSc.}
 
 % Supervisor's department (again according to Organizational structure of MFF)
-\def\SupervisorsDepartment{\xxx{department}}
+\def\SupervisorsDepartment{Institute of Theoretical Physics}
 
 % Study programme (does not apply to rigorosum theses)
-\def\StudyProgramme{\xxx{study programme}}
+\def\StudyProgramme{Physics}
 
 % An optional dedication: you can thank whomever you wish (your supervisor,
 % consultant, who provided you with tea and pizza, etc.)
 \def\Dedication{%
-\xxx{Dedication.}
+I dedicate this thesis to all the people who make my life great, help me love what I do, and find joy in it, as well as to those who support me on my journey and help me become a better person.
 }
 
 % Abstract (recommended length around 80-200 words; this is not a copy of your thesis assignment!)
 \def\Abstract{%
-\xxx{Use the most precise, shortest sentences that state what problem the
-thesis addresses, how it is approached, pinpoint the exact result achieved, and
-describe the applications and significance of the results. Highlight anything
-novel that was discovered or improved by the thesis. Maximum length is 200
-words, but try to fit into 120. Abstracts are often used for deciding if
-a reviewer will be suitable for the thesis; a well-written abstract thus
-increases the probability of getting a reviewer who will like the thesis.}
+We study the dynamics of free test particles in the gravitational field of a Schwarzschild and a Reissner-Nordstr\"om black hole perturbed by an external exact thin axisymmetric source. Specifically, we consider a Schwarzschild black hole with a Bach-Weyl ring and a Reissner-Nordstr\"om black hole with a Majumdar-Papapetrou ring. To quantify chaotic dynamics, we construct basin maps and estimate the fractal dimension of basin boundaries using the uncertainty exponent method. We reproduce and compare selected results available in the literature and extend the basin map analysis to parameter regimes and configurations not previously studied with this approach.
 }
 
 % 3 to 5 keywords (recommended) separated by \sep
 % Keywords are useful for indexing and searching for the theses by topic.
 \def\ThesisKeywords{%
-\xxx{keyword\sep key phrase}
+general relativity\sep perturbed black holes\sep geodesic chaos\sep basin boundaries\sep uncertainty exponent
 }
 
 % If any of your metadata strings contains TeX macros, you need to provide
 % a plain-text version for use in XMP metadata embedded in the output PDF file.
 % If you are not sure, check the generated thesis.xmpdata file.
-\def\ThesisAuthorXMP{\ThesisAuthor}
-\def\ThesisTitleXMP{\ThesisTitle}
-\def\ThesisKeywordsXMP{\ThesisKeywords}
-\def\AbstractXMP{\Abstract}
+% Plain-text versions for XMP metadata (avoid TeX macros / diacritics here).
+\def\ThesisAuthorXMP{David Jopek}
+\def\ThesisTitleXMP{Fractal features of geodesic motion around perturbed black holes}
+\def\ThesisKeywordsXMP{general relativity; perturbed black holes; geodesic chaos; basin boundaries; uncertainty exponent}
+\def\AbstractXMP{We study the dynamics of free test particles in the gravitational field of a Schwarzschild and a Reissner-Nordstrom black hole perturbed by an external exact thin axisymmetric source. Specifically, we consider a Schwarzschild black hole with a Bach-Weyl ring and a Reissner-Nordstrom black hole with a Majumdar-Papapetrou ring. To quantify chaotic dynamics, we construct basin maps and estimate the fractal dimension of basin boundaries using the uncertainty exponent method. We reproduce and compare selected results available in the literature and extend the basin-map analysis to parameter regimes and configurations not previously studied with this approach.}
 
 % If your abstracts are long and do not fit in the infopage, you can make the
 % fonts a bit smaller by this setting. (Also, you should try to compress your abstract more.)
@@ -80,16 +75,25 @@ increases the probability of getting a reviewer who will like the thesis.}
 % If you are studing in a Czech programme, you also need to provide metadata in Czech:
 % (in English programmes, this is not used anywhere)
 
-\def\ThesisTitleCS{\xxx{Název práce česky}}
-\def\DepartmentCS{\xxx{Název katedry česky}}
-\def\DeptTypeCS{\xxx{Katedra}}
-\def\SupervisorsDepartmentCS{\xxx{katedra vedoucího}}
-\def\StudyProgrammeCS{\xxx{studijní program}}
+\def\ThesisTitleCS{Fraktální vlastnosti geodetického pohybu v okolí perturbovaných černých děr}
+\def\DepartmentCS{Ústav teoretické fyziky}
+\def\DeptTypeCS{Ústav}
+\def\SupervisorsDepartmentCS{Ústav teoretické fyziky}
+\def\StudyProgrammeCS{Fyzika}
 
 \def\ThesisKeywordsCS{%
-\xxx{klíčová slova\sep klíčové fráze}
+geodetický pohyb\sep černé díry\sep chaos\sep hranice oblastí přitažlivosti\sep fraktální dimenze
 }
 
 \def\AbstractCS{%
-\xxx{Abstrakt práce přeložte také do češtiny.}
+Studujeme dynamiku volných testovacích částic v gravitačním poli
+Schwarzschildovy a Reissnerovy--Nordströmovy černé díry perturbované vnější
+exaktní tenkou osově symetrickou soustavou. Konkrétně uvažujeme
+Schwarzschildovu černou díru s Bachovým--Weylovým prstencem a
+Reissnerovu--Nordströmovu černou díru s Majumdarovým--Papapetrouovým
+prstencem. Pro kvantifikaci chaotické dynamiky konstruujeme mapy oblastí
+přitažlivosti a odhadujeme fraktální dimenzi hranic těchto oblastí metodou
+exponentu neurčitosti. Reprodukujeme a porovnáváme vybrané výsledky dostupné v
+literatuře a rozšiřujeme analýzu map oblastí přitažlivosti na režimy parametrů
+a konfigurace, které dosud nebyly tímto přístupem studovány.
 }

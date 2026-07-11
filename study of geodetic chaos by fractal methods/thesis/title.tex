@@ -119,7 +119,7 @@ In \hbox to 6em{\dotfill} date \hbox to 6em{\dotfill}
 \openright
 {\InfoPageFont
 
-\vtop to 0.5\vsize{
+\vtop to \vsize{
 \setlength\parindent{0mm}
 \setlength\parskip{5mm}
 
@@ -144,11 +144,16 @@ Keywords:
 \vfil
 }
 
+}
+
+\newpage
+
 % In Czech study programmes, it is mandatory to include Czech meta-data:
 
 \ifx\StudyLanguage\LangCS
+{\InfoPageFont
 
-\vtop to 0.49\vsize{
+\vtop to \vsize{
 \setlength\parindent{0mm}
 \setlength\parskip{5mm}
 
@@ -173,9 +178,9 @@ Klíčová slova:
 \vfil
 }
 
-\fi
-
 }
+
+\fi
 
 \newpage
 
