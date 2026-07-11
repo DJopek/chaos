@@ -73,7 +73,16 @@ def processing(
                         urho_section.append(float(row_next[6]))
 
     fig, ax = plt.subplots(figsize=(6.4, 4.8))
-    ax.scatter(rho_section,urho_section,s=0.1,color="black")
+    ax.scatter(
+        rho_section,
+        urho_section,
+        s=0.3,
+        c="black",
+        marker=".",
+        linewidths=0,
+        edgecolors="none",
+        rasterized=True,
+    )
     ax.set_xlabel(r'$\rho$ [M]')
     ax.set_ylabel(r'$u^\rho$ [1]')
     ax.set_xlim(0, 45)
@@ -113,7 +122,7 @@ poincare_section = processing(
 poincare_section = processing(
     data_path="./data_0",
     rho_start = 7,
-    rho_end = 45,
+    rho_end = 60,
     urho_start = -0.2,
     urho_end = 0.2,
     perturbation = 0,
@@ -121,13 +130,13 @@ poincare_section = processing(
     l = 3.75,
     eps = 0.977,
     b = 20,
-    m = 1.1,
+    m = 0.6,
     z = 0.0,
     Tmax = 2*10**5,
     schw_bw = True,
     rn_mp = False,
-    number_of_points = 20,
-    samples = 20,
+    number_of_points = 25,
+    samples = 25,
 )
 
 poincare_section = processing(
