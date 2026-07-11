@@ -391,24 +391,36 @@ the ring mass \(\mathcal{M}\) was varied.
     \label{fig:poincare-schw-bw-chaos-v}
 \end{figure}
 
-Kraus independently reproduced one of the corresponding Poincar\'e sections
-with \textit{Gravitacek 2} in \cite{Kraus2025}. Reproduction can be seen in
-Figure~\ref{fig:poincare-schw-bw-kraus-gravitacek2}. This is relevant for the
+To check that the same trajectory integrator reproduces the expected
+phase-space structures, we also computed two corresponding Poincar\'e sections
+with \textit{Gravitacek 2}; see
+Figures~\ref{fig:poincare-schw-bw-gravitacek2-M0p1}
+and~\ref{fig:poincare-schw-bw-gravitacek2-M0p6}. This is relevant for the
 present validation because the trajectories classified in our basin maps were
-constructed with the \textit{Gravitacek 2} codebase  as described in
+constructed with the \textit{Gravitacek 2} codebase as described in
 Chapter~\ref{chap:implementation}. The figure does not validate the
 basin-boundary classification by itself, but it shows that the trajectory
-integrator used here reproduces the phase space structures known from the
-Poincar\'e-section studies of the Schwarzschild-Bach-Weyl system.
+integrator used here reproduces the phase-space structures known from the
+Poincar\'e-section studies of the Schwarzschild--Bach--Weyl system.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.82\linewidth]{img/poincare_schw_bw_kraus_gravitacek2.png}
-    \caption{Equatorial Poincar\'e section for the Schwarzschild black hole with
-    a Bach--Weyl ring, computed with \textit{Gravitacek 2} for
-    \(\mathcal{M}=0.1M\), \(b=20M\), \(\epsilon=0.977\), and
-    \(\ell=3.75M\) (Kraus~\cite[Fig.~B.1]{Kraus2025}).}
-    \label{fig:poincare-schw-bw-kraus-gravitacek2}
+    \includegraphics[width=0.98\linewidth]{img/poincare_schw_bw_gravitacek2_M0p1.pdf}
+    \caption{Equatorial Poincar\'e section for the Schwarzschild black hole
+    with a Bach--Weyl ring, computed in this thesis with
+    \textit{Gravitacek 2} for \(b=20M\), \(\epsilon=0.977\),
+    \(\ell=3.75M\), and \(\mathcal{M}=0.1M\).}
+    \label{fig:poincare-schw-bw-gravitacek2-M0p1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.98\linewidth]{img/poincare_schw_bw_gravitacek2_M0p6.pdf}
+    \caption{Equatorial Poincar\'e section for the Schwarzschild black hole
+    with a Bach--Weyl ring, computed in this thesis with
+    \textit{Gravitacek 2} for \(b=20M\), \(\epsilon=0.977\),
+    \(\ell=3.75M\), and \(\mathcal{M}=0.6M\).}
+    \label{fig:poincare-schw-bw-gravitacek2-M0p6}
 \end{figure}
 
 The Poincaré sections are in Schwarzschild coordinates, while in our basin maps we were working in Weyl coordinates. Also, the nature of Poincaré sections is different, so this is a qualitative comparison and a different view of the same dynamics of the system. In the comparison, we want to analyze the trend with increasing perturbation and compare if it agrees with the Poincaré sections. For comparison, we will also make use of the color scale employed. Roughly speaking, blue and possibly green indicate regular orbits, while red

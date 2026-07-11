@@ -85,7 +85,7 @@ def processing(
     )
     ax.set_xlabel(r'$\rho$ [M]')
     ax.set_ylabel(r'$u^\rho$ [1]')
-    ax.set_xlim(0, 65)
+    ax.set_xlim(0, rho_end)
     ax.set_ylim(-0.35, 0.35)
 
     if schw_bw:
@@ -132,15 +132,15 @@ def processing(
 #    perturbation = 0,
 #    M = 1.0,
 #    l = 3.2,
-#    eps = 0.955,
+#    eps = 0.96,
 #    b = 20,
 #    m = 0.5,
 #    z = 0.2,
-#    Tmax = 2*10**5,
+#    Tmax = 10**5,
 #    schw_bw = False,
 #    rn_mp = True,
-#    number_of_points = 20,
+#    number_of_points = 50,
 #    n = 1/10,
 #    zofrho = True,
-#    samples = 20,
+#    samples = 50,
 #)
