@@ -52,7 +52,7 @@ def processing(
     # main loop
     for i in range(number_of_points**2):
 
-        if (i+1)%10000 == 0:
+        if (i+1)%100 == 0:
             ratio = (i+1)/number_of_points**2
             print(f"{ratio *100:.2f}% processed")
 
@@ -99,86 +99,48 @@ def processing(
     plt.savefig(name, dpi=300)
     plt.close()
 
-poincare_section = processing(
-    data_path="./data_0",
-    rho_start = 7,
-    rho_end = 45,
-    urho_start = -0.2,
-    urho_end = 0.2,
-    perturbation = 0,
-    M = 1.0,
-    l = 3.75,
-    eps = 0.977,
-    b = 20,
-    m = 0.1,
-    z = 0.0,
-    Tmax = 2*10**5,
-    schw_bw = True,
-    rn_mp = False,
-    number_of_points = 20,
-    samples = 20,
-)
+# example - schw+bw
 
-poincare_section = processing(
-    data_path="./data_0",
-    rho_start = 7,
-    rho_end = 60,
-    urho_start = -0.2,
-    urho_end = 0.2,
-    perturbation = 0,
-    M = 1.0,
-    l = 3.75,
-    eps = 0.977,
-    b = 20,
-    m = 0.6,
-    z = 0.0,
-    Tmax = 2*10**5,
-    schw_bw = True,
-    rn_mp = False,
-    number_of_points = 25,
-    samples = 25,
-)
+#poincare_section = processing(
+#    data_path="./data_0",
+#    rho_start = 7,
+#    rho_end = 45,
+#    urho_start = -0.2,
+#    urho_end = 0.2,
+#    perturbation = 0,
+#    M = 1.0,
+#    l = 3.75,
+#    eps = 0.977,
+#    b = 20,
+#    m = 0.1,
+#    z = 0.0,
+#    Tmax = 2*10**5,
+#    schw_bw = True,
+#    rn_mp = False,
+#    number_of_points = 20,
+#    samples = 20,
+#)
 
-poincare_section = processing(
-    data_path="./data_0",
-    rho_start = 3,
-    rho_end = 30,
-    urho_start = -0.3,
-    urho_end = 0.3,
-    perturbation = 0,
-    M = 1.0,
-    l = 3.2,
-    eps = 0.955,
-    b = 20,
-    m = 0.5,
-    z = 0.2,
-    Tmax = 2*10**5,
-    schw_bw = False,
-    rn_mp = True,
-    number_of_points = 20,
-    n = 1/10,
-    zofrho = True,
-    samples = 20,
-)
+# example - rn+mp
 
-poincare_section = processing(
-    data_path="./data_0",
-    rho_start = 3,
-    rho_end = 30,
-    urho_start = -0.3,
-    urho_end = 0.3,
-    perturbation = 0,
-    M = 1.0,
-    l = 3.2,
-    eps = 0.955,
-    b = 20,
-    m = 0.5,
-    z = 0.2,
-    Tmax = 2*10**5,
-    schw_bw = False,
-    rn_mp = True,
-    number_of_points = 20,
-    n = 1/10,
-    zofrho = True,
-    samples = 20,
-)
+#poincare_section = processing(
+#    data_path="./data_0",
+#    rho_start = 3,
+#    rho_end = 30,
+#    urho_start = -0.3,
+#    urho_end = 0.3,
+#    perturbation = 0,
+#    M = 1.0,
+#    l = 3.2,
+#    eps = 0.955,
+#    b = 20,
+#    m = 0.5,
+#    z = 0.2,
+#    Tmax = 2*10**5,
+#    schw_bw = False,
+#    rn_mp = True,
+#    number_of_points = 20,
+#    n = 1/10,
+#    zofrho = True,
+#    samples = 20,
+#)

@@ -31,7 +31,7 @@ def calculate_trajectories(
 
     time_stamp = Tmax/10
     # for Poincaré sections
-    time_stamp = 1
+    # time_stamp = 1
 
     parallelisation_division = int(number_of_points/parallelisation_number)
 
@@ -96,6 +96,164 @@ def calculate_trajectories(
     process_0.stdin.close()
     process_0.wait()
 
+# example - basin map schw+bw
+
+#calculate_trajectories(
+#    rho_start = 11.65,
+#    rho_end = 12,
+#    urho_start = 0.077,
+#    urho_end = 0.082,
+#    perturbation = 0,
+#    M = 1.0,
+#    l = 3.943,
+#    eps = 0.955,
+#    b = 20,
+#    m = 0.5,
+#    z = 0.2,
+#    Tmax = 10**4,
+#    schw_bw = True,
+#    rn_mp = False,
+#    number_of_points = 500,
+#    parallelisation_number = 5,
+#)
+#
+#calculate_trajectories(
+#    rho_start = 11.65,
+#    rho_end = 12,
+#    urho_start = 0.077,
+#    urho_end = 0.082,
+#    perturbation = 10**(-4),
+#    M = 1.0,
+#    l = 3.943,
+#    eps = 0.955,
+#    b = 20,
+#    m = 0.5,
+#    z = 0.2,
+#    Tmax = 10**4,
+#    schw_bw = True,
+#    rn_mp = False,
+#    number_of_points = 500,
+#    parallelisation_number = 5,
+#)
+#
+#calculate_trajectories(
+#    rho_start = 11.65,
+#    rho_end = 12,
+#    urho_start = 0.077,
+#    urho_end = 0.082,
+#    perturbation = -10**(-4),
+#    M = 1.0,
+#    l = 3.943,
+#    eps = 0.955,
+#    b = 20,
+#    m = 0.5,
+#    z = 0.2,
+#    Tmax = 10**4,
+#    schw_bw = True,
+#    rn_mp = False,
+#    number_of_points = 500,
+#    parallelisation_number = 5,
+#)
+#
+#calculate_trajectories(
+#    rho_start = 11.65,
+#    rho_end = 12,
+#    urho_start = 0.077,
+#    urho_end = 0.082,
+#    perturbation = 10**(-3),
+#    M = 1.0,
+#    l = 3.943,
+#    eps = 0.955,
+#    b = 20,
+#    m = 0.5,
+#    z = 0.2,
+#    Tmax = 10**4,
+#    schw_bw = True,
+#    rn_mp = False,
+#    number_of_points = 500,
+#    parallelisation_number = 5,
+#)
+#
+#calculate_trajectories(
+#    rho_start = 11.65,
+#    rho_end = 12,
+#    urho_start = 0.077,
+#    urho_end = 0.082,
+#    perturbation = -10**(-3),
+#    M = 1.0,
+#    l = 3.943,
+#    eps = 0.955,
+#    b = 20,
+#    m = 0.5,
+#    z = 0.2,
+#    Tmax = 10**4,
+#    schw_bw = True,
+#    rn_mp = False,
+#    number_of_points = 500,
+#    parallelisation_number = 5,
+#)
+#
+#calculate_trajectories(
+#    rho_start = 11.65,
+#    rho_end = 12,
+#    urho_start = 0.077,
+#    urho_end = 0.082,
+#    perturbation = 10**(-2),
+#    M = 1.0,
+#    l = 3.943,
+#    eps = 0.955,
+#    b = 20,
+#    m = 0.5,
+#    z = 0.2,
+#    Tmax = 10**4,
+#    schw_bw = True,
+#    rn_mp = False,
+#    number_of_points = 500,
+#    parallelisation_number = 5,
+#)
+#
+#calculate_trajectories(
+#    rho_start = 11.65,
+#    rho_end = 12,
+#    urho_start = 0.077,
+#    urho_end = 0.082,
+#    perturbation = -10**(-2),
+#    M = 1.0,
+#    l = 3.943,
+#    eps = 0.955,
+#    b = 20,
+#    m = 0.5,
+#    z = 0.2,
+#    Tmax = 10**4,
+#    schw_bw = True,
+#    rn_mp = False,
+#    number_of_points = 500,
+#    parallelisation_number = 5,
+#)
+
+# example - basin map rn+mp
+
+#calculate_trajectories(
+#    rho_start = 1,
+#    rho_end = 2,
+#    urho_start = 0.18,
+#    urho_end = 0.20,
+#    perturbation = 0,
+#    M = 1.0,
+#    l = 3.2,
+#    eps = 0.995,
+#    b = 20,
+#    m = 0.5,
+#    z = 0.2,
+#    Tmax = 10**4,
+#    schw_bw = False,
+#    rn_mp = True,
+#    number_of_points = 500,
+#    n = 1/10,
+#    zofrho = True,
+#    parallelisation_number = 50,
+#)
+#
 #calculate_trajectories(
 #    rho_start = 1,
 #    rho_end = 2,
@@ -114,6 +272,7 @@ def calculate_trajectories(
 #    number_of_points = 500,
 #    n = 1/10,
 #    zofrho = True,
+#    parallelisation_number = 50,
 #)
 #
 #calculate_trajectories(
@@ -134,6 +293,7 @@ def calculate_trajectories(
 #    number_of_points = 500,
 #    n = 1/10,
 #    zofrho = True,
+#    parallelisation_number = 50,
 #)
 #
 #calculate_trajectories(
@@ -154,6 +314,7 @@ def calculate_trajectories(
 #    number_of_points = 500,
 #    n = 1/10,
 #    zofrho = True,
+#    parallelisation_number = 50,
 #)
 #
 #calculate_trajectories(
@@ -174,6 +335,7 @@ def calculate_trajectories(
 #    number_of_points = 500,
 #    n = 1/10,
 #    zofrho = True,
+#    parallelisation_number = 50,
 #)
 #
 #calculate_trajectories(
@@ -194,6 +356,7 @@ def calculate_trajectories(
 #    number_of_points = 500,
 #    n = 1/10,
 #    zofrho = True,
+#    parallelisation_number = 50,
 #)
 #
 #calculate_trajectories(
@@ -214,63 +377,49 @@ def calculate_trajectories(
 #    number_of_points = 500,
 #    n = 1/10,
 #    zofrho = True,
+#    parallelisation_number = 50,
 #)
 
-calculate_trajectories(
-    rho_start = 7,
-    rho_end = 45,
-    urho_start = -0.2,
-    urho_end = 0.2,
-    perturbation = 0,
-    M = 1.0,
-    l = 3.75,
-    eps = 0.977,
-    b = 20,
-    m = 0.1,
-    z = 0.0,
-    Tmax = 2*10**5,
-    schw_bw = True,
-    rn_mp = False,
-    number_of_points = 20,
-    parallelisation_number = 20,
-)
+# example - Poincaré section schw+bw
 
-calculate_trajectories(
-    rho_start = 7,
-    rho_end = 45,
-    urho_start = -0.2,
-    urho_end = 0.2,
-    perturbation = 0,
-    M = 1.0,
-    l = 3.75,
-    eps = 0.977,
-    b = 20,
-    m = 1.1,
-    z = 0.0,
-    Tmax = 2*10**5,
-    schw_bw = True,
-    rn_mp = False,
-    number_of_points = 20,
-    parallelisation_number = 20,
-)
+#calculate_trajectories(
+#    rho_start = 7,
+#    rho_end = 45,
+#    urho_start = -0.2,
+#    urho_end = 0.2,
+#    perturbation = 0,
+#    M = 1.0,
+#    l = 3.75,
+#    eps = 0.977,
+#    b = 20,
+#    m = 0.1,
+#    z = 0.0,
+#    Tmax = 2*10**5,
+#    schw_bw = True,
+#    rn_mp = False,
+#    number_of_points = 20,
+#    parallelisation_number = 20,
+#)
 
-calculate_trajectories(
-    rho_start = 3,
-    rho_end = 30,
-    urho_start = -0.3,
-    urho_end = 0.3,
-    perturbation = 0,
-    M = 1.0,
-    l = 3.2,
-    eps = 0.955,
-    b = 20,
-    m = 0.5,
-    z = 0.2,
-    Tmax = 2*10**5,
-    schw_bw = False,
-    rn_mp = True,
-    number_of_points = 20,
-    n = 1/10,
-    zofrho = True,
-    parallelisation_number = 20,
-)
+# example - Poincaré section rn+mp
+
+#calculate_trajectories(
+#    rho_start = 3,
+#    rho_end = 30,
+#    urho_start = -0.3,
+#    urho_end = 0.3,
+#    perturbation = 0,
+#    M = 1.0,
+#    l = 3.2,
+#    eps = 0.955,
+#    b = 20,
+#    m = 0.5,
+#    z = 0.2,
+#    Tmax = 2*10**5,
+#    schw_bw = False,
+#    rn_mp = True,
+#    number_of_points = 20,
+#    n = 1/10,
+#    zofrho = True,
+#    parallelisation_number = 20,
+#)
