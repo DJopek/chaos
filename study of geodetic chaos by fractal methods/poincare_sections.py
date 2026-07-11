@@ -85,7 +85,7 @@ def processing(
     )
     ax.set_xlabel(r'$\rho$ [M]')
     ax.set_ylabel(r'$u^\rho$ [1]')
-    ax.set_xlim(0, 45)
+    ax.set_xlim(0, 65)
     ax.set_ylim(-0.35, 0.35)
 
     if schw_bw:
