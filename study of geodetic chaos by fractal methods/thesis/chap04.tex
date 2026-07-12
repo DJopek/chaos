@@ -231,7 +231,7 @@ the Bach-Weyl ring mass for \(b=20M\), \(l=3.75M\), and \(z=0.2M\).
 Although the caption in Sychrovsky's thesis states \(\epsilon=0.955\),
 the shape of the accessible region is consistent with
 \(\epsilon=0.977\). We therefore treat \(0.977\) as the energy used for
-that figure~\cite{Sychrovsky2020}. As $\mathcal{M} \rightarrow0$ we expect $d \rightarrow1$ as the system goes to the Schwarzschild limit, which is integrable. However, even a light ring can significantly affect the dynamics, which can be described as "cracks" in the basin $O$. This effect can be observed in our basin maps. We can also observe the formation of smaller islands and their merging, which results in a decrease in the dimenion.
+that figure~\cite{Sychrovsky2020}. As $\mathcal{M} \rightarrow0$ we expect $d \rightarrow1$ as the system goes to the Schwarzschild limit, which is integrable. However, even a light ring can significantly affect the dynamics, which can be described as "cracks" in the basin $O$. This effect can be observed in our basin maps. We can also observe the formation of smaller islands and their merging, which results in a decrease in the dimension.
 
 \begin{figure}[H]
     \centering
@@ -362,12 +362,12 @@ that figure~\cite{Sychrovsky2020}. As $\mathcal{M} \rightarrow0$ we expect $d \r
     \label{fig:schw-bw-sychrovsky-mass-fractal-dimension}
 \end{figure}
 
-The visual comparison is only partially successful. However, the trend is consistent as we can observe a peak of the dimension with the appearance of "cracks", a decrease of the dimension with heavier rings, and the
+The visual comparison is only partially successful. However, the broad trend is consistent: the dimension peaks when "cracks" appear, decreases for heavier rings, and the
 unperturbed case \(\mathcal{M}=0\) gives a dimension close to that of a
 smooth curve, as expected for the Schwarzschild limit. However, 
 non-zero low-mass cases do not show a clean monotone approach
 \(d\to1\) as \(\mathcal{M}\to0^+\). Instead, several small but non-zero
-ring masses give dimensions in the range \(d\approx 1.6\)-\(1.7\). Nevertheless, we can see that the error increases as the ring becomes lighter. It is possible that to better resolve the dimension of the structure we would need a much finer resolution and the decline would be observed at even smaller values for $\mathcal{M}$.
+ring masses give dimensions in the range \(d\approx 1.6\)-\(1.7\). Nevertheless, the error increases as the ring becomes lighter. It is possible that, to better resolve the dimension of the structure, we would need a much finer resolution and the decline would be observed at even smaller values of \(\mathcal{M}\).
 
 The result is still
 useful for the thesis because it shows that the method detects a regular
@@ -484,7 +484,7 @@ The previous comparison varied the mass of the Bach-Weyl ring at a fixed
 radius. Polcar, Suková, and Semerak also show the complementary dependence
 on the radius of the ring \(b\) for fixed \(\mathcal{M}=0.5M\),
 \(\ell=3.75M\), and \(\epsilon=0.94\)~\cite{Polcar2019}. The sections show that
-changing \(b\) makes itself visible in changing the overall structure of the Poincaré secions and the appearance of the chaotic dynamics.
+changing \(b\) makes itself visible in changing the overall structure of the Poincaré sections and the appearance of the chaotic dynamics.
 
 \begin{figure}[H]
     \centering
@@ -531,9 +531,9 @@ The comparison is qualitative again. We again, as previously, can see that the l
 
 We now consider the extreme Reissner-Nordstr\"om black hole surrounded
 by a Majumdar-Papapetrou ring. The analysis by Polcar and Semerak \cite{PolcarSemerak2019} using the Melnikov method shows that for weak
-perturbations, the transversal intersection of stable and unstable manifolds along the homoclinic orbit is present. As a result of this, the chaotic dynamics appears. Our purpose here is not to reproduce any results but rather to bring about a new view into the dynamics. 
+perturbations, the transverse intersection of stable and unstable manifolds along the homoclinic orbit is present. As a result of this, the chaotic dynamics appears. Our purpose here is not to reproduce any results but rather to bring about a new view into the dynamics. 
 
-As discussed in \ref{subchap:RNMPanalysis} a specific condition needs to be taken into account in order to have basin maps where a particle may plunge into the black hole and energy levels with given parameters may affect the results. Before we dive into a closer analysis of how this manifests in basin maps, we will take a look at some nuances. 
+As discussed in \ref{subchap:RNMPanalysis}, a specific condition needs to be taken into account in order to obtain basin maps where a particle may plunge into the black hole, and the energy levels for given parameters may affect the results. Before we dive into a closer analysis of how this manifests in basin maps, we will take a look at some nuances. 
 
 As before, precision and integration time may affect the overall result. We will now work with fixed $z$, so only a collision with the ring is possible, no plunging into the black hole. First, a reference run is done on the ARM architecture, therefore, with lower precision with a standard integration time $\tau_{\mathrm{MAX}} = 10^4M$. Then runs with integration times $\tau_{\mathrm{MAX}}=10^5M$ both on ARM and x86 are done.
 
@@ -564,9 +564,9 @@ As before, precision and integration time may affect the overall result. We will
     \label{fig:basin-rn-mp-long-time-comparison}
 \end{figure}
 
-With lower precision, an increase in integration time results in more trajectories being classified as plunged. However, with increasing precision, we can see that the basin $C$ was only a numerical artifact. The same discussion and implication for the method, finite-time, and precision as previously can be applied.
+With lower precision, an increase in integration time results in more trajectories being classified as plunged. However, with increasing precision, the basin $C$ disappears and is therefore interpreted as a numerical artifact. The same discussion and implication for the method, finite-time classification, and precision as previously can be applied.
 
-We will now analyze the basin maps with the possibility of a test particle plunging into the black hole. We will choose such parameters that the accessible region will not be separated into subregions. In addition, we will start with energies close to the energy level tangental to the local maximum of $V_{ef}$, so near the separatrix, and we will decrease it, analyzing the dependence of the fractal dimension $d$ on the energy $\epsilon$. As \cite{PolcarSemerak2019} suggests, we may expect a chaotic nature near the separatrix, and as the energy increases, we may expect $d \rightarrow1$.
+We will now analyze the basin maps with the possibility of a test particle plunging into the black hole. We will choose parameters such that the accessible region will not be separated into subregions. In addition, we will start with energy levels for which \(\epsilon^2\) is close to the local maximum of \(V_{\mathrm{eff}}^2\), so near the separatrix, and we will increase \(\epsilon\), analyzing the dependence of the fractal dimension \(d\) on the energy \(\epsilon\). As \cite{PolcarSemerak2019} suggests, we may expect a chaotic nature near the separatrix, and as the energy increases, we may expect \(d \rightarrow1\).
 
 \begin{figure}[H]
     \centering
@@ -722,7 +722,7 @@ We will now analyze the basin maps with the possibility of a test particle plung
     \label{fig:basin-rn-mp-energy-high-x86}
 \end{figure}
 
-The RN+MP sequence shows a clear energy dependence. With energ levels near the separatrix, the basin map is rich and, as noticed earlier with a comparison of the basin maps and Poincaré sections, the island in the basin $C$ may suggest a chaotic nature. With an increasing energy level, we observe the formation of regions in the basin $O$ separated by regions of basin $C$, which are more "coherent". However, with the energy level going even higher we can see dominance of the basin $O$ on the map and shrinking of the basin $C$, both with a smoother structure. This qualitative analysis suggests that our earlier hypothesis may be possible, and we shall proceed with a qualitative analysis.
+The RN+MP sequence shows a clear energy dependence. For energy levels near the separatrix, the basin map is rich and, as noticed earlier in the comparison of basin maps and Poincaré sections, the island in the basin $C$ may suggest a chaotic nature. With an increasing energy level, we observe the formation of more coherent regions in the basin $O$ separated by regions of basin $C$. However, at even higher energy levels, the basin $O$ dominates the map and the basin $C$ shrinks; both have a smoother structure. This qualitative analysis suggests that our earlier hypothesis may be possible, and we shall proceed with a quantitative analysis.
 
 \begin{table}[H]
     \centering
@@ -759,4 +759,4 @@ The RN+MP sequence shows a clear energy dependence. With energ levels near the s
 
 The dependence of the fractal dimension $d$ on the energy $\epsilon$ quantitatively supports our qualitative observation. We see a monotonic decline in the fractal dimension $d$ as the energy level increases, further away from the separatrix. Near the separatrix, we see a high outcome sensitivity, possibly even initial condition sensitivity as the structure of the basin map suggests. As we move further away from the separatrix, we see that the system is becoming integrable. 
 
-Given the analysis done in \cite{PolcarSemerak2019} and the above results, we may form a hypothesis. Near the separatrix, for large perturbation, given the parameters with the condition of plunge into the black hole being possible, a chaos of homoclinic origin is present. However, the above analysis suggests this, it does not confirm it. Further research and analysis, for example, with Poincaré sections, is needed.  
+Given the analysis in \cite{PolcarSemerak2019} and the above results, we may form a hypothesis. Near the separatrix, for a large perturbation and for parameters that allow plunge into the black hole, chaos of homoclinic origin may be present. However, the above analysis suggests this; it does not confirm it. Further research and analysis, for example with Poincaré sections, is needed.  

@@ -132,7 +132,7 @@ def processing(
 #    perturbation = 0,
 #    M = 1.0,
 #    l = 3.2,
-#    eps = 0.96,
+#    eps = 0.955,
 #    b = 20,
 #    m = 0.5,
 #    z = 0.2,
